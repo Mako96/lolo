@@ -1,7 +1,0 @@
-{
-  "name": "lolo",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
