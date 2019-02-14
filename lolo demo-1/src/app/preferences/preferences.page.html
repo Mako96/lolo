@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>preferences</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+ 
+  <ion-list>
+    <ion-item *ngFor="let entry of form">
+      <ion-label>{{entry.val}}</ion-label>
+      <ion-img class="topic" src={{entry.img}} center ></ion-img>
+      <ion-checkbox  color="secondary"   slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
+    </ion-item>
+    <ion-button (click)="nextClick(form)"  expand="full" shape="round">Next</ion-button>
+  </ion-list>
+
+  
+</ion-content>
