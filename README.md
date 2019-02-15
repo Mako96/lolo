@@ -22,9 +22,9 @@ Or you can use this instruction to display as desktop app :: ionic serve
 For creating a new page you can type : ionic g page main
 and since you have it, there are in its folder three distinct files:
 
-main.html <-- for the structure
-main.ts <-- for fuctionality
-
+main.page.html <-- for the structure
+main.page.ts <-- for fuctionality
+main.page.scss <-- to deal with the style "css"
 
  
 
