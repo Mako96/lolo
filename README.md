@@ -20,7 +20,9 @@ ionic serve --lab :: provides simulations for ios and android, and inside the pa
 Or you can use this instruction to display as desktop app :: ionic serve 
 
 For creating a new page you can type : ionic g page main
-and since you have it, there are in its folder three distinct files:
+and since you have it, there are three distinct files in its folder:
+
+in the path "lolo\src\app\"
 
 main.page.html <-- for the structure
 main.page.ts <-- for fuctionality
