@@ -12,9 +12,9 @@
 
 *  * * 
 
-##User collection 
+## User collection 
 
-###Format of a document :
+### Format of a document :
 
 	{
 		email: ‘example@example.com’ ,
