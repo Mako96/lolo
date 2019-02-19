@@ -16,11 +16,9 @@ def translate_data(file, src_language, dest_language):
         translation = translator.translate(word, src=src_language, dest=dest_language).text
         translations.append(translation)
 
-    df[1] = translations
+    df[df.shape[1]] = translations
 
-    file_with_transl = file.split(".")[0] + "_" + src_language + "_" + dest_language + ".csv"
-
-    df.to_csv(file_with_transl, index=None, header=None)
+    df.to_csv(file, index=None, header=None)
 
 
 if __name__ == '__main__':
