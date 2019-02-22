@@ -1,5 +1,19 @@
 # lolo
 
+ ## Folder structure
+├── Docs
+│   ├── ....
+├── Data
+│   ├── ....
+├── App
+│   ├── ....
+├── API
+│   ├── ....
+├── AI
+│   ├── ....
+├── README.md
+
+## Ionic setup
 To work on ionic please install the following software:
 nodejs
 git
@@ -28,6 +42,8 @@ main.page.html <-- for the structure
 main.page.ts <-- for fuctionality
 main.page.scss <-- to deal with the style "css"
 
- 
-
 # How to collaborate
+
+Please if you want to collaborate create a new branch, and when you are sure
+that your changes work request a merge to the master branch. This is a good
+practice to avoid conflict problems.
