@@ -20,9 +20,9 @@ export class ModePage implements OnInit {
    }
 
   public modes=[
-    { val:5  ,type:"../../assets/images/mode/timer5.png" },
-    { val:10 ,type:"../../assets/images/mode/timer10.png" },
-    { val:15 ,type: "../../assets/images/mode/timer15.png" }
+    { val:5  ,type:"../../assets/images/mode/5words.jpg" },
+    { val:10 ,type:"../../assets/images/mode/10words.jpg" },
+    { val:15 ,type: "../../assets/images/mode/15words.jpg" }
   ];
 
   

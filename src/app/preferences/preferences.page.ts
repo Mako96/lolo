@@ -20,7 +20,7 @@ export class PreferencesPage implements OnInit {
   public form = [
     { val: 'Animals', isChecked: false , img:"../../assets/images/topics/animals.jpg" },
     { val: 'Colors', isChecked: false  , img: "../../assets/images/topics/colors.jpg" },
-    { val: 'fruits', isChecked: false  , img: "../../assets/images/topics/fruits.jpg" },
+    { val: 'fruits', isChecked: true  , img: "../../assets/images/topics/fruits.jpg" },
     { val: 'Sports', isChecked: false , img:"../../assets/images/topics/sports.jpg" },
     { val: 'Stationery', isChecked: false , img:"../../assets/images/topics/Stationery.jpg" },
     { val: 'Clothes', isChecked: false , img:"../../assets/images/topics/cloth.jpg"  }
