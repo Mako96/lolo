@@ -19,12 +19,6 @@ export class LearnPage implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(
-      params => {
-        this.preferences =JSON.parse(params["prefer"]);
-        this.level =params["level"];
-      }
-    )
   }
 
   next(){

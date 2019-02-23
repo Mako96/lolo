@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,NavigationExtras } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-preferences',
@@ -7,10 +8,13 @@ import { Router,NavigationExtras } from '@angular/router';
   styleUrls: ['./preferences.page.scss'],
 })
 export class PreferencesPage implements OnInit {
-
-  constructor(private router: Router) { }
+  firstName:string;
+  lastName:string;
+  email:string;
+  constructor(private router: Router, private navCtrl:NavController,private route: ActivatedRoute) { }
 
   ngOnInit() {
+
   }
 
   buttonClick(item){
@@ -26,16 +30,15 @@ export class PreferencesPage implements OnInit {
     { val: 'Clothes', isChecked: false , img:"../../assets/images/topics/cloth.jpg"  }
   ];
 
-  nextClick(data)
+  ConfirmClick(data)
   {
     
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          prefer:JSON.stringify(data)
-          }
-        };
 
-  this.router.navigate(['mode'],navigationExtras);
+
+// there we should save the data in the server ////////////////
+
+this.router.navigate(["main"]);
+  
   }
 }
 

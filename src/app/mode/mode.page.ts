@@ -45,24 +45,15 @@ export class ModePage implements OnInit {
 }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(
-      params => {this.preferences =JSON.parse(params["prefer"]);
- //     alert(this.preferences[1].isChecked);
-      }
-    )
+   
   }
   
    // mode next Button
   nextClick()
   {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          prefer:JSON.stringify(this.preferences),
-          level:this.modes[this.value].val
-          }
-        };
 
-  this.router.navigate(['main'],navigationExtras);
+
+  this.router.navigate(['learn']);
 
   }
 

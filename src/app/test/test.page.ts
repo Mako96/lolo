@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -10,15 +10,16 @@ export class TestPage implements OnInit {
 
   public preferences:any;
   public level:number;
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  public data = [
+    { word: 'Blue :: Bleu', w1:'Bleu', w2:'Rouge',  w3:'Vert', w4:'Orange', im1:"../../assets/Data/Bleu.png",im2:"../../assets/Data/Rouge.png",im3:"../../assets/Data/Vert.png",im4:"../../assets/Data/Orange.png" },
+    { word: 'Run :: Courir ', w1:'marche', w2:'Saut',  w3:'courir', w4:'nager', im1:"../../assets/Data/marche.jpg",im2:"../../assets/Data/Saut.jpg",im3:"../../assets/Data/courir.jpg",im4:"../../assets/Data/nager.jpg"  }
+  ];
+  constructor(private router: Router) { }
+
 
   ngOnInit() {
-    this.route.queryParams.subscribe(
-      params => {
-        this.preferences =JSON.parse(params["prefer"]);
-        this.level =params["level"];
-      }
-    )
+
   }
+
 
 }

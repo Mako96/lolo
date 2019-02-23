@@ -21,4 +21,6 @@ constructor(private router: Router){}
     this.router.navigate(['register']);
     
   }
+
+
 }
