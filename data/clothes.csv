@@ -1,28 +1,28 @@
-belt,ceinture,clothes
-blouse,chemisier,clothes
-boots,bottes,clothes
-cap,casquette,clothes
-coat,manteau,clothes
-dress,robe,clothes
-gloves,gants,clothes
-hat,chapeau,clothes
-jacket,veste,clothes
-jeans,jeans,clothes
-overalls,salopette,clothes
-pajamas,pyjamas,clothes
-pants,un pantalon,clothes
-raincoat,imperméable,clothes
-scarf,écharpe,clothes
-shirt,chemise,clothes
-shoes,des chaussures,clothes
-shorts,short,clothes
-skirt,jupe,clothes
-slippers,chaussons,clothes
-socks,chaussettes,clothes
-stockings,bas,clothes
-suit,costume,clothes
-sweatshirt,sweat-shirt,clothes
-t-shirt,T-shirt,clothes
-tie,cravate,clothes
-bra,soutien-gorge,clothes
-slip,caleçon,clothes
+belt,ceinture,clothes,pictures/clothes/belt.jpg
+blouse,chemisier,clothes,pictures/clothes/blouse.jpg
+boots,bottes,clothes,pictures/clothes/boots.jpg
+cap,casquette,clothes,pictures/clothes/cap.jpg
+coat,manteau,clothes,pictures/clothes/coat.jpg
+dress,robe,clothes,pictures/clothes/dress.jpg
+gloves,gants,clothes,pictures/clothes/gloves.jpg
+hat,chapeau,clothes,pictures/clothes/hat.jpg
+jacket,veste,clothes,pictures/clothes/jacket.jpg
+jeans,jeans,clothes,pictures/clothes/jeans.jpg
+overalls,salopette,clothes,pictures/clothes/overalls.jpg
+pajamas,pyjamas,clothes,pictures/clothes/pajamas.jpg
+pants,un pantalon,clothes,pictures/clothes/pants.jpg
+raincoat,imperméable,clothes,pictures/clothes/raincoat.jpg
+scarf,écharpe,clothes,pictures/clothes/scarf.jpg
+shirt,chemise,clothes,pictures/clothes/shirt.jpg
+shoes,des chaussures,clothes,pictures/clothes/shoes.jpg
+shorts,short,clothes,pictures/clothes/shorts.jpg
+skirt,jupe,clothes,pictures/clothes/skirt.jpg
+slippers,chaussons,clothes,pictures/clothes/slippers.jpg
+socks,chaussettes,clothes,pictures/clothes/socks.jpg
+stockings,bas,clothes,pictures/clothes/stockings.jpg
+suit,costume,clothes,pictures/clothes/suit.jpg
+sweatshirt,sweat-shirt,clothes,pictures/clothes/sweatshirt.jpg
+t-shirt,T-shirt,clothes,pictures/clothes/t-shirt.jpg
+tie,cravate,clothes,pictures/clothes/tie.jpg
+bra,soutien-gorge,clothes,pictures/clothes/bra.jpg
+slip,caleçon,clothes,pictures/clothes/slip.jpg
