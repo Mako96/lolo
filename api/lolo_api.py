@@ -1,55 +1,63 @@
-from flask import request, url_for
+from flask import request, url_for, jsonify, abort
 from flask_api import FlaskAPI, status, exceptions
+import mock_messages as mock
 
 app = FlaskAPI(__name__)
 
 
-notes = {
-    0: 'do the shopping',
-    1: 'build the codez',
-    2: 'paint the door',
-}
-
-def note_repr(key):
-    return {
-        'url': request.host_url.rstrip('/') + url_for('notes_detail', key=key),
-        'text': notes[key]
-    }
+@app.route('/lolo/api/v1.0/user/register', methods=['POST'])
+def register_user():
+    if not request.json or not 'data' in request.json:
+        abort(400)
+    print(request.json)
+    return jsonify(**mock.register_message)
 
 
-@app.route("/", methods=['GET', 'POST'])
-def notes_list():
-    """
-    List or create notes.
-    """
-    if request.method == 'POST':
-        note = str(request.data.get('text', ''))
-        idx = max(notes.keys()) + 1
-        notes[idx] = note
-        return note_repr(idx), status.HTTP_201_CREATED
-
-    # request.method == 'GET'
-    return [note_repr(idx) for idx in sorted(notes.keys())]
+@app.route('/lolo/api/v1.0/user/auth', methods=['POST'])
+def auth_user():
+    if not request.json or not 'data' in request.json:
+        abort(400)
+    print(request.json)
+    return jsonify(**mock.auth_message)
 
 
-@app.route("/<int:key>/", methods=['GET', 'PUT', 'DELETE'])
-def notes_detail(key):
-    """
-    Retrieve, update or delete note instances.
-    """
-    if request.method == 'PUT':
-        note = str(request.data.get('text', ''))
-        notes[key] = note
-        return note_repr(key)
+@app.route('/lolo/api/v1.0/preferences', methods=['GET'])
+def get_preferences():
+    return jsonify(**mock.preferences_message)
 
-    elif request.method == 'DELETE':
-        notes.pop(key, None)
-        return '', status.HTTP_204_NO_CONTENT
 
-    # request.method == 'GET'
-    if key not in notes:
-        raise exceptions.NotFound()
-    return note_repr(key)
+@app.route('/lolo/api/v1.0/user/<int:user_id>/preferences', methods=['POST'])
+def set_user_preferences():
+    if not request.json or not 'data' in request.json:
+        abort(400)
+    print(request.json)
+    return jsonify(**mock.set_preferences_message)
+
+
+@app.route('/lolo/api/v1.0/user/<int:user_id>/learn/words', methods=['GET'])
+def get_words_learn():
+    return jsonify(**mock.learn_words_message)
+
+
+@app.route('/lolo/api/v1.0/user/<int:user_id>/learn/test', methods=['GET'])
+def get_words_test():
+    return jsonify(**mock.test_words_message)
+
+
+@app.route('/lolo/api/v1.0/user/<int:user_id>/learn/summary', methods=['POST'])
+def learn_summary():
+    if not request.json or not 'data' in request.json:
+        abort(400)
+    print(request.json)
+    return jsonify(**mock.learn_summary_message)
+
+
+@app.route('/lolo/api/v1.0/user/<int:user_id>/test/summary', methods=['POST'])
+def test_summary():
+    if not request.json or not 'data' in request.json:
+        abort(400)
+    print(request.json)
+    return jsonify(**mock.test_summary_message)
 
 
 if __name__ == "__main__":
