@@ -1,50 +1,50 @@
-bacon,Bacon
-beef,du boeuf
-chicken,poulet
-ham,jambon
-hamburger,Hamburger
-hot dog,Hot-dog
-lamb chop,côtelette d'agneau
-pork,porc
-sausage,saucisse
-steak,steak
-turkey,dinde
-veal,veau
-apple,Pomme
-apricot,abricot
-banana,banane
-blackberry,la mûre
-blueberry,myrtille
-cherry,Cerise
-currant,groseille
-fig,figue
-grape,grain de raisin
-grapefruit,pamplemousse
-grapes,les raisins
-kiwi,kiwi
-lemon,citron
-lime,citron vert
-melon,melon
-nectarine,nectarine
-orange,Orange
-peach,pêche
-pear,poire
-pineapple,ananas
-plum,prune
-pomegranate,Grenade
-prune,prune
-raspberry,framboise
-strawberry,fraise
-tangerine,mandarine
-watermelon,pastèque
-apple pie,tarte aux pommes
-birthday cake,gâteau d'anniversaire
-cake,gâteau
-candy,bonbons
-donut,Donut
-fruit,fruit
-ice cream,crème glacée
-muffin,muffin
-pie,tarte
-pudding,pudding
-whip cream,Fouetter la crème
+bacon,Bacon,food
+beef,du boeuf,food
+chicken,poulet,food
+ham,jambon,food
+hamburger,Hamburger,food
+hot dog,Hot-dog,food
+lamb chop,côtelette d'agneau,food
+pork,porc,food
+sausage,saucisse,food
+steak,steak,food
+turkey,dinde,food
+veal,veau,food
+apple,Pomme,food
+apricot,abricot,food
+banana,banane,food
+blackberry,la mûre,food
+blueberry,myrtille,food
+cherry,Cerise,food
+currant,groseille,food
+fig,figue,food
+grape,grain de raisin,food
+grapefruit,pamplemousse,food
+grapes,les raisins,food
+kiwi,kiwi,food
+lemon,citron,food
+lime,citron vert,food
+melon,melon,food
+nectarine,nectarine,food
+orange,Orange,food
+peach,pêche,food
+pear,poire,food
+pineapple,ananas,food
+plum,prune,food
+pomegranate,Grenade,food
+prune,prune,food
+raspberry,framboise,food
+strawberry,fraise,food
+tangerine,mandarine,food
+watermelon,pastèque,food
+apple pie,tarte aux pommes,food
+birthday cake,gâteau d'anniversaire,food
+cake,gâteau,food
+candy,bonbons,food
+donut,Donut,food
+fruit,fruit,food
+ice cream,crème glacée,food
+muffin,muffin,food
+pie,tarte,food
+pudding,pudding,food
+whip cream,Fouetter la crème,food

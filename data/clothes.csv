@@ -1,28 +1,28 @@
-belt,ceinture
-blouse,chemisier
-boots,bottes
-cap,casquette
-coat,manteau
-dress,robe
-gloves,gants
-hat,chapeau
-jacket,veste
-jeans,jeans
-overalls,salopette
-pajamas,pyjamas
-pants,un pantalon
-raincoat,imperméable
-scarf,écharpe
-shirt,chemise
-shoes,des chaussures
-shorts,short
-skirt,jupe
-slippers,chaussons
-socks,chaussettes
-stockings,bas
-suit,costume
-sweatshirt,sweat-shirt
-t-shirt,T-shirt
-tie,cravate
-bra,soutien-gorge
-slip,caleçon
+belt,ceinture,clothes
+blouse,chemisier,clothes
+boots,bottes,clothes
+cap,casquette,clothes
+coat,manteau,clothes
+dress,robe,clothes
+gloves,gants,clothes
+hat,chapeau,clothes
+jacket,veste,clothes
+jeans,jeans,clothes
+overalls,salopette,clothes
+pajamas,pyjamas,clothes
+pants,un pantalon,clothes
+raincoat,imperméable,clothes
+scarf,écharpe,clothes
+shirt,chemise,clothes
+shoes,des chaussures,clothes
+shorts,short,clothes
+skirt,jupe,clothes
+slippers,chaussons,clothes
+socks,chaussettes,clothes
+stockings,bas,clothes
+suit,costume,clothes
+sweatshirt,sweat-shirt,clothes
+t-shirt,T-shirt,clothes
+tie,cravate,clothes
+bra,soutien-gorge,clothes
+slip,caleçon,clothes
