@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+        ServerName 52.39.19.210
+        DocumentRoot /home/lolo/lolo/api
+
+        WSGIScriptAlias / /home/lolo/lolo/api/lolo_api.wsgi
+        
+        <Directory /home/lolo/lolo/api/>
+        WSGIProcessGroup lolo_api
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>
