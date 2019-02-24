@@ -9,11 +9,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LearnPage implements OnInit {
  
   public index:number=0;
-  public preferences:any;
+  public instance:any;
+  public answer:any;
   public level:number;
   public data = [
-    { word: 'Blue :: Bleu', w1:'Bleu', w2:'Rouge',  w3:'Vert', w4:'Orange', im1:"../../assets/Data/Bleu.png",im2:"../../assets/Data/Rouge.png",im3:"../../assets/Data/Vert.png",im4:"../../assets/Data/Orange.png" },
-    { word: 'Run :: Courir ', w1:'marche', w2:'Saut',  w3:'courir', w4:'nager', im1:"../../assets/Data/marche.jpg",im2:"../../assets/Data/Saut.jpg",im3:"../../assets/Data/courir.jpg",im4:"../../assets/Data/nager.jpg"  }
+    { word: 'Blue :: Bleu', w1:'Bleu', w2:'Rouge',  w3:'Vert', w4:'Orange', im1:"../../assets/Data/Bleu.png",im2:"../../assets/Data/Rouge.png",im3:"../../assets/Data/Vert.png",im4:"../../assets/Data/Orange.png",answer: "../../assets/Data/Bleu.png"},
+    { word: 'Run :: Courir ', w1:'marche', w2:'Saut',  w3:'courir', w4:'nager', im1:"../../assets/Data/marche.jpg",im2:"../../assets/Data/Saut.jpg",im3:"../../assets/Data/courir.jpg",im4:"../../assets/Data/nager.jpg",answer: "../../assets/Data/courir.jpg" }
   ];
 
   constructor(private router: Router, private route: ActivatedRoute) { }
@@ -27,5 +28,24 @@ export class LearnPage implements OnInit {
     alert(this.index);
   }
 
+  check(instance,answer)
+  {
+    this.instance=JSON.stringify(instance);
+    this.answer=JSON.stringify(answer);
+
+if (this.instance==this.answer)
+{
+
+  alert("Correct!!");
+  
+  /// display new instance by index
+  // for the demo I have two instances so the index will be 0 or 1
+  this.index=Math.round(Math.random());
+}
+else
+{
+  alert("Wrong");
+}
+  }
 
 }

@@ -52,7 +52,7 @@ export class ModePage implements OnInit {
   nextClick()
   {
 
-
+//upload the mode 
   this.router.navigate(['learn']);
 
   }

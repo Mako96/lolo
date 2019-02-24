@@ -5,31 +5,52 @@
 </ion-header>
 
 <ion-content padding>
-  <div>
-  
+
+  <div class="frame0"  [hidden]=image>
     <h2>{{data[index].word}}</h2>
-  
     <div class="c0">
+
+    <div class="c1">
         <div >
-            <img src={{data[index].im1}}/>
-            <p>{{data[index].w1}}</p>
+            <p (click)="checkAnswer(data[index].v1,data[index].answer)">{{data[index].v1}}</p>
         </div>
         <div >
-            <img src={{data[index].im2}}/>
-            <p>{{data[index].w2}}</p>
+            <p (click)="checkAnswer(data[index].v2,data[index].answer)">{{data[index].v2}}</p>
         </div>
     </div>
-    <div class="c0">
+    <div class="c1">
         <div >
-            <img src={{data[index].im3}}/>
-            <p>{{data[index].w3}}</p>
+            <p (click)="checkAnswer(data[index].v3,data[index].answer)">{{data[index].v3}}</p>
         </div>   
         <div >
-            <img src={{data[index].im4}}/>
-            <p>{{data[index].w4}}</p>
+            <p (click)="checkAnswer(data[index].v4,data[index].answer)">{{data[index].v4}}</p>
         </div>  
     </div>
 
-    <ion-button (click)="next()">Next</ion-button>
+  </div>
+  </div>
+
+  <div class="frame0"  [hidden]="text">
+    <img src="{{data[index].word}}"/>
+    <div class="c0">
+
+    <div class="c1">
+        <div >
+            <p (click)="checkAnswer(data[index].v1,data[index].answer)">{{data[index].v1}}</p>
+        </div>
+        <div >
+            <p (click)="checkAnswer(data[index].v2,data[index].answer)">{{data[index].v2}}</p>
+        </div>
+    </div>
+    <div class="c1">
+        <div >
+            <p (click)="checkAnswer(data[index].v3,data[index].answer)">{{data[index].v3}}</p>
+        </div>   
+        <div >
+            <p (click)="checkAnswer(data[index].v4,data[index].answer)">{{data[index].v4}}</p>
+        </div>  
+    </div>
+
+  </div>
   </div>
 </ion-content>

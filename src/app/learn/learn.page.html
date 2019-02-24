@@ -12,26 +12,25 @@
   
     <div class="c0">
         <div >
-            <img src={{data[index].im1}}/>
+            <img src={{data[index].im1}} (click)="check(data[index].im1,data[index].answer)"/>
             <p>{{data[index].w1}}</p>
         </div>
         <div >
-            <img src={{data[index].im2}}/>
+            <img src={{data[index].im2}} (click)="check(data[index].im2,data[index].answer)"/>
             <p>{{data[index].w2}}</p>
         </div>
     </div>
     <div class="c0">
         <div >
-            <img src={{data[index].im3}}/>
+            <img src={{data[index].im3}} (click)="check(data[index].im3,data[index].answer)"/>
             <p>{{data[index].w3}}</p>
         </div>   
         <div >
-            <img src={{data[index].im4}}/>
+            <img src={{data[index].im4}} (click)="check(data[index].im3,data[index].answer)"/>
             <p>{{data[index].w4}}</p>
         </div>  
     </div>
 
-    <ion-button (click)="next()">Next</ion-button>
   </div>
   
 </ion-content>

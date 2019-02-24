@@ -10,9 +10,15 @@ export class TestPage implements OnInit {
 
   public preferences:any;
   public level:number;
+  public index:number=0;
+
+  // these boolean values "image, text" helps to switch to the correct formula for presenting the data e.g. if the if the tested data is
+  // image so image is true otherwise it's false 
+  image=false;
+  text=true;
   public data = [
-    { word: 'Blue :: Bleu', w1:'Bleu', w2:'Rouge',  w3:'Vert', w4:'Orange', im1:"../../assets/Data/Bleu.png",im2:"../../assets/Data/Rouge.png",im3:"../../assets/Data/Vert.png",im4:"../../assets/Data/Orange.png" },
-    { word: 'Run :: Courir ', w1:'marche', w2:'Saut',  w3:'courir', w4:'nager', im1:"../../assets/Data/marche.jpg",im2:"../../assets/Data/Saut.jpg",im3:"../../assets/Data/courir.jpg",im4:"../../assets/Data/nager.jpg"  }
+    { word: 'Bleu', v1:'Blue', v2:'Red',  v3:'Green', v4:'Orange',answer: 'Blue'},
+    { word: "../../assets/Data/courir.jpg", v1:'marche', v2:'Saut',  v3:'courir', v4:'nager',answer:'courir'}
   ];
   constructor(private router: Router) { }
 
@@ -21,5 +27,32 @@ export class TestPage implements OnInit {
 
   }
 
+  checkAnswer(value,answer)
+  {
+    //update the index
+    this.index=1;
+
+
+
+    if(this.data[this.index].word.includes("assets"))
+    {
+      this.image=true;
+      this.text=false;
+    }
+    else
+    {
+      this.image=false;
+      this.text=true;
+    }
+
+    if(value==answer)
+    {
+    alert("Correct");
+
+    }
+    else{
+      alert("wrong");
+    }
+  }
 
 }
