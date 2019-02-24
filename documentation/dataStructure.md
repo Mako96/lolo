@@ -21,13 +21,15 @@
 		interests: [‘colours’, ‘animals’],
 		taughtWords: [
 			{
-				word: ’rouge’ ,
-				datelastSeen:  Date(2013,11,10,2,35),
+				wordID: 09184650943,
+				lang: "fr"
+				dateLastSeen:  Date(2013,11,10,2,35),
 				numberOfTimesSeen: 4,
 			},
 			{
-				word: ’orange’,
-				datelastSeen:  Date(2015,5,10,2,5),
+				wordID: 09184690238,
+				lang: "fr"
+				dateLastSeen:  Date(2015,5,10,2,5),
 				numberOfTimesSeen: 10,
 			}
 		]
@@ -35,32 +37,34 @@
 
 		testedWords: [
 			{
-				word: ’rouge’,
+				wordID: 09184690238,
+				lang: "fr"
 				result: [
 					{
 						date:  Date(2013,11,10,2,35),
 						sucess: True,
-						test: 'Written',
+						type: 'Written',
 					},
 					{
 						date:  Date(2012,19,4,2,35),
 						sucess: False,
-						test: 'Written',
+						type: 'Written',
 					}
 				]
 			},
 			{
-				word: ’orange’ 
+				wordID: 09184690238,
+				lang: "fr"
 				result: [
 					{
 						date:  Date(2013,11,10,2,35),
 						sucess: True,
-						test: 'Written',
+						type: 'Written',
 					},
 					{
 						date:  Date(2012,19,4,2,35),
-						sucess: Flase,
-						test: 'Written',
+						sucess: False,
+						type: 'Written',
 					}
 				]
 			}
