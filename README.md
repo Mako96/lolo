@@ -1,6 +1,6 @@
 # lolo
 
-To work on ionic please install the following software:
+To work with ionic please install the following software:
 nodejs
 git
 android studio : to build an app for smartphone 
