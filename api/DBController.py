@@ -1,7 +1,13 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import datetime
+import json
 
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
 
 class DBController:
 
@@ -67,14 +73,14 @@ class DBController:
     def getTrainingWords(self, user_ID, size):
         """Returns all the words needed for the training part
         Format: [{'to learn': word, 'complementary': [list of 3 words]}, {...}]"""
-        trainingWords = []
+        trainingWords = {"words": []}
         topics = self.getInterests(user_ID)
         wordsToLearn = self.decideWordsToLearn(ObjectId(user_ID), topics, size)
         for word in wordsToLearn:
             complementaryWords = self.getComplementaryWords(word["topic"], word)
-            trainingWords.append({"to_learn": word, "complementary": complementaryWords})
+            trainingWords["words"].append({"to_learn": word, "complementary": complementaryWords})
 
-        return trainingWords
+        return JSONEncoder().encode(trainingWords)
 
 
     def getTestingWords(self, user_ID, size):
@@ -195,9 +201,9 @@ if __name__ == '__main__':
     #print(controller.doesUserExistByID("5c73ed4c2344ef2a3a8e1c2c"))
     #print(controller.setInterests("5c73ed4c2344ef2a3a8e1c2c", ["animals"]))
     #print(controller.getInterests("5c73ed4c2344ef2a3a8e1c2c"))
-    #print(controller.getTrainingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
+    print(controller.getTrainingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
     #print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
-    print(controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2d", "lang": "fr"}]))
-    controller.updateTestedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2f", "success": True, "type": "written", "lang": "fr"}])
+    #print(controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2d", "lang": "fr"}]))
+    #controller.updateTestedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2f", "success": True, "type": "written", "lang": "fr"}])
 
     #print(controller.getPreviousTestResults("5c73ed4c2344ef2a3a8e1c2c", "fr"))
