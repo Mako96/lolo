@@ -14,16 +14,22 @@ class DBController:
         """ Inserts an email address in the user collection
             Returns true if it succeeds else false"""
         if not self.doesUserExist(user_email):
+            print("here")
             query = {"email": user_email, "interests": [], "taughtWords": [], "testedWords": []}
             self.user_collection.insert_one(query)
-            return True
+            userID = self.user_collection.find_one({"email": user_email}, {'_id': 1})
+            return userID["_id"]
         else:
-            return False
+            return None
 
     def doesUserExist(self, user_email):
         query = {"email": user_email}
-        count = self.user_collection.find(query).count()
-        return count == 1
+        userID = self.user_collection.find_one({"email": user_email}, {'_id': 1})
+        if userID:
+            return userID["_id"]
+        else:
+            return None
+
 
     def getInterests(self, user_email):
         """Returns a list of the user interests of a user.
@@ -170,9 +176,10 @@ class DBController:
 
 if __name__ == '__main__':
     controller = DBController()
+    print(controller.doesUserExist("zd.be"))
     # print(controller.setInterests("p@p.com", ["animals"]))
     # print(controller.getInterests("p@p.com"))
     #print(controller.getTrainingWords('p@p.com', 5))
     #print(controller.updateLearnedWords("p@p.com", ["5c727e21bf137730b7f411111"]))
     #controller.updateTestedWords("p@p.com", [{"wordID": 111, "success": True, "type": "written", "lang": "fr"}])
-    print(controller.getPreviousTestResults("p@p.com", "fr"))
+    #print(controller.getPreviousTestResults("p@p.com", "fr"))
