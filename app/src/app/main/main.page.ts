@@ -23,29 +23,24 @@ export class MainPage implements OnInit {
 
 
   learnPage(){
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          prefer:JSON.stringify(this.preferences),
-          level:this.level
-                 }
-        };
 
-  this.router.navigate(['learn'],navigationExtras);
+
+  this.router.navigate(['mode']);
     
   }
 
   
   testPage(){
 
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          prefer:JSON.stringify(this.preferences),
-          level:this.level
-                 }
-        };
 
-  this.router.navigate(['test'],navigationExtras);
+  this.router.navigate(['test']);
     
+  }
+
+  ChangePreference()
+  {
+
+    this.router.navigate(['preferences']);
   }
 
 

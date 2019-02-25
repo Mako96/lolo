@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
     //here there must be checking if the email is registered "for now it's -ture condition-"
     if (true)
     { 
-    this.router.navigate(['preferences']);
+    this.router.navigate(['main']);
     }
     else
     {

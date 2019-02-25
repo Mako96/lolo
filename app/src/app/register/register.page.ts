@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute,NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterPage implements OnInit {
 
-  firstName_V:string;
-  lastName_V:string;
-  email_V:string;
+  firstName_V:string="";
+  lastName_V:string="";
+  email_V:string="";
   constructor(private router: Router){
 
   }
@@ -18,17 +18,21 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  submitClick()
+  nextClick()
   {
     if (this.firstName_V.length > 0 && this.email_V.length > 0 && this.lastName_V.length > 0)
     {
-    alert("Thank you for Registration");
+    alert("Here we should save the personal data in the server");
+    ///////
+    ///////
+    this.router.navigate(['preferences']);
     }
     else
+    {
      alert("Fill in the blanks, please");
+    }
 
   }
-
   goBack(){
     this.router.navigate(['home']);
   }
