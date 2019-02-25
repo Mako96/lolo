@@ -73,14 +73,17 @@ class DBController:
     def getTrainingWords(self, user_ID, size):
         """Returns all the words needed for the training part
         Format: [{'to learn': word, 'complementary': [list of 3 words]}, {...}]"""
-        trainingWords = {"words": []}
-        topics = self.getInterests(user_ID)
-        wordsToLearn = self.decideWordsToLearn(ObjectId(user_ID), topics, size)
-        for word in wordsToLearn:
-            complementaryWords = self.getComplementaryWords(word["topic"], word)
-            trainingWords["words"].append({"to_learn": word, "complementary": complementaryWords})
+        if not self.doesUserExistByID(user_ID):
+            return None
+        else:
+            trainingWords = {"words": []}
+            topics = self.getInterests(user_ID)
+            wordsToLearn = self.decideWordsToLearn(ObjectId(user_ID), topics, size)
+            for word in wordsToLearn:
+                complementaryWords = self.getComplementaryWords(word["topic"], word)
+                trainingWords["words"].append({"to_learn": word, "complementary": complementaryWords})
 
-        return JSONEncoder().encode(trainingWords)
+            return JSONEncoder().encode(trainingWords)
 
 
     def getTestingWords(self, user_ID, size):
