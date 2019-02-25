@@ -1,5 +1,7 @@
 from flask import request, url_for, jsonify, abort
 from flask_api import FlaskAPI, status, exceptions
+from flask_cors import CORS
+
 import mock_messages as mock
 from DBController import *
 
@@ -9,6 +11,7 @@ dbc = DBController()
 @app.route('/')
 def test():
     return "ok"
+CORS(app)
 
 @app.route('/lolo/api/v1.0/user/register', methods=['POST'])
 def register_user():
