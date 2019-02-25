@@ -88,11 +88,7 @@ When the user has selected his/her preferences a post action has to be done in o
 ```json
 {
     "data": {
-        "preferences":[
-            {
-                "name" : "category2"
-            }
-        ]
+        "preferences":[ "category2" ]
     }
 }
 ```
@@ -114,34 +110,40 @@ The response will be:
 ```json
 {
     "data":{
-        "learn": {
-            "words" : [
-                {
-                    "EN" : "Hello",
-                    "FR" : "Salut",
-                    "IMG" : "http://...."
+        "words": [
+            {
+                "to_learn": {
+                    "_id": "5c713a8802045a96c31771a6",
+                    "en": "chicken",
+                    "fr": "poulet",
+                    "topic": "animals",
+                    "url": "pictures/animals/chicken.jpg"
                 },
-                {
-                    "EN" : "Bye",
-                    "FR" : "Aurevoir",
-                    "IMG" : "http://...."
-                }
-            ]
-        },
-        "complementary" : {
-            "words" : [
-                {
-                    "EN" : "Morning",
-                    "FR" : "Matin",
-                    "IMG" : "http://...."
-                },
-                {
-                    "EN" : "Night",
-                    "FR" : "soir",
-                    "IMG" : "http://...."
-                }
-            ]
-        }
+                "complementary": [
+                    {
+                        "_id": "5c713a8802045a96c31771b4",
+                        "en": "frog",
+                        "fr": "la grenouille",
+                        "topic": "animals",
+                        "url": "pictures/animals/frog.jpg"
+                    },
+                    {
+                        "_id": "5c713a8802045a96c31771ce",
+                        "en": "rat",
+                        "fr": "rat",
+                        "topic": "animals",
+                        "url": "pictures/animals/rat.jpg"
+                    },
+                    {
+                        "_id": "5c713a8802045a96c31771e6",
+                        "en": "weasel",
+                        "fr": "belette",
+                        "topic": "animals",
+                        "url": "pictures/animals/weasel.jpg"
+                    }
+                ]
+            }
+        ]
     },
     "error":{
         "code" : "failed",
@@ -155,34 +157,40 @@ The response will be:
 ```json
 {
     "data":{
-        "test": {
-            "words" : [
-                {
-                    "EN" : "Hello",
-                    "FR" : "Salut",
-                    "IMG" : "http://...."
+        "words": [
+            {
+                "to_learn": {
+                    "_id": "5c713a8802045a96c31771a6",
+                    "en": "chicken",
+                    "fr": "poulet",
+                    "topic": "animals",
+                    "url": "pictures/animals/chicken.jpg"
                 },
-                {
-                    "EN" : "Bye",
-                    "FR" : "Aurevoir",
-                    "IMG" : "http://...."
-                }
-            ]
-        },
-        "complementary" : {
-            "words" : [
-                {
-                    "EN" : "Morning",
-                    "FR" : "Matin",
-                    "IMG" : "http://...."
-                },
-                {
-                    "EN" : "Night",
-                    "FR" : "soir",
-                    "IMG" : "http://...."
-                }
-            ]
-        }
+                "complementary": [
+                    {
+                        "_id": "5c713a8802045a96c31771b4",
+                        "en": "frog",
+                        "fr": "la grenouille",
+                        "topic": "animals",
+                        "url": "pictures/animals/frog.jpg"
+                    },
+                    {
+                        "_id": "5c713a8802045a96c31771ce",
+                        "en": "rat",
+                        "fr": "rat",
+                        "topic": "animals",
+                        "url": "pictures/animals/rat.jpg"
+                    },
+                    {
+                        "_id": "5c713a8802045a96c31771e6",
+                        "en": "weasel",
+                        "fr": "belette",
+                        "topic": "animals",
+                        "url": "pictures/animals/weasel.jpg"
+                    }
+                ]
+            }
+        ]
     },
     "error":{
         "code" : "failed",
@@ -191,7 +199,37 @@ The response will be:
 }
 ```
 ### Update learn progress
-To define ...
+The body of the POST request should be:
+```json
+{
+    "data":{
+        "summary" : [
+            {
+                "wordID": "a word id", "lang": "FR"
+            },
+            {
+                "wordID": "a word id", "lang": "FR"
+            },
+
+        ]
+    }
+}
+```
 
 ### Update test progress
-To define ...
+```json
+{
+    "data":{
+        "summary" : [
+            {
+                "wordID": "a word id", "success": true, "type": "written", "lang": "fr"
+            },
+            {
+                "wordID": "a word id", "success": false, "type": "written", "lang": "fr"
+            },
+
+        ]
+    }
+}
+```
+```
