@@ -1,9 +1,11 @@
 from flask import request, url_for, jsonify, abort
 from flask_api import FlaskAPI, status, exceptions
+from flask_cors import CORS
+
 import mock_messages as mock
 
 app = FlaskAPI(__name__)
-
+CORS(app)
 
 @app.route('/lolo/api/v1.0/user/register', methods=['POST'])
 def register_user():
