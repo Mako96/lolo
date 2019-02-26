@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
+import { LoloPreferencesProviderService } from '../lolo-preferences-provider.service';
+
+
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.page.html',
@@ -11,16 +14,16 @@ export class PreferencesPage implements OnInit {
   firstName:string;
   lastName:string;
   email:string;
-  constructor(private router: Router, private navCtrl:NavController,private route: ActivatedRoute) { }
+  constructor(private preferencesProvider: LoloPreferencesProviderService, private router: Router, private navCtrl:NavController,private route: ActivatedRoute) { }
 
   ngOnInit() {
-
+    alert(this.preferencesProvider.getPreferences());
   }
 
   buttonClick(item){
     alert(item);
   }
-  
+
   public form = [
     { val: 'Animals', isChecked: false , img:"../../assets/images/topics/animals.jpg" },
     { val: 'Colors', isChecked: false  , img: "../../assets/images/topics/colors.jpg" },
@@ -32,14 +35,12 @@ export class PreferencesPage implements OnInit {
 
   ConfirmClick(data)
   {
-    
+
 
 
 // there we should save the data in the server ////////////////
 
 this.router.navigate(["main"]);
-  
+
   }
 }
-
-

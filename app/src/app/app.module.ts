@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { LoloApiProviderService } from './lolo-api-provider.service';
 import { LoloUserProviderService } from './lolo-user-provider.service';
+import { LoloPreferencesProviderService } from './lolo-preferences-provider.service';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +23,7 @@ import { LoloUserProviderService } from './lolo-user-provider.service';
   providers: [
     LoloApiProviderService,
     LoloUserProviderService,
+    LoloPreferencesProviderService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

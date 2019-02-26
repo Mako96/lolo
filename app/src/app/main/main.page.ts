@@ -13,12 +13,12 @@ export class MainPage implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(
+    /*this.route.queryParams.subscribe(
       params => {
         this.preferences =JSON.parse(params["prefer"]);
         this.level =params["level"];
       }
-    )
+    )*/
   }
 
 
@@ -26,15 +26,15 @@ export class MainPage implements OnInit {
 
 
   this.router.navigate(['mode']);
-    
+
   }
 
-  
+
   testPage(){
 
 
   this.router.navigate(['test']);
-    
+
   }
 
   ChangePreference()
