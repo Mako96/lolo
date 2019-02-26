@@ -6,7 +6,7 @@
 |-------------|-------------------------------------------------|--------------------------------|------------------|------------------|
 | POST        | http://lolo.ai/lolo/api/v1.0/user/register      | Register a new user to the DB  | application/json | application/json |
 | POST        | http://lolo.ai/lolo/api/v1.0/user/auth          | Authenticate a user            | application/json | application/json |
-| POST         | http://lolo.ai/lolo/api/v1.0/{iduser}/preferences        | Retrieve lolo categories for user       | application/json | application/json |
+| GET         | http://lolo.ai/lolo/api/v1.0/{iduser}/preferences        | Retrieve lolo categories for user       | application/json | application/json |
 | POST        | http://lolo.ai/lolo/api/v1.0/user/{iduser}/preferences   | Save user selected preferences | application/json | application/json |
 | GET         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/learn/words   | Retrieve set of words to learn | application/json | application/json |
 | GET         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/test/words    | Retrieve set of words to test  | application/json | application/json |
