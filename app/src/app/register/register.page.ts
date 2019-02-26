@@ -16,7 +16,7 @@ export class RegisterPage implements OnInit {
   email_V:string;
   data:any;
   resp:string;
-  constructor(private router: Router,private apiProvider: LoloApiProviderService, private userProvider: LoloUserProviderService){
+  constructor(private router: Router, private userProvider: LoloUserProviderService){
 
   }
 
@@ -25,20 +25,15 @@ export class RegisterPage implements OnInit {
 
   submitClick()
   {
+    var _self=this;
     if (this.firstName_V.length > 0 && this.email_V.length > 0 && this.lastName_V.length > 0)
     {
-    	this.apiProvider.doRegister(this.firstName_V, this.email_V).subscribe((data: any)=>{
-            console.log(data);
-            if(data.error !== undefined){
-            	alert(data.error.message);
-            } else if (data.data !== undefined) {
-            	this.userProvider.setUserID(data.data.userid);
-            	alert(data.data.message);
-            	this.router.navigate(["main"]);
-            } else {
-            	alert('Unknown API error, please try again later');
-            }
-        });
+    	var cbError = function(error){alert(error.message);};
+    	var cbSucces = function(data){
+            	alert(data.message);
+            	_self.router.navigate(["main"]);
+        };
+    	this.userProvider.doRegister(this.firstName_V, this.email_V, cbSucces, cbError);
     }
     else
      alert("Fill in the blanks, please");

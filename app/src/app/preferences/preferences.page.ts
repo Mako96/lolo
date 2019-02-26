@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
-import { LoloPreferencesProviderService } from '../lolo-preferences-provider.service';
+import { LoloUserProviderService } from '../lolo-user-provider.service';
 
 
 @Component({
@@ -14,10 +14,10 @@ export class PreferencesPage implements OnInit {
   firstName:string;
   lastName:string;
   email:string;
-  constructor(private preferencesProvider: LoloPreferencesProviderService, private router: Router, private navCtrl:NavController,private route: ActivatedRoute) { }
+  constructor(private userProvider: LoloUserProviderService, private router: Router, private navCtrl:NavController,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    alert(this.preferencesProvider.getPreferences());
+    this.userProvider.getPreferences(console.log, console.log);
   }
 
   buttonClick(item){
@@ -35,12 +35,17 @@ export class PreferencesPage implements OnInit {
 
   ConfirmClick(data)
   {
+  	var _self = this;
+	var cbError = function(error){alert(error.message);};
+    	var cbSucces = function(data){
+            	alert(data.message);
+            	_self.router.navigate(["main"]);
+        };
 
+  	this.userProvider.setPreferences(['fruits'], cbSucces, cbError);
 
 
 // there we should save the data in the server ////////////////
-
-this.router.navigate(["main"]);
 
   }
 }
