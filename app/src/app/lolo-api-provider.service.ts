@@ -20,6 +20,15 @@ export class LoloApiProviderService {
 	    }});
   }
   
+  doAuth(email) {
+	return this.http.post(this.apiUrl + 'user/auth', {
+	    data: {
+		user: {
+		    email : email,
+		}
+	    }});
+  }
+  
   getPreferences() {
 	return this.http.get(this.apiUrl + 'preferences');
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoloApiProviderService } from '../lolo-api-provider.service';
 import { LoloUserProviderService } from '../lolo-user-provider.service';
 
 
@@ -14,8 +13,7 @@ export class RegisterPage implements OnInit {
   firstName_V:string;
   lastName_V:string;
   email_V:string;
-  data:any;
-  resp:string;
+ 
   constructor(private router: Router, private userProvider: LoloUserProviderService){
 
   }

@@ -52,6 +52,18 @@ export class LoloUserProviderService {
             	cbError({'message': this.genericApiErrorMsg});
             }
         });  
+   }
+   doLogin(email, cbSucces, cbError) {
+  	this.apiProvider.doAuth(email).subscribe((data: any)=>{
+            if(data.error !== undefined){
+            	cbError(data.error);
+            } else if (data.data !== undefined) {
+            	this.setUserID(data.data.userid);
+            	cbSucces(data.data);
+            } else {
+            	cbError({'message': this.genericApiErrorMsg});
+            }
+        });  
   }
   
 }

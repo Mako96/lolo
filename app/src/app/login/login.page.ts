@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { PreferencesPage } from '../preferences/preferences.page';
+
+import { LoloUserProviderService } from '../lolo-user-provider.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -9,21 +12,20 @@ import { PreferencesPage } from '../preferences/preferences.page';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router:Router) { }
+  email_V:string;
+  constructor(private router:Router, private userProvider: LoloUserProviderService) { }
 
   ngOnInit() {
   }
 
   start(){
-    //here there must be checking if the email is registered "for now it's -ture condition-"
-    if (true)
-    { 
-    this.router.navigate(['main']);
-    }
-    else
-    {
-      alert("Invalid credentials");
-    }
+  	var _self = this;
+  	var cbError = function(error){alert(error.message);};
+    	var cbSucces = function(data){
+            	alert(data.message);
+            	_self.router.navigate(["main"]);
+        };
+    	this.userProvider.doLogin(this.email_V, cbSucces, cbError);
   }
 
   goBack(){
