@@ -85,7 +85,7 @@ class DBController:
                 complementaryWords = self.getComplementaryWords(word["topic"], word)
                 trainingWords["words"].append({"to_learn": word, "complementary": complementaryWords})
 
-            return JSONEncoder().encode(trainingWords)
+            return json.loads(JSONEncoder().encode(trainingWords))
 
 
     def getTestingWords(self, user_ID, size):

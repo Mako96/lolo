@@ -115,12 +115,11 @@ def set_user_preferences(userid):
 def get_words_learn(userid):
     result = dbc.getTrainingWords(userid, 10)
     if result :
-        return result
+        return jsonify({"data":result})
     else:
         return jsonify(
             {
                 "error" : {
-                    "code" : "failed",
                     "message" : "Something went wrong with the words"
                 }
             })
@@ -130,12 +129,11 @@ def get_words_learn(userid):
 def get_words_test(userid):
     result = dbc.getTestingWords(userid, 10)
     if result :
-        return result
+        return jsonify({"data":result})
     else:
         return jsonify(
             {
                 "error" : {
-                    "code" : "failed",
                     "message" : "Something went wrong with the words"
                 }
             })
