@@ -29,10 +29,11 @@ The response will be:
 ```json
 {
     "data":{
-        "message" : "Successfully registered"
+        "message" : "Successfully registered",
+        "userid": "some user id"
     },
     "error":{
-        "code" : "failed"
+        "message" : "Something went wrong"
     }
 }
 ```
@@ -55,8 +56,7 @@ The response will be:
         "message" : "Authentication correct"
     },
     "error":{
-        "code" : "failed",
-        "message" : "The user is not registered yet"
+        "message" : "Authentication failed
     }
 }
 ```
@@ -78,7 +78,7 @@ The response will be:
         ]
     },
     "error":{
-        "code" : "failed"
+        "message" : "failed"
     }
 }
 ```
@@ -96,11 +96,10 @@ The response will be:
 ```json
 {
     "data":{
-        "message" : "Preferences saved"
+        "message" : "Preferences successfully saved"
     },
     "error":{
-        "code" : "failed",
-        "message" : "There is an error in the preferences"
+        "message" : "Something went wrong"
     }
 }
 ```
@@ -146,8 +145,7 @@ The response will be:
         ]
     },
     "error":{
-        "code" : "failed",
-        "message" : "Something wrong with the words"
+        "message" : "Something went wrong with the words"
     }
 }
 ```
@@ -193,8 +191,7 @@ The response will be:
         ]
     },
     "error":{
-        "code" : "failed",
-        "message" : "Something wrong with the words"
+        "message" : "Something went wrong with the words"
     }
 }
 ```
@@ -214,6 +211,17 @@ The body of the POST request should be:
     }
 }
 ```
+response:
+```json
+{
+    "data":{
+        "message" : "Successfully updated"
+    },
+    "error":{
+        "message" : "Something went wrong"
+    }
+}
+```
 
 ### Update test progress
 ```json
@@ -230,4 +238,13 @@ The body of the POST request should be:
     }
 }
 ```
-```
+response:
+```json
+{
+    "data":{
+        "message" : "Successfully updated"
+    },
+    "error":{
+        "message" : "Something went wrong"
+    }
+}
