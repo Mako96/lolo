@@ -50,16 +50,15 @@ class DBController:
 
 
     def getInterests(self, user_ID):
-        """Returns a list of the user interests of a user.
+        """Returns a list of the user interests.
            Returns None if the user doesn't exist"""
+        if not self.doesUserExistByID(user_ID):
+            return None
         res = self.user_collection.find_one(
             {"_id": ObjectId(user_ID)},
             {"interests": 1, '_id': 0}
         )
-        if res:
-            return res["interests"]
-        else:
-            return None
+        return res["interests"]
 
     def setInterests(self, user_ID, interests):
         """Sets the interests of a user. Takes a list of interests and the email as arguments.

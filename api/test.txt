@@ -23,7 +23,12 @@ curl --header "Content-Type: application/json" \
   --request GET \
   http://localhost:5000/lolo/api/v1.0/preferences
 
-# set preferences
+# Get user preferences
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:5000/lolo/api/v1.0/user/5c73f018948d1f5ea7247a3b/preferences
+
+# set user preferences
 
 {"data": {"preferences":[ "animals" ]}}
 

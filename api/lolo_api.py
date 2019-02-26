@@ -83,6 +83,26 @@ def get_preferences():
     }
     return jsonify(**categories)
 
+@app.route('/lolo/api/v1.0/user/<userid>/preferences', methods=['GET'])
+def get_user_preferences(userid):
+    result = dbc.getInterests(userid)
+    print(result)
+    if result is not None:
+        return jsonify(
+            {
+                "data": {
+                    "preferences": result,
+                }
+            })
+    else:
+        return jsonify(
+            {
+                "error": {
+                    "code": "failed",
+                    "message": "Something went wrong in get_user_preferences" + str(userid)
+                }
+            })
+
 
 @app.route('/lolo/api/v1.0/user/<userid>/preferences', methods=['POST'])
 def set_user_preferences(userid):
