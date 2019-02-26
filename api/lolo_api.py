@@ -57,7 +57,7 @@ def auth_user():
             })
 
 
-@app.route('/lolo/api/v1.0/<userid>/preferences', methods=['POST'])
+@app.route('/lolo/api/v1.0/<userid>/preferences', methods=['GET'])
 def get_preferences(userid):
     #TODO: connect to db and get either user specific themes or list of all themes
     #DUMMY DATA FOR TESTING:
