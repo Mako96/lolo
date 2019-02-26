@@ -29,7 +29,7 @@ def register_user():
         return jsonify(
             {
                 "error": {
-                    "message": "Something went wrong"
+                    "message": "Something went wrong in register_user()"
                 }
             })
 
@@ -102,7 +102,7 @@ def set_user_preferences(userid):
         return jsonify(
             {
                 "error": {
-                    "message": "Something went wrong"
+                    "message": "Something went wrong in set_user_preferences()"
                 }
             })
 
@@ -117,7 +117,7 @@ def get_words_learn(userid):
             {
                 "error": {
                     "code": "failed",
-                    "message": "Something went wrong with the words"
+                    "message": "Something went wrong in get_words_learn" + str(userid)
                 }
             })
 
@@ -132,7 +132,7 @@ def get_words_test(userid):
             {
                 "error": {
                     "code": "failed",
-                    "message": "Something went wrong with the words"
+                    "message": "Something went wrong in get_words_test" + str(userid)
                 }
             })
 
@@ -153,7 +153,7 @@ def update_learning_data(userid):
         return jsonify(
             {
                 "error": {
-                    "message": "Something went wrong"
+                    "message": "Something went wrong in update_learning_data for user " + str(userid)
                 }
             })
 
@@ -174,7 +174,7 @@ def update_testing_data(userid):
         return jsonify(
             {
                 "error": {
-                    "message": "Something went wrong"
+                    "message": "Something went wrong in update_testing_data()"
                 }
             })
 
