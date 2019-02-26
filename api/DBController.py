@@ -39,6 +39,8 @@ class DBController:
 
     def doesUserExistByID(self, user_ID):
         """Returns the userID if the user exists else None"""
+        if not ObjectId.is_valid(user_ID):
+            return False
 
         userID = self.user_collection.find_one({"_id": ObjectId(user_ID)}, {'_id': 1})
         if userID:
@@ -204,7 +206,7 @@ if __name__ == '__main__':
     #print(controller.doesUserExistByID("5c73ed4c2344ef2a3a8e1c2c"))
     #print(controller.setInterests("5c73ed4c2344ef2a3a8e1c2c", ["animals"]))
     #print(controller.getInterests("5c73ed4c2344ef2a3a8e1c2c"))
-    print(controller.getTrainingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
+    print(controller.getTrainingWords("5c73ed4c2344ef", 3))
     #print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
     #print(controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2d", "lang": "fr"}]))
     #controller.updateTestedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2f", "success": True, "type": "written", "lang": "fr"}])
