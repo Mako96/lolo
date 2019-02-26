@@ -1,5 +1,3 @@
-#!/usr/bin/env/pyhon2
-
 from flask import request, url_for, jsonify, abort
 from flask_api import FlaskAPI, status, exceptions
 from flask_cors import CORS
@@ -10,10 +8,8 @@ from DBController import *
 app = FlaskAPI(__name__)
 dbc = DBController()
 
-@app.route('/')
-def test():
-    return "ok"
 CORS(app)
+
 
 @app.route('/lolo/api/v1.0/user/register', methods=['POST'])
 def register_user():
@@ -24,16 +20,16 @@ def register_user():
     if userid:
         return jsonify(
             {
-                "data":{
-                "message" : "Successfully registered",
-                "userid": userid
+                "data": {
+                    "message": "Successfully registered",
+                    "userid": userid
                 }
             })
     else:
         return jsonify(
             {
-                "error":{
-                "message" : "Something went wrong"
+                "error": {
+                    "message": "Something went wrong"
                 }
             })
 
@@ -47,16 +43,16 @@ def auth_user():
     if userid:
         return jsonify(
             {
-                "data":{
-                "message" : "Successfully authenticated",
-                "id" : userid
+                "data": {
+                    "message": "Successfully authenticated",
+                    "id": userid
                 }
             })
     else:
         return jsonify(
             {
-                "error":{
-                "message" : "Authentication failed"
+                "error": {
+                    "message": "Authentication failed"
                 }
             })
 
@@ -64,22 +60,22 @@ def auth_user():
 @app.route('/lolo/api/v1.0/preferences', methods=['GET'])
 def get_preferences():
     categories = {
-        "data":{
-            "preferences" : [
+        "data": {
+            "preferences": [
                 {
-                    "name" : "Animals", 
+                    "name": "Animals",
                     "image": "http://......"
                 },
                 {
-                    "name" : "Colours", 
+                    "name": "Colours",
                     "image": "http://......"
                 },
                 {
-                    "name" : "Clothes", 
+                    "name": "Clothes",
                     "image": "http://......"
                 },
                 {
-                    "name" : "Food", 
+                    "name": "Food",
                     "image": "http://......"
                 },
             ]
@@ -98,15 +94,15 @@ def set_user_preferences(userid):
     if success:
         return jsonify(
             {
-                "data":{
-                "message" : "Preferences successfully saved"
+                "data": {
+                    "message": "Preferences successfully saved"
                 }
             })
     else:
         return jsonify(
             {
-                "error":{
-                "message" : "Something went wrong"
+                "error": {
+                    "message": "Something went wrong"
                 }
             })
 
@@ -114,13 +110,14 @@ def set_user_preferences(userid):
 @app.route('/lolo/api/v1.0/user/<userid>/learn/words', methods=['GET'])
 def get_words_learn(userid):
     result = dbc.getTrainingWords(userid, 10)
-    if result :
-        return jsonify({"data":result})
+    if result:
+        return result
     else:
         return jsonify(
             {
-                "error" : {
-                    "message" : "Something went wrong with the words"
+                "error": {
+                    "code": "failed",
+                    "message": "Something went wrong with the words"
                 }
             })
 
@@ -128,55 +125,56 @@ def get_words_learn(userid):
 @app.route('/lolo/api/v1.0/user/<userid>/test/words', methods=['GET'])
 def get_words_test(userid):
     result = dbc.getTestingWords(userid, 10)
-    if result :
-        return jsonify({"data":result})
+    if result:
+        return result
     else:
         return jsonify(
             {
-                "error" : {
-                    "message" : "Something went wrong with the words"
+                "error": {
+                    "code": "failed",
+                    "message": "Something went wrong with the words"
                 }
             })
 
 
 @app.route('/lolo/api/v1.0/user/<userid>/learn/update', methods=['POST'])
 def update_learning_data(userid):
-    if not request.json :
+    if not request.json:
         abort(400)
     success = dbc.updateLearnedWords(userid, request.json["data"]["learned"])
     if success:
         return jsonify(
             {
-                "data":{
-                "message" : "Successfully updated"
+                "data": {
+                    "message": "Successfully updated"
                 }
             })
     else:
         return jsonify(
             {
-                "error":{
-                "message" : "Something went wrong"
+                "error": {
+                    "message": "Something went wrong"
                 }
             })
 
 
 @app.route('/lolo/api/v1.0/user/<userid>/test/update', methods=['POST'])
 def update_testing_data(userid):
-    if not request.json :
+    if not request.json:
         abort(400)
     success = dbc.updateTestedWords(userid, request.json["data"]["tested"])
     if success:
         return jsonify(
             {
-                "data":{
-                "message" : "Successfully updated"
+                "data": {
+                    "message": "Successfully updated"
                 }
             })
     else:
         return jsonify(
             {
-                "error":{
-                "message" : "Something went wrong"
+                "error": {
+                    "message": "Something went wrong"
                 }
             })
 
