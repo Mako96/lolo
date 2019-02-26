@@ -15,15 +15,16 @@ CORS(app)
 
 @app.route('/lolo/api/v1.0/user/register', methods=['POST'])
 def register_user():
-    if not request.json: #  or not 'data' in request.json
+    if not request.json:
         abort(400)
     email = request.json["data"]["user"]["email"]
-    success = dbc.insertUser(email)
-    if success:
+    userid = dbc.insertUser(email)
+    if userid:
         return jsonify(
             {
                 "data":{
-                "message" : "Successfully registered"
+                "message" : "Successfully registered",
+                "userid": userid
                 }
             })
     else:
@@ -40,12 +41,13 @@ def auth_user():
     if not request.json or not 'data' in request.json:
         abort(400)
     email = request.json["data"]["user"]["email"]
-    success = dbc.doesUserExist(email)
-    if success:
+    userid = dbc.doesUserExist(email)
+    if userid:
         return jsonify(
             {
                 "data":{
-                "message" : "Successfully authenticated"
+                "message" : "Successfully authenticated",
+                "id" : userid
                 }
             })
     else:
@@ -79,21 +81,18 @@ def get_preferences():
                     "image": "http://......"
                 },
             ]
-        },
-        "error":{
-            "code" : "failed"
         }
-}
+    }
     return jsonify(**categories)
 
 
-@app.route('/lolo/api/v1.0/user/preferences', methods=['POST'])
-def set_user_preferences():
+@app.route('/lolo/api/v1.0/user/<userid>/preferences', methods=['POST'])
+def set_user_preferences(userid):
     if not request.json or not 'data' in request.json:
         abort(400)
-    email = request.json["data"]["user"]["email"]
-    interests = request.json["data"]["user"]["preferences"]
-    success = dbc.setInterests(email, interests)
+    print(userid)
+    interests = request.json["data"]["preferences"]
+    success = dbc.setInterests(userid, interests)
     if success:
         return jsonify(
             {
@@ -110,29 +109,49 @@ def set_user_preferences():
             })
 
 
-@app.route('/lolo/api/v1.0/user/<int:user_id>/learn/words', methods=['GET'])
-def get_words_learn():
-    return jsonify(**mock.learn_words_message)
+@app.route('/lolo/api/v1.0/user/<userid>/learn/words', methods=['GET'])
+def get_words_learn(userid):
+    result = dbc.getTrainingWords(userid, 10)
+    if result :
+        return result
+    else:
+        return jsonify(
+            {
+                "error" : {
+                    "code" : "failed",
+                    "message" : "Something went wrong with the words"
+                }
+            })
 
 
-@app.route('/lolo/api/v1.0/user/<int:user_id>/learn/test', methods=['GET'])
-def get_words_test():
-    return jsonify(**mock.test_words_message)
+@app.route('/lolo/api/v1.0/user/<userid>/learn/test', methods=['GET'])
+def get_words_test(userid):
+    result = dbc.getTestingWords(userid, 10)
+    if result :
+        return result
+    else:
+        return jsonify(
+            {
+                "error" : {
+                    "code" : "failed",
+                    "message" : "Something went wrong with the words"
+                }
+            })
 
 
-@app.route('/lolo/api/v1.0/user/<int:user_id>/learn/summary', methods=['POST'])
-def learn_summary():
-    if not request.json or not 'data' in request.json:
+@app.route('/lolo/api/v1.0/user/<userid>/learn/summary', methods=['POST'])
+def learn_summary(userid):
+    if not request.json :
         abort(400)
-    print(request.json)
+    dbc.updateLearnedWords(userid, request.json["data"]["summary"])
     return jsonify(**mock.learn_summary_message)
 
 
-@app.route('/lolo/api/v1.0/user/<int:user_id>/test/summary', methods=['POST'])
-def test_summary():
-    if not request.json or not 'data' in request.json:
+@app.route('/lolo/api/v1.0/user/<userid>/test/summary', methods=['POST'])
+def updateTestedWords(userid):
+    if not request.json :
         abort(400)
-    print(request.json)
+    dbc.updateLearnedWords(userid, request.json["data"]["summary"])
     return jsonify(**mock.test_summary_message)
 
 
