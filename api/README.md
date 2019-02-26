@@ -203,14 +203,13 @@ The body of the POST request should be:
 ```json
 {
     "data":{
-        "summary" : [
+        "learned" : [
             {
                 "wordID": "a word id", "lang": "FR"
             },
             {
                 "wordID": "a word id", "lang": "FR"
-            },
-
+            }
         ]
     }
 }
@@ -220,14 +219,13 @@ The body of the POST request should be:
 ```json
 {
     "data":{
-        "summary" : [
+        "tested" : [
             {
                 "wordID": "a word id", "success": true, "type": "written", "lang": "fr"
             },
             {
                 "wordID": "a word id", "success": false, "type": "written", "lang": "fr"
-            },
-
+            }
         ]
     }
 }

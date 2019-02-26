@@ -95,6 +95,9 @@ class DBController:
 
     def updateLearnedWords(self, user_ID, results):
         #[{wordID: ..., lang: ...}]
+        if not self.doesUserExistByID(user_ID):
+            return False
+
         date = datetime.datetime.utcnow()
 
         taughtWords = self.user_collection.find_one(
@@ -108,7 +111,7 @@ class DBController:
         for result in results:
             if taughtWords:
                 for elem in taughtWords:
-                    if elem["wordID"] == result["wordID"] and elem["lang"] == result["lang"] :
+                    if elem["wordID"] == ObjectId(result["wordID"]) and elem["lang"] == result["lang"] :
                         self.user_collection.update({"_id": ObjectId(user_ID), "taughtWords.wordID": ObjectId(result["wordID"]),
                                                     "taughtWords.lang": result["lang"]},
                                             {"$inc": {"taughtWords.$.numberOfTimesSeen": 1},
@@ -127,9 +130,12 @@ class DBController:
                                                                            'dateLastSeen': date}}},
                                             False,
                                             True)
+        return True
 
     def updateTestedWords(self, user_ID, results):
         #[{wordID: ..., success: True, type: "written", lang: "fr"}]
+        if not self.doesUserExistByID(user_ID):
+            return False
 
         date = datetime.datetime.utcnow()
 
@@ -144,8 +150,7 @@ class DBController:
         for result in results:
             if testedWords:
                 for elem in testedWords:
-                    if elem["wordID"] == result["wordID"] and elem["lang"] == result["lang"]:
-                        print("qdz")
+                    if elem["wordID"] == ObjectId(result["wordID"]) and elem["lang"] == result["lang"]:
                         self.user_collection.update({"_id": ObjectId(user_ID), "testedWords.wordID": ObjectId(result["wordID"]),
                                                      "testedWords.lang": result["lang"]},
                                                     {"$push": {
@@ -171,6 +176,7 @@ class DBController:
                                                                                 'type': result["type"]
                                                                                }
                                                                            ]}}})
+        return True
 
     def getPreviousTestResults(self, user_ID, lang):
         """Returns a list of all the tested words of a user"""

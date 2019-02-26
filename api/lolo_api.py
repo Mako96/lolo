@@ -1,3 +1,5 @@
+#!/usr/bin/env/pyhon2
+
 from flask import request, url_for, jsonify, abort
 from flask_api import FlaskAPI, status, exceptions
 from flask_cors import CORS
@@ -124,7 +126,7 @@ def get_words_learn(userid):
             })
 
 
-@app.route('/lolo/api/v1.0/user/<userid>/learn/test', methods=['GET'])
+@app.route('/lolo/api/v1.0/user/<userid>/test/words', methods=['GET'])
 def get_words_test(userid):
     result = dbc.getTestingWords(userid, 10)
     if result :
@@ -139,20 +141,46 @@ def get_words_test(userid):
             })
 
 
-@app.route('/lolo/api/v1.0/user/<userid>/learn/summary', methods=['POST'])
-def learn_summary(userid):
+@app.route('/lolo/api/v1.0/user/<userid>/learn/update', methods=['POST'])
+def update_learning_data(userid):
     if not request.json :
         abort(400)
-    dbc.updateLearnedWords(userid, request.json["data"]["summary"])
-    return jsonify(**mock.learn_summary_message)
+    success = dbc.updateLearnedWords(userid, request.json["data"]["learned"])
+    if success:
+        return jsonify(
+            {
+                "data":{
+                "message" : "Successfully updated"
+                }
+            })
+    else:
+        return jsonify(
+            {
+                "error":{
+                "message" : "Something went wrong"
+                }
+            })
 
 
-@app.route('/lolo/api/v1.0/user/<userid>/test/summary', methods=['POST'])
-def updateTestedWords(userid):
+@app.route('/lolo/api/v1.0/user/<userid>/test/update', methods=['POST'])
+def update_testing_data(userid):
     if not request.json :
         abort(400)
-    dbc.updateLearnedWords(userid, request.json["data"]["summary"])
-    return jsonify(**mock.test_summary_message)
+    success = dbc.updateTestedWords(userid, request.json["data"]["tested"])
+    if success:
+        return jsonify(
+            {
+                "data":{
+                "message" : "Successfully updated"
+                }
+            })
+    else:
+        return jsonify(
+            {
+                "error":{
+                "message" : "Something went wrong"
+                }
+            })
 
 
 if __name__ == "__main__":
