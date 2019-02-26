@@ -112,8 +112,8 @@ def get_user_preferences(userid):
 @app.route('/lolo/api/v1.0/user/<userid>/preferences', methods=['POST'])
 def set_user_preferences(userid):
     if not request.json or not 'data' in request.json:
+        print("d")
         abort(400)
-    print(userid)
     interests = request.json["data"]["preferences"]
     success = dbc.setInterests(userid, interests)
     if success:
@@ -132,11 +132,15 @@ def set_user_preferences(userid):
             })
 
 
-@app.route('/lolo/api/v1.0/user/<userid>/learn/words', methods=['GET'])
-def get_words_learn(userid):
-    result = dbc.getTrainingWords(userid, 10)
+@app.route('/lolo/api/v1.0/user/<userid>/learn/words/<int:number_of_words>', methods=['GET'])
+def get_words_learn(userid, number_of_words):
+    result = dbc.getTrainingWords(userid, number_of_words)
+    #print(result)
     if result:
-        return result
+        return jsonify(
+            {
+                "data": result
+            })
     else:
         return jsonify(
             {
@@ -147,11 +151,15 @@ def get_words_learn(userid):
             })
 
 
-@app.route('/lolo/api/v1.0/user/<userid>/test/words', methods=['GET'])
-def get_words_test(userid):
-    result = dbc.getTestingWords(userid, 10)
+@app.route('/lolo/api/v1.0/user/<userid>/test/words/<int:number_of_words>', methods=['GET'])
+def get_words_test(userid, number_of_words):
+    result = dbc.getTestingWords(userid, number_of_words)
+    print(type(result))
     if result:
-        return result
+        return jsonify(
+            {
+                "data": result
+            })
     else:
         return jsonify(
             {

@@ -80,6 +80,8 @@ class DBController:
             trainingWords = {"words": []}
             topics = self.getInterests(user_ID)
             wordsToLearn = self.decideWordsToLearn(ObjectId(user_ID), topics, size)
+            print("hi")
+            print(wordsToLearn)
             for word in wordsToLearn:
                 complementaryWords = self.getComplementaryWords(word["topic"], word)
                 trainingWords["words"].append({"to_learn": word, "complementary": complementaryWords})
