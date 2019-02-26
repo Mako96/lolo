@@ -10,8 +10,8 @@
 | POST        | http://lolo.ai/lolo/api/v1.0/user/{iduser}/preferences   | Save user selected preferences | application/json | application/json |
 | GET         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/learn/words   | Retrieve set of words to learn | application/json | application/json |
 | GET         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/test/words    | Retrieve set of words to test  | application/json | application/json |
-| PUT         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/learn/summary | Update user learn progress     | application/json | application/json |
-| PUT         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/test/summary  | Update user test progress      | application/json | application/json |
+| POST         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/learn/update | Update user learn progress     | application/json | application/json |
+| POST         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/test/update  | Update user test progress      | application/json | application/json |
 
 ### Register
 This services will require a payload with the following structure:
