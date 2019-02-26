@@ -92,7 +92,6 @@ def get_preferences(userid):
 @app.route('/lolo/api/v1.0/user/<userid>/preferences', methods=['GET'])
 def get_user_preferences(userid):
     result = dbc.getInterests(userid)
-    print(result)
     if result is not None:
         return jsonify(
             {
