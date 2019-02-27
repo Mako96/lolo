@@ -17,6 +17,9 @@ export class LearnPage implements OnInit {
     { word: 'Blue :: Bleu', w1:'Bleu', w2:'Rouge',  w3:'Vert', w4:'Orange', im1:"../../assets/Data/Bleu.png",im2:"../../assets/Data/Rouge.png",im3:"../../assets/Data/Vert.png",im4:"../../assets/Data/Orange.png",answer: "../../assets/Data/Bleu.png"},
     { word: 'Run :: Courir ', w1:'marche', w2:'Saut',  w3:'courir', w4:'nager', im1:"../../assets/Data/marche.jpg",im2:"../../assets/Data/Saut.jpg",im3:"../../assets/Data/courir.jpg",im4:"../../assets/Data/nager.jpg",answer: "../../assets/Data/courir.jpg" }
   ];
+  public learnLang = "fr";
+  public knownLang = "en";
+  public imageDir = "../../assets/images/"
 
   constructor(private router: Router, private route: ActivatedRoute, private userProvider: LoloUserProviderService) { }
 
@@ -33,10 +36,11 @@ export class LearnPage implements OnInit {
               data.words.forEach( (page) => {
                 var temp = page.complementary;
                 temp.push(page.to_learn);
-                res.push(temp);
+                temp.sort(() => Math.random() - 0.5);
+                res.push({learning: page.to_learn, words: temp});
               });
               console.log(res);
-            	_self.data = data.words;
+            	_self.data = res;
         };
     	this.userProvider.getLearningWords( cbSucces, cbError);
   }
@@ -49,22 +53,21 @@ export class LearnPage implements OnInit {
 
   check(instance,answer)
   {
-    this.instance=JSON.stringify(instance);
-    this.answer=JSON.stringify(answer);
+    if (instance==answer)
+    {
 
-if (this.instance==this.answer)
-{
+      alert("Correct");
+      if(this.index < this.data.length - 1){
+        this.index++;
+      } else {
+        //end of learning
 
-  alert("Correct!!");
-
-  /// display new instance by index
-  // for the demo I have two instances so the index will be 0 or 1
-  this.index=Math.round(Math.random());
-}
-else
-{
-  alert("Wrong");
-}
+      }
+    }
+    else
+    {
+      alert("Wrong");
+    }
   }
 
 }
