@@ -58,32 +58,28 @@ def auth_user():
             })
 
 
-@app.route('/lolo/api/v1.0/<userid>/preferences', methods=['GET'])
-def get_preferences(userid):
-    #TODO: connect to db and get either user specific themes or list of all themes
-    #DUMMY DATA FOR TESTING:
+@app.route('/lolo/api/v1.0/topics', methods=['GET'])
+def get_topics():
+    #DUMMY DATA FOR TESTING AS THE TOPIC ARE NOT STORED IN THE BD :
     categories = {
         "data": {
-            "preferences": [
+            "topics": [
                 {
-                    "name": "Animals",
-                    "image": "http://......",
-                    "selected": 1
+                    "name": "animals",
+                    "image": "topics/animals.jpg",
+
                 },
                 {
-                    "name": "Colours",
-                    "image": "http://......",
-                    "selected": 0
+                    "name": "colours",
+                    "image": "topics/colours.jpg",
                 },
                 {
-                    "name": "Clothes",
-                    "image": "http://......",
-                    "selected": 0
+                    "name": "clothes",
+                    "image": "topics/colours.jpg",
                 },
                 {
-                    "name": "Food",
-                    "image": "http://......",
-                    "selected": 1
+                    "name": "food",
+                    "image": "topics/food.jpg",
                 },
             ]
         }

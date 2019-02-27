@@ -61,13 +61,13 @@ The response will be:
     }
 }
 ```
-### Choose preferences
-The first step is to get the available preferences from the server to show to the user
+### Get all topics
+The first step is to get the available topics from the server to show to the user
 The response will be:
 ```json
 {
     "data":{
-        "preferences" : [
+        "topics" : [
             {
                 "name" : "category1", 
                 "image": "http://......"
