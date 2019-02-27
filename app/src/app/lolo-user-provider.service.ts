@@ -59,6 +59,7 @@ export class LoloUserProviderService {
          });
   }
   getTopics(cbSucces, cbError) {
+    var _self = this;
     this.apiProvider.getTopics().subscribe((data: any)=>{
              if(data.error !== undefined){
               cbError(data.error);
