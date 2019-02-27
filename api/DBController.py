@@ -82,7 +82,7 @@ class DBController:
             trainingWords = {"words": []}
             topics = self.getInterests(user_ID)
             wordsToLearn = self.decideWordsToLearn(ObjectId(user_ID), topics, size)
-            print("hi")
+            print(len(wordsToLearn))
             print(wordsToLearn)
             for word in wordsToLearn:
                 complementaryWords = self.getComplementaryWords(word["topic"], word)
@@ -200,17 +200,26 @@ class DBController:
 
     def decideWordsToLearn(self, user_ID, topics, size):
         """Returns a list of words to learn """
-        res = self.voc_collection.aggregate([{"$sample": {"size": size}},
-                                             {"$match":  {"topic": {'$in': topics}}}])
-        return [word for word in res]
+        res = []
+        while len(res) != size:
+           word = self.voc_collection.aggregate([{"$sample": {"size": 1}},
+                                            {"$match":  {"topic": {'$in': topics}}}])
+          
+           for elem in word:
+              res.append(elem)
+        return res
 
     def getComplementaryWords(self, topic, word_to_learn):
         """Returns a list of 3  words different than the word_to_learn"""
-        complementaryWords = self.voc_collection.aggregate([{"$sample": {"size": 3}},
-                                                            {"$match": {"topic": topic}},
-                                                            {"$match": {'en': {'$nin': [word_to_learn["en"]]}}}])
-        return [word for word in complementaryWords]
-
+        res = []
+        while len(res) != 3:
+           word = self.voc_collection.aggregate([{"$sample": {"size": 1}},
+                                            {"$match":  {"topic": topic}}, 
+                                            {"$match": {"en": {"$nin": [word_to_learn["en"]]}}}])
+               
+           for elem in word:
+              res.append(elem)
+        return res
 
 if __name__ == '__main__':
     controller = DBController()
