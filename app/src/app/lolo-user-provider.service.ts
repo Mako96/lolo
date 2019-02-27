@@ -1,20 +1,31 @@
 import { Injectable } from '@angular/core';
 import { LoloApiProviderService } from './lolo-api-provider.service';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoloUserProviderService {
 
-  constructor(private apiProvider: LoloApiProviderService,) { }
-  userid = 0;
+  constructor(private apiProvider: LoloApiProviderService, private storage: Storage) {
+
+  }
+  userid = undefined;
   genericApiErrorMsg = 'Unknown API error, please try again later';
 
   setUserID(userid) {
-  	this.userid = userid;
+    console.log('set userid '+userid);
+    this.storage.set('userid', userid);
+    this.userid = userid;
   }
-  getUserID() {
-  	return this.userid;
+  getUserID(cb) {
+    console.log(this.userid);
+    if(this.userid !== undefined || this.userid !== null){
+      cb(this.userid);
+    }
+    this.storage.get('userid').then((uid) => {
+      cb(uid);
+    });
   }
 
 
@@ -46,7 +57,7 @@ export class LoloUserProviderService {
             if(data.error !== undefined){
             	cbError(data.error);
             } else if (data.data !== undefined) {
-            	this.setUserID(data.data.userid);
+            	this.setUserID(data.data.id);
             	cbSucces(data.data);
             } else {
             	cbError({'message': this.genericApiErrorMsg});
@@ -58,7 +69,7 @@ export class LoloUserProviderService {
             if(data.error !== undefined){
             	cbError(data.error);
             } else if (data.data !== undefined) {
-            	this.setUserID(data.data.userid);
+            	this.setUserID(data.data.id);
             	cbSucces(data.data);
             } else {
             	cbError({'message': this.genericApiErrorMsg});
@@ -66,14 +77,17 @@ export class LoloUserProviderService {
         });
     }
     getLearningWords(cbSucces, cbError) {
-     	this.apiProvider.getLearningWords(10, this.getUserID()).subscribe((data: any)=>{
-               if(data.error !== undefined){
-               	cbError(data.error);
-               } else if (data.data !== undefined) {
-               	cbSucces(data.data);
-               } else {
-               	cbError({'message': this.genericApiErrorMsg});
-               }
+      var _self = this;
+      this.getUserID(function(userid){
+       	_self.apiProvider.getLearningWords(10, userid).subscribe((data: any)=>{
+                 if(data.error !== undefined){
+                 	cbError(data.error);
+                 } else if (data.data !== undefined) {
+                 	cbSucces(data.data);
+                 } else {
+                 	cbError({'message': _self.genericApiErrorMsg});
+                 }
+             });
            });
     }
 

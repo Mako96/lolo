@@ -8,7 +8,8 @@ export class LoloApiProviderService {
 
   constructor(public http: HttpClient) { }
 
-  apiUrl = "http://localhost:5000/lolo/api/v1.0/";
+  //apiUrl = "http://:5000/lolo/api/v1.0/";
+  apiUrl = 'http://52.39.19.210/lolo/lolo/api/v1.0/';
 
   doRegister(name, email) {
 	return this.http.post(this.apiUrl + 'user/register', {

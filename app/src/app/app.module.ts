@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { LoloApiProviderService } from './lolo-api-provider.service';
 import { LoloUserProviderService } from './lolo-user-provider.service';
@@ -18,7 +19,7 @@ import { LoloUserProviderService } from './lolo-user-provider.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,IonicStorageModule.forRoot()],
   providers: [
     LoloApiProviderService,
     LoloUserProviderService,

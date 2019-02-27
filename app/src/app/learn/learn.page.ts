@@ -29,7 +29,14 @@ export class LearnPage implements OnInit {
     	var cbError = function(error){alert(error.message);};
     	var cbSucces = function(data){
               console.log(data);
-            	_self.data = data;
+              var res = [];
+              data.words.forEach( (page) => {
+                var temp = page.complementary;
+                temp.push(page.to_learn);
+                res.push(temp);
+              });
+              console.log(res);
+            	_self.data = data.words;
         };
     	this.userProvider.getLearningWords( cbSucces, cbError);
   }
