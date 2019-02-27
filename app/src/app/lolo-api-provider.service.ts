@@ -36,8 +36,11 @@ export class LoloApiProviderService {
   getTestingWords(userid) {
     return this.http.get(this.apiUrl + 'user/'+userid+'/test/words/10');
   }
-  getPreferences() {
-    return this.http.get(this.apiUrl + 'preferences');
+  getTopics(){
+    return this.http.get(this.apiUrl + 'topics');
+  }
+  getPreferences(userid) {
+    return this.http.get(this.apiUrl + 'user/'+userid+'/preferences');
   }
   setPreferences(preferences, userid){
   	return this.http.post(this.apiUrl + 'user/'+userid+'/preferences', {

@@ -17,7 +17,39 @@ export class PreferencesPage implements OnInit {
   constructor(private userProvider: LoloUserProviderService, private router: Router, private navCtrl:NavController,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.userProvider.getPreferences(console.log, console.log);
+    this.loadTopics();
+  }
+
+  loadTopics(){
+    var _self=this;
+    var cbError = function(error){alert(error.message);};
+    var cbSucces = function(data){
+            console.log(data);
+            var res = [];
+            data.topics.forEach( (topic) => {
+              res.push({ val: topic.name, isChecked: false , img: '../../assets/images/'+topic.image });
+            });
+            console.log(res);
+            _self.form = res;
+            _self.loadUserPrefs();
+      };
+    this.userProvider.getTopics(cbSucces, cbError);
+  }
+  loadUserPrefs(){
+    var _self=this;
+    var cbError = function(error){alert(error.message);};
+    var cbSucces = function(data){
+            console.log(data);
+            // this can probably be done more performant manner
+            data.preferences.forEach( (pref) => {
+              _self.form.forEach( (topic) => {
+                if(pref == topic.val){
+                  topic.isChecked = true;
+                }
+              });
+            });
+      };
+    this.userProvider.getPreferences(cbSucces, cbError);
   }
 
   buttonClick(item){
@@ -35,14 +67,22 @@ export class PreferencesPage implements OnInit {
 
   ConfirmClick(data)
   {
+
+    var prefs = [];
+    this.form.forEach( (topic) => {
+      if(topic.isChecked){
+        prefs.push(topic.val);
+      }
+    });
+    console.log(prefs);
   	var _self = this;
-	var cbError = function(error){alert(error.message);};
-    	var cbSucces = function(data){
+	  var cbError = function(error){alert(error.message);};
+    var cbSucces = function(data){
             	alert(data.message);
             	_self.router.navigate(["main"]);
         };
 
-  	this.userProvider.setPreferences(['fruits'], cbSucces, cbError);
+  	this.userProvider.setPreferences(prefs, cbSucces, cbError);
 
 
 // there we should save the data in the server ////////////////

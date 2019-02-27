@@ -19,7 +19,6 @@ export class LoloUserProviderService {
     this.userid = userid;
   }
   getUserID(cb) {
-    console.log(this.userid);
     if(this.userid !== undefined && this.userid !== null){
       cb(this.userid);
     } else {
@@ -32,26 +31,43 @@ export class LoloUserProviderService {
 
 
   setPreferences(preferences, cbSucces, cbError) {
-  	this.apiProvider.setPreferences(preferences, this.userid).subscribe((data: any)=>{
-            if(data.error !== undefined){
-            	cbError(data.error);
-            } else if (data.data !== undefined) {
-            	cbSucces(data.data);
-            } else {
-            	cbError({'message': this.genericApiErrorMsg});
-            }
-        });
+    var _self = this;
+    this.getUserID(function(userid){
+      _self.apiProvider.setPreferences(preferences, userid).subscribe((data: any)=>{
+               if(data.error !== undefined){
+                cbError(data.error);
+               } else if (data.data !== undefined) {
+                cbSucces(data.data);
+               } else {
+                cbError({'message': _self.genericApiErrorMsg});
+               }
+           });
+         });
   }
   getPreferences(cbSucces, cbError) {
-  	this.apiProvider.getPreferences().subscribe((data: any)=>{
-            if(data.error !== undefined){
-            	cbError(data.error);
-            } else if (data.data !== undefined) {
-            	cbSucces(data.data);
-            } else {
-            	cbError({'message': this.genericApiErrorMsg});
-            }
-        });
+    var _self = this;
+    this.getUserID(function(userid){
+      _self.apiProvider.getPreferences(userid).subscribe((data: any)=>{
+               if(data.error !== undefined){
+                cbError(data.error);
+               } else if (data.data !== undefined) {
+                cbSucces(data.data);
+               } else {
+                cbError({'message': _self.genericApiErrorMsg});
+               }
+           });
+         });
+  }
+  getTopics(cbSucces, cbError) {
+    this.apiProvider.getTopics().subscribe((data: any)=>{
+             if(data.error !== undefined){
+              cbError(data.error);
+             } else if (data.data !== undefined) {
+              cbSucces(data.data);
+             } else {
+              cbError({'message': _self.genericApiErrorMsg});
+             }
+         });
   }
 
   doRegister(firstname, email, cbSucces, cbError) {
