@@ -30,7 +30,7 @@ The response will be:
 {
     "data":{
         "message" : "Successfully registered",
-        "userid": "some user id"
+        "id": "some user id"
     },
     "error":{
         "message" : "Something went wrong"
@@ -54,6 +54,7 @@ The response will be:
 {
     "data":{
         "message" : "Authentication correct"
+        "id": "some user id"
     },
     "error":{
         "message" : "Authentication failed

@@ -23,7 +23,7 @@ def register_user():
             {
                 "data": {
                     "message": "Successfully registered",
-                    "userid": userid
+                    "id": userid
                 }
             })
     else:
