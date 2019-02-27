@@ -200,25 +200,23 @@ class DBController:
 
     def decideWordsToLearn(self, user_ID, topics, size):
         """Returns a list of words to learn """
-        res = []
-        while len(res) != size:
-           word = self.voc_collection.aggregate([{"$sample": {"size": 1}},
-                                            {"$match":  {"topic": {'$in': topics}}}])
-          
-           for elem in word:
-              res.append(elem)
+        #get all the words that are in the topics list
+        words = self.voc_collection.aggregate([{"$match":  {"topic": {'$in': topics}}}])
+
+        res = list(words)
+        res = random.sample(res, size)
+
         return res
 
+
     def getComplementaryWords(self, topic, word_to_learn):
-        """Returns a list of 3  words different than the word_to_learn"""
-        res = []
-        while len(res) != 3:
-           word = self.voc_collection.aggregate([{"$sample": {"size": 1}},
-                                            {"$match":  {"topic": topic}}, 
+        """Returns a list of 3 of the same topic of word_to_learn but  different than the word_to_learn"""
+        words = self.voc_collection.aggregate([
+                                            {"$match":  {"topic": topic}},
                                             {"$match": {"en": {"$nin": [word_to_learn["en"]]}}}])
-               
-           for elem in word:
-              res.append(elem)
+
+        res = list(words)
+        res = random.sample(res, 3)
         return res
 
 if __name__ == '__main__':

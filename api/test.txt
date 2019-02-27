@@ -41,12 +41,12 @@ curl --header "Content-Type: application/json" \
 
 curl --header "Content-Type: application/json" \
   --request GET \
-  http://localhost:5000/lolo/api/v1.0/user/5c73f018948d1f5ea7247a3b/learn/words/10
+  http://localhost:5000/lolo/api/v1.0/user/5c7580c52344ef3563137808/learn/words/10
 
 # Get words to test
-curl --header "Content-Type: application/json"; Charset=UTF-8 \
+curl --header "Content-Type: application/json" \
   --request GET \
-  http://localhost:5000/lolo/api/v1.0/user/5c7580c52344ef3563137808/test/words/3
+  http://localhost:5000/lolo/api/v1.0/user/5c768f2e948d1f46e158ce74/test/words/3
 
 # Update learned words
 {"data":{"learned":[{"wordID":"5c713a8802045a96c31771a8","lang":"fr"},{"wordID":"5c713a8802045a96c31771b7","lang":"fr"}]}}
