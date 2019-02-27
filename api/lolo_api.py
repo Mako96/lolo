@@ -1,6 +1,7 @@
 from flask import request, url_for, jsonify, abort
 from flask_api import FlaskAPI, status, exceptions
 from flask_cors import CORS
+import json
 
 import mock_messages as mock
 from DBController import *
@@ -22,7 +23,7 @@ def register_user():
             {
                 "data": {
                     "message": "Successfully registered",
-                    "userid": userid
+                    "id": userid
                 }
             })
     else:
@@ -137,10 +138,9 @@ def get_words_learn(userid, number_of_words):
     result = dbc.getTrainingWords(userid, number_of_words)
     #print(result)
     if result:
-        return jsonify(
-            {
-                "data": result
-            })
+        return json.dumps({
+            "data": result
+        }, ensure_ascii=False).encode('utf8')
     else:
         return jsonify(
             {
@@ -154,12 +154,11 @@ def get_words_learn(userid, number_of_words):
 @app.route('/lolo/api/v1.0/user/<userid>/test/words/<int:number_of_words>', methods=['GET'])
 def get_words_test(userid, number_of_words):
     result = dbc.getTestingWords(userid, number_of_words)
-    print(type(result))
     if result:
-        return jsonify(
-            {
+        return json.dumps({
                 "data": result
-            })
+            }, ensure_ascii=False).encode('utf8')
+
     else:
         return jsonify(
             {
