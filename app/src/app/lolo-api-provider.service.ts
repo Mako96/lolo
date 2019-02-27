@@ -7,9 +7,9 @@ import { HttpClient } from '@angular/common/http';
 export class LoloApiProviderService {
 
   constructor(public http: HttpClient) { }
-  
+
   apiUrl = "http://localhost:5000/lolo/api/v1.0/";
-  
+
   doRegister(name, email) {
 	return this.http.post(this.apiUrl + 'user/register', {
 	    data: {
@@ -19,7 +19,7 @@ export class LoloApiProviderService {
 		}
 	    }});
   }
-  
+
   doAuth(email) {
 	return this.http.post(this.apiUrl + 'user/auth', {
 	    data: {
@@ -28,9 +28,12 @@ export class LoloApiProviderService {
 		}
 	    }});
   }
-  
+
+  getLearningWords(count, userid) {
+	return this.http.get(this.apiUrl + 'user/'+userid+'/learn/words/'+count);
+  }
   getPreferences() {
-	return this.http.get(this.apiUrl + 'preferences');
+  return this.http.get(this.apiUrl + 'preferences');
   }
   setPreferences(preferences, userid){
   	return this.http.post(this.apiUrl + 'user/'+userid+'/preferences', {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoloUserProviderService } from '../lolo-user-provider.service';
 
 @Component({
   selector: 'app-learn',
@@ -7,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./learn.page.scss'],
 })
 export class LearnPage implements OnInit {
- 
+
   public index:number=0;
   public instance:any;
   public answer:any;
@@ -17,9 +18,20 @@ export class LearnPage implements OnInit {
     { word: 'Run :: Courir ', w1:'marche', w2:'Saut',  w3:'courir', w4:'nager', im1:"../../assets/Data/marche.jpg",im2:"../../assets/Data/Saut.jpg",im3:"../../assets/Data/courir.jpg",im4:"../../assets/Data/nager.jpg",answer: "../../assets/Data/courir.jpg" }
   ];
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private userProvider: LoloUserProviderService) { }
 
   ngOnInit() {
+    this.loadWords();
+  }
+
+  loadWords(){
+      var _self=this;
+    	var cbError = function(error){alert(error.message);};
+    	var cbSucces = function(data){
+              console.log(data);
+            	_self.data = data;
+        };
+    	this.userProvider.getLearningWords( cbSucces, cbError);
   }
 
   next(){
@@ -37,7 +49,7 @@ if (this.instance==this.answer)
 {
 
   alert("Correct!!");
-  
+
   /// display new instance by index
   // for the demo I have two instances so the index will be 0 or 1
   this.index=Math.round(Math.random());
