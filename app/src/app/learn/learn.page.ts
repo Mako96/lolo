@@ -13,13 +13,12 @@ export class LearnPage implements OnInit {
   public instance:any;
   public answer:any;
   public level:number;
-  public data = [
-    { word: 'Blue :: Bleu', w1:'Bleu', w2:'Rouge',  w3:'Vert', w4:'Orange', im1:"../../assets/Data/Bleu.png",im2:"../../assets/Data/Rouge.png",im3:"../../assets/Data/Vert.png",im4:"../../assets/Data/Orange.png",answer: "../../assets/Data/Bleu.png"},
-    { word: 'Run :: Courir ', w1:'marche', w2:'Saut',  w3:'courir', w4:'nager', im1:"../../assets/Data/marche.jpg",im2:"../../assets/Data/Saut.jpg",im3:"../../assets/Data/courir.jpg",im4:"../../assets/Data/nager.jpg",answer: "../../assets/Data/courir.jpg" }
-  ];
+  public data = [];
   public learnLang = "fr";
   public knownLang = "en";
   public imageDir = "../../assets/images/"
+
+  learnedWords = [];
 
   constructor(private router: Router, private route: ActivatedRoute, private userProvider: LoloUserProviderService) { }
 
@@ -55,13 +54,19 @@ export class LearnPage implements OnInit {
   {
     if (instance==answer)
     {
-
       alert("Correct");
-      if(this.index < this.data.length - 1){
+      if(this.index < this.data.length - 2){
+        var learned = {"wordID": this.data[this.index].learning._id, "lang": this.learnLang};
+        this.learnedWords.push(learned);
         this.index++;
       } else {
         //end of learning
-
+        var _self = this;
+        var cbError = function(error){alert(error.message);};
+        var cbSucces = function(data){
+              _self.router.navigate(['home']);
+          };
+        this.userProvider.updateLearnedWords(this.learnedWords, cbSucces, cbError);
       }
     }
     else

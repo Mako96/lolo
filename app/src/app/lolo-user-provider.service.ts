@@ -20,12 +20,14 @@ export class LoloUserProviderService {
   }
   getUserID(cb) {
     console.log(this.userid);
-    if(this.userid !== undefined || this.userid !== null){
+    if(this.userid !== undefined && this.userid !== null){
       cb(this.userid);
+    } else {
+      this.storage.get('userid').then((uid) => {
+        cb(uid);
+      });
     }
-    this.storage.get('userid').then((uid) => {
-      cb(uid);
-    });
+
   }
 
 
@@ -80,6 +82,20 @@ export class LoloUserProviderService {
       var _self = this;
       this.getUserID(function(userid){
        	_self.apiProvider.getLearningWords(10, userid).subscribe((data: any)=>{
+                 if(data.error !== undefined){
+                 	cbError(data.error);
+                 } else if (data.data !== undefined) {
+                 	cbSucces(data.data);
+                 } else {
+                 	cbError({'message': _self.genericApiErrorMsg});
+                 }
+             });
+           });
+    }
+    updateLearnedWords(words, cbSucces, cbError) {
+      var _self = this;
+      this.getUserID(function(userid){
+       	_self.apiProvider.updateLearnedWords(words, userid).subscribe((data: any)=>{
                  if(data.error !== undefined){
                  	cbError(data.error);
                  } else if (data.data !== undefined) {

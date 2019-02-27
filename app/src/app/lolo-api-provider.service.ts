@@ -43,4 +43,12 @@ export class LoloApiProviderService {
 		    }
 	});
   }
+
+  updateLearnedWords(words, userid){
+    return this.http.post(this.apiUrl + 'user/'+userid+'/learn/update', {
+	    "data": {
+			"learned": words
+		    }
+	     });
+  }
 }
