@@ -2,6 +2,8 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import datetime
 import json
+import random
+
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
@@ -90,8 +92,12 @@ class DBController:
 
 
     def getTestingWords(self, user_ID, size):
-        """For now we do the same thing as for the training"""
-        return self.getTrainingWords(user_ID, size)
+        """For now we do the same thing as for the training and we add a fied "typ" to define
+        which type of test will be used for each word"""
+        testingWords = self.getTrainingWords(user_ID, size)
+        for word in testingWords["words"]:
+            word["type"] = random.choice(["written", "visual"])
+        return testingWords
 
 
     def updateLearnedWords(self, user_ID, results):

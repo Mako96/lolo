@@ -154,46 +154,111 @@ The response will be:
 The response will be:
 ```json
 {
-    "data":{
-        "words": [
-            {
-                "to_learn": {
-                    "_id": "5c713a8802045a96c31771a6",
-                    "en": "chicken",
-                    "fr": "poulet",
-                    "topic": "animals",
-                    "url": "pictures/animals/chicken.jpg"
-                },
-                "complementary": [
-                    {
-                        "_id": "5c713a8802045a96c31771b4",
-                        "en": "frog",
-                        "fr": "la grenouille",
-                        "topic": "animals",
-                        "url": "pictures/animals/frog.jpg"
-                    },
-                    {
-                        "_id": "5c713a8802045a96c31771ce",
-                        "en": "rat",
-                        "fr": "rat",
-                        "topic": "animals",
-                        "url": "pictures/animals/rat.jpg"
-                    },
-                    {
-                        "_id": "5c713a8802045a96c31771e6",
-                        "en": "weasel",
-                        "fr": "belette",
-                        "topic": "animals",
-                        "url": "pictures/animals/weasel.jpg"
-                    }
-                ]
-            }
-        ]
-    },
-    "error":{
-        "message" : "Something went wrong with the words"
-    }
+  "data": {
+    "words": [
+      {
+        "complementary": [
+          {
+            "_id": "5c727e21bf137730b7f48926", 
+            "en": "rooster", 
+            "fr": "coq", 
+            "topic": "animals", 
+            "url": "pictures/animals/rooster.jpg"
+          }, 
+          {
+            "_id": "5c727e21bf137730b7f4890f", 
+            "en": "lion", 
+            "fr": "Lion", 
+            "topic": "animals", 
+            "url": "pictures/animals/lion.jpg"
+          }, 
+          {
+            "_id": "5c727e21bf137730b7f48930", 
+            "en": "swan", 
+            "fr": "cygne", 
+            "topic": "animals", 
+            "url": "pictures/animals/swan.jpg"
+          }
+        ], 
+        "to_learn": {
+          "_id": "5c727e21bf137730b7f4893c", 
+          "en": "sheep", 
+          "fr": "mouton", 
+          "topic": "animals", 
+          "url": "pictures/animals/sheep.jpg"
+        }, 
+        "type": "visual"
+      }, 
+      {
+        "complementary": [
+          {
+            "_id": "5c727e21bf137730b7f4892f", 
+            "en": "swallow", 
+            "fr": "avaler", 
+            "topic": "animals", 
+            "url": "pictures/animals/swallow.jpg"
+          }, 
+          {
+            "_id": "5c727e21bf137730b7f48900", 
+            "en": "eagle", 
+            "fr": "Aigle", 
+            "topic": "animals", 
+            "url": "pictures/animals/eagle.jpg"
+          }, 
+          {
+            "_id": "5c727e21bf137730b7f4891e", 
+            "en": "puppy", 
+            "fr": "chiot", 
+            "topic": "animals", 
+            "url": "pictures/animals/puppy.jpg"
+          }
+        ], 
+        "to_learn": {
+          "_id": "5c727e21bf137730b7f48901", 
+          "en": "elephant", 
+          "fr": "l'\u00e9l\u00e9phant", 
+          "topic": "animals", 
+          "url": "pictures/animals/elephant.jpg"
+        }, 
+        "type": "written"
+      }, 
+      {
+        "complementary": [
+          {
+            "_id": "5c727e21bf137730b7f48933", 
+            "en": "tortoise", 
+            "fr": "tortue", 
+            "topic": "animals", 
+            "url": "pictures/animals/tortoise.jpg"
+          }, 
+          {
+            "_id": "5c727e21bf137730b7f488fb", 
+            "en": "crocodile", 
+            "fr": "crocodile", 
+            "topic": "animals", 
+            "url": "pictures/animals/crocodile.jpg"
+          }, 
+          {
+            "_id": "5c727e21bf137730b7f4892d", 
+            "en": "squid", 
+            "fr": "calamar", 
+            "topic": "animals", 
+            "url": "pictures/animals/squid.jpg"
+          }
+        ], 
+        "to_learn": {
+          "_id": "5c727e21bf137730b7f48932", 
+          "en": "toad", 
+          "fr": "crapaud", 
+          "topic": "animals", 
+          "url": "pictures/animals/toad.jpg"
+        }, 
+        "type": "visual"
+      }
+    ]
+  }
 }
+
 ```
 ### Update learn progress
 The body of the POST request should be:
