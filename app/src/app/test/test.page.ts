@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoloUserProviderService } from '../lolo-user-provider.service';
 
 @Component({
   selector: 'app-test',
@@ -13,45 +14,63 @@ export class TestPage implements OnInit {
   public index:number=0;
 
   // these boolean values "image, text" helps to switch to the correct formula for presenting the data e.g. if the if the tested data is
-  // image so image is true otherwise it's false 
+  // image so image is true otherwise it's false
   image=false;
   text=true;
-  public data = [
-    { word: 'Bleu', v1:'Blue', v2:'Red',  v3:'Green', v4:'Orange',answer: 'Blue'},
-    { word: "../../assets/Data/courir.jpg", v1:'marche', v2:'Saut',  v3:'courir', v4:'nager',answer:'courir'}
-  ];
-  constructor(private router: Router) { }
+  public data = [];
+
+  public learnLang = "fr";
+  public knownLang = "en";
+  public imageDir = "../../assets/images/";
+
+  testedWords = [];
+
+  constructor(private router: Router, private userProvider: LoloUserProviderService) { }
 
 
   ngOnInit() {
-
+    this.loadWords();
   }
 
-  checkAnswer(value,answer)
+  loadWords(){
+      var _self=this;
+    	var cbError = function(error){alert(error.message);};
+    	var cbSucces = function(data){
+              console.log(data);
+              var res = [];
+              data.words.forEach( (page) => {
+                var temp = page.complementary;
+                temp.push(page.to_learn);
+                temp.sort(() => Math.random() - 0.5);
+                var isImage = (page.type == 'visual' ? true : false);
+                var isText = !isImage;
+                res.push({isImage: isImage, isText: isText, type: page.type, test: page.to_learn, words: temp});
+              });
+              console.log(res);
+            	_self.data = res;
+        };
+    	this.userProvider.getTestingWords( cbSucces, cbError);
+  }
+
+  checkAnswer(instance,answer)
   {
-    //update the index
-    this.index=1;
-
-
-
-    if(this.data[this.index].word.includes("assets"))
+    var correct = false;
+    if (instance==answer)
     {
-      this.image=true;
-      this.text=false;
+      correct = true;
     }
-    else
-    {
-      this.image=false;
-      this.text=true;
-    }
-
-    if(value==answer)
-    {
-    alert("Correct");
-
-    }
-    else{
-      alert("wrong");
+    if(this.index < this.data.length - 2){
+      var tested = {"wordID": this.data[this.index].test._id, "success": correct, "type": this.data[this.index].type, "lang": this.learnLang};
+      this.testedWords.push(tested);
+      this.index++;
+    } else {
+      //end of learning
+      var _self = this;
+      var cbError = function(error){alert(error.message);};
+      var cbSucces = function(data){
+            _self.router.navigate(['main']);
+        };
+      this.userProvider.updateTestedWords(this.testedWords, cbSucces, cbError);
     }
   }
 

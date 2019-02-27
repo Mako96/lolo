@@ -31,10 +31,13 @@ export class LoloApiProviderService {
   }
 
   getLearningWords(count, userid) {
-	return this.http.get(this.apiUrl + 'user/'+userid+'/learn/words/'+count);
+	   return this.http.get(this.apiUrl + 'user/'+userid+'/learn/words/'+count);
+  }
+  getTestingWords(userid) {
+    return this.http.get(this.apiUrl + 'user/'+userid+'/test/words/10');
   }
   getPreferences() {
-  return this.http.get(this.apiUrl + 'preferences');
+    return this.http.get(this.apiUrl + 'preferences');
   }
   setPreferences(preferences, userid){
   	return this.http.post(this.apiUrl + 'user/'+userid+'/preferences', {
@@ -48,6 +51,13 @@ export class LoloApiProviderService {
     return this.http.post(this.apiUrl + 'user/'+userid+'/learn/update', {
 	    "data": {
 			"learned": words
+		    }
+	     });
+  }
+  updateTestedWords(words, userid){
+    return this.http.post(this.apiUrl + 'user/'+userid+'/test/update', {
+	    "data": {
+			"tested": words
 		    }
 	     });
   }

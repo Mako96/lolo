@@ -6,50 +6,49 @@
 
 <ion-content padding>
 
-  <div class="frame0"  [hidden]=image>
-    <h2>{{data[index].word}}</h2>
+  <div class="frame0" [hidden]=data[index].isText>
+    <h2>{{data[index].test[knownLang]}}</h2>
     <div class="c0">
 
     <div class="c1">
         <div >
-            <p (click)="checkAnswer(data[index].v1,data[index].answer)">{{data[index].v1}}</p>
+            <p (click)="checkAnswer(data[index].words[0]._id, data[index].test._id)">{{data[index].words[0][learnLang]}}</p>
         </div>
         <div >
-            <p (click)="checkAnswer(data[index].v2,data[index].answer)">{{data[index].v2}}</p>
+            <p (click)="checkAnswer(data[index].words[1]._id, data[index].test._id)">{{data[index].words[1][learnLang]}}</p>
         </div>
     </div>
     <div class="c1">
-        <div >
-            <p (click)="checkAnswer(data[index].v3,data[index].answer)">{{data[index].v3}}</p>
-        </div>   
-        <div >
-            <p (click)="checkAnswer(data[index].v4,data[index].answer)">{{data[index].v4}}</p>
-        </div>  
+      <div >
+          <p (click)="checkAnswer(data[index].words[2]._id, data[index].test._id)">{{data[index].words[2][learnLang]}}</p>
+      </div>
+      <div >
+          <p (click)="checkAnswer(data[index].words[3]._id, data[index].test._id)">{{data[index].words[3][learnLang]}}</p>
+      </div>
     </div>
 
   </div>
   </div>
 
-  <div class="frame0"  [hidden]="text">
-    <img src="{{data[index].word}}"/>
+  <div class="frame0" [hidden]=data[index].isImage>
+    <img src="{{imageDir+data[index].test.url}}"/>
     <div class="c0">
-
-    <div class="c1">
+      <div class="c1">
+          <div >
+              <p (click)="checkAnswer(data[index].words[0]._id, data[index].test._id)">{{data[index].words[0][learnLang]}}</p>
+          </div>
+          <div >
+              <p (click)="checkAnswer(data[index].words[1]._id, data[index].test._id)">{{data[index].words[1][learnLang]}}</p>
+          </div>
+      </div>
+      <div class="c1">
         <div >
-            <p (click)="checkAnswer(data[index].v1,data[index].answer)">{{data[index].v1}}</p>
+            <p (click)="checkAnswer(data[index].words[2]._id, data[index].test._id)">{{data[index].words[2][learnLang]}}</p>
         </div>
         <div >
-            <p (click)="checkAnswer(data[index].v2,data[index].answer)">{{data[index].v2}}</p>
+            <p (click)="checkAnswer(data[index].words[3]._id, data[index].test._id)">{{data[index].words[3][learnLang]}}</p>
         </div>
-    </div>
-    <div class="c1">
-        <div >
-            <p (click)="checkAnswer(data[index].v3,data[index].answer)">{{data[index].v3}}</p>
-        </div>   
-        <div >
-            <p (click)="checkAnswer(data[index].v4,data[index].answer)">{{data[index].v4}}</p>
-        </div>  
-    </div>
+      </div>
 
   </div>
   </div>

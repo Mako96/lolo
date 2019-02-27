@@ -16,7 +16,7 @@ export class LearnPage implements OnInit {
   public data = [];
   public learnLang = "fr";
   public knownLang = "en";
-  public imageDir = "../../assets/images/"
+  public imageDir = "../../assets/images/";
 
   learnedWords = [];
 
@@ -64,7 +64,7 @@ export class LearnPage implements OnInit {
         var _self = this;
         var cbError = function(error){alert(error.message);};
         var cbSucces = function(data){
-              _self.router.navigate(['home']);
+              _self.router.navigate(['main']);
           };
         this.userProvider.updateLearnedWords(this.learnedWords, cbSucces, cbError);
       }

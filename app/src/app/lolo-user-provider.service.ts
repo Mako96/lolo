@@ -106,5 +106,33 @@ export class LoloUserProviderService {
              });
            });
     }
+    getTestingWords(cbSucces, cbError) {
+      var _self = this;
+      this.getUserID(function(userid){
+       	_self.apiProvider.getTestingWords(userid).subscribe((data: any)=>{
+                 if(data.error !== undefined){
+                 	cbError(data.error);
+                 } else if (data.data !== undefined) {
+                 	cbSucces(data.data);
+                 } else {
+                 	cbError({'message': _self.genericApiErrorMsg});
+                 }
+             });
+           });
+    }
+    updateTestedWords(words, cbSucces, cbError) {
+      var _self = this;
+      this.getUserID(function(userid){
+       	_self.apiProvider.updateTestedWords(words, userid).subscribe((data: any)=>{
+                 if(data.error !== undefined){
+                 	cbError(data.error);
+                 } else if (data.data !== undefined) {
+                 	cbSucces(data.data);
+                 } else {
+                 	cbError({'message': _self.genericApiErrorMsg});
+                 }
+             });
+           });
+    }
 
 }
