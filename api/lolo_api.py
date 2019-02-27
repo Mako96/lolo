@@ -75,7 +75,7 @@ def get_topics():
                 },
                 {
                     "name": "clothes",
-                    "image": "topics/colours.jpg",
+                    "image": "topics/clothes.jpg",
                 },
                 {
                     "name": "food",
