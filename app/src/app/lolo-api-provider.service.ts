@@ -33,8 +33,8 @@ export class LoloApiProviderService {
   getLearningWords(count, userid) {
 	   return this.http.get(this.apiUrl + 'user/'+userid+'/learn/words/'+count);
   }
-  getTestingWords(userid) {
-    return this.http.get(this.apiUrl + 'user/'+userid+'/test/words/10');
+  getTestingWords(count, userid) {
+    return this.http.get(this.apiUrl + 'user/'+userid+'/test/words/'+count);
   }
   getTopics(){
     return this.http.get(this.apiUrl + 'topics');

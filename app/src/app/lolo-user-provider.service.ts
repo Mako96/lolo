@@ -98,7 +98,7 @@ export class LoloUserProviderService {
     getLearningWords(cbSucces, cbError) {
       var _self = this;
       this.getUserID(function(userid){
-       	_self.apiProvider.getLearningWords(10, userid).subscribe((data: any)=>{
+       	_self.apiProvider.getLearningWords(5, userid).subscribe((data: any)=>{
                  if(data.error !== undefined){
                  	cbError(data.error);
                  } else if (data.data !== undefined) {
@@ -126,7 +126,7 @@ export class LoloUserProviderService {
     getTestingWords(cbSucces, cbError) {
       var _self = this;
       this.getUserID(function(userid){
-       	_self.apiProvider.getTestingWords(userid).subscribe((data: any)=>{
+       	_self.apiProvider.getTestingWords(5, userid).subscribe((data: any)=>{
                  if(data.error !== undefined){
                  	cbError(data.error);
                  } else if (data.data !== undefined) {
