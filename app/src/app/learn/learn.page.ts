@@ -55,18 +55,22 @@ export class LearnPage implements OnInit {
     if (instance==answer)
     {
       alert("Correct");
-      if(this.index < this.data.length - 2){
+      console.log(this.data.length)
+      if(this.index < this.data.length){
         var learned = {"wordID": this.data[this.index].learning._id, "lang": this.learnLang};
         this.learnedWords.push(learned);
-        this.index++;
-      } else {
-        //end of learning
-        var _self = this;
-        var cbError = function(error){alert(error.message);};
-        var cbSucces = function(data){
-              _self.router.navigate(['main']);
+        console.log(this.index)
+        if (this.index == this.data.length - 1){
+          //end of learning
+          var _self = this;
+          var cbError = function(error){alert(error.message);};
+          var cbSucces = function(data){
+            _self.router.navigate(['main']);
           };
-        this.userProvider.updateLearnedWords(this.learnedWords, cbSucces, cbError);
+          this.userProvider.updateLearnedWords(this.learnedWords, cbSucces, cbError);
+        }
+
+        this.index++;
       }
     }
     else

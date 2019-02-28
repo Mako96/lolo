@@ -62,18 +62,20 @@ export class TestPage implements OnInit {
       alert("False, the correct translation of "+ this.data[this.index].test.en + " is " + this.data[this.index].test.fr)
     }
 
-    if(this.index < this.data.length - 2){
+    if(this.index < this.data.length ){
       var tested = {"wordID": this.data[this.index].test._id, "success": correct, "type": this.data[this.index].type, "lang": this.learnLang};
       this.testedWords.push(tested);
-      this.index++;
-    } else {
-      //end of learning
-      var _self = this;
-      var cbError = function(error){alert(error.message);};
-      var cbSucces = function(data){
+      if (this.index == this.data.length - 1){
+          //end of test
+          var _self = this;
+          var cbError = function(error){alert(error.message);};
+          var cbSucces = function(data){
             _self.router.navigate(['main']);
-        };
-      this.userProvider.updateTestedWords(this.testedWords, cbSucces, cbError);
+          };
+          this.userProvider.updateTestedWords(this.testedWords, cbSucces, cbError);
+        }
+
+      this.index++;
     }
   }
 
