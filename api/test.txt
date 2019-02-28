@@ -46,7 +46,7 @@ curl --header "Content-Type: application/json" \
 # Get words to test
 curl --header "Content-Type: application/json" \
   --request GET \
-  http://localhost:5000/lolo/api/v1.0/user/5c7689e72344ef13b13227b0/test/words/3
+  http://localhost:5000/lolo/api/v1.0/user/5c768f2e948d1f46e158ce74/test/words/3
 
 # Update learned words
 {"data":{"learned":[{"wordID":"5c713a8802045a96c31771a8","lang":"fr"},{"wordID":"5c713a8802045a96c31771b7","lang":"fr"}]}}
