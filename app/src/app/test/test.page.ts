@@ -55,10 +55,13 @@ export class TestPage implements OnInit {
   checkAnswer(instance,answer)
   {
     var correct = false;
-    if (instance==answer)
-    {
+    if (instance==answer){
+      alert("Correct");
       correct = true;
+    } else {
+      alert("False, the correct answer was " + this.data[this.index].test.fr)
     }
+
     if(this.index < this.data.length - 2){
       var tested = {"wordID": this.data[this.index].test._id, "success": correct, "type": this.data[this.index].type, "lang": this.learnLang};
       this.testedWords.push(tested);
