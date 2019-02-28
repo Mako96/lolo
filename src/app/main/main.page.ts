@@ -43,6 +43,9 @@ export class MainPage implements OnInit {
     this.router.navigate(['preferences']);
   }
 
+  Logout(){
+    this.router.navigate(['home']);
+  }
 
 
 }
