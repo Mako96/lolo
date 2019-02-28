@@ -78,26 +78,39 @@ class DBController:
         Format: [{'to learn': word, 'complementary': [list of 3 words]}, {...}]"""
         if not self.doesUserExistByID(user_ID):
             return None
-        else:
-            trainingWords = {"words": []}
-            topics = self.getInterests(user_ID)
-            wordsToLearn = self.decideWordsToLearn(ObjectId(user_ID), topics, size)
-            print(len(wordsToLearn))
-            print(wordsToLearn)
-            for word in wordsToLearn:
-                complementaryWords = self.getComplementaryWords(word["topic"], word)
-                trainingWords["words"].append({"to_learn": word, "complementary": complementaryWords})
 
-            return json.loads(JSONEncoder().encode(trainingWords))
+        trainingWords = {"words": []}
+        topics = self.getInterests(user_ID)
+
+        # if the user has no preferences, he will get training words from all the possible topics
+        if len(topics) == 0: topics = ["animals", "food", "clothes", "colours"]
+
+        wordsToLearn = self.decideWordsToLearn(ObjectId(user_ID), topics, size)
+        for word in wordsToLearn:
+            complementaryWords = self.getComplementaryWords(word["topic"], word)
+            trainingWords["words"].append({"to_learn": word, "complementary": complementaryWords})
+
+        return json.loads(JSONEncoder().encode(trainingWords))
 
 
     def getTestingWords(self, user_ID, size):
         """For now we do the same thing as for the training and we add a fied "typ" to define
         which type of test will be used for each word"""
-        testingWords = self.getTrainingWords(user_ID, size)
-        for word in testingWords["words"]:
-            word["type"] = random.choice(["written", "visual"])
-        return testingWords
+
+        testingWords = {"words": []}
+        if not self.doesUserExistByID(user_ID):
+            return None
+
+        topics = self.getInterests(user_ID)
+        # if the user has no preferences, he will get training words from all the possible topics
+        if len(topics) == 0: topics = ["animals", "food", "clothes", "colours"]
+
+        wordsToTest = self.decideWordsToTest(user_ID, topics, size)
+
+        for word in wordsToTest:
+            complementaryWords = self.getComplementaryWords(word["topic"], word)
+            testingWords["words"].append({"to_learn": word, "complementary": complementaryWords, "type": random.choice(["written", "visual"])})
+        return json.loads(JSONEncoder().encode(testingWords))
 
 
     def updateLearnedWords(self, user_ID, results):
@@ -208,6 +221,43 @@ class DBController:
 
         return res
 
+    def getLearnedWords(self, user_ID):
+        """Returns the wordIDs of the words that the user has learned"""
+        learnedWords = self.user_collection.find_one(
+            {"_id": ObjectId(user_ID)},
+            {"taughtWords.wordID": 1, '_id': 0}
+        )
+        if learnedWords:
+            return [wordID["wordID"] for wordID in learnedWords["taughtWords"]]
+        else:
+            return []
+
+
+
+    def decideWordsToTest(self, user_ID, topics, size):
+        """Returns a list of words to test """
+
+        # Gets all the words learned by a user
+        learnedWordsIDs = self.getLearnedWords(user_ID)
+        learnedWords = self.voc_collection.aggregate([{"$match": {"_id": {'$in': learnedWordsIDs}}}])
+        learnedWords = list(learnedWords)
+
+        #Gets all the words that match the preferred topics
+        topicsWords = self.voc_collection.aggregate([{"$match":  {"topic": {'$in': topics}}}])
+        topicsWords = list(topicsWords)
+
+        # Intersection between the words that the user has learned and the words in his preferences
+        intersection = [learnedWord for learnedWord in learnedWords for topicsWord in topicsWords if learnedWord['_id']==topicsWord['_id']]
+
+        # if the user has learned less words than the size of the test, we complete with random words
+        to_add = [word for word in topicsWords if word not in intersection]
+        to_add = random.sample(topicsWords, size - len(intersection))
+
+        to_test = intersection + to_add
+
+        return random.sample(to_test, size)
+
+
 
     def getComplementaryWords(self, topic, word_to_learn):
         """Returns a list of 3 of the same topic of word_to_learn but  different than the word_to_learn"""
@@ -226,9 +276,11 @@ if __name__ == '__main__':
     #print(controller.doesUserExistByID("5c73ed4c2344ef2a3a8e1c2c"))
     #print(controller.setInterests("5c73ed4c2344ef2a3a8e1c2c", ["animals"]))
     #print(controller.getInterests("5c73ed4c2344ef2a3a8e1c2c"))
-    print(controller.getTrainingWords("5c73ed4c2344ef", 3))
+    print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 5))
     #print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
     #print(controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2d", "lang": "fr"}]))
-    #controller.updateTestedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2f", "success": True, "type": "written", "lang": "fr"}])
+    #controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c727e21bf137730b7f488f3", "lang": "fr"}])
+    #controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c727e21bf137730b7f488f4","lang": "fr"}])
+
 
     #print(controller.getPreviousTestResults("5c73ed4c2344ef2a3a8e1c2c", "fr"))
