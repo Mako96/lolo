@@ -59,7 +59,7 @@ export class TestPage implements OnInit {
       alert("Correct");
       correct = true;
     } else {
-      alert("False, the correct answer was " + this.data[this.index].test.fr)
+      alert("False, the correct translation of "+ this.data[this.index].test.en + " is " + this.data[this.index].test.fr)
     }
 
     if(this.index < this.data.length - 2){
