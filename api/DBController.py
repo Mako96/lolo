@@ -245,13 +245,11 @@ class DBController:
         #Gets all the words that match the preferred topics
         topicsWords = self.voc_collection.aggregate([{"$match":  {"topic": {'$in': topics}}}])
         topicsWords = list(topicsWords)
-
         # Intersection between the words that the user has learned and the words in his preferences
         intersection = [learnedWord for learnedWord in learnedWords for topicsWord in topicsWords if learnedWord['_id']==topicsWord['_id']]
-
         # if the user has learned less words than the size of the test, we complete with random words
         to_add = [word for word in topicsWords if word not in intersection]
-        to_add = random.sample(topicsWords, size - len(intersection))
+        to_add = random.sample(to_add, max(0,size - len(intersection)))
 
         to_test = intersection + to_add
 
