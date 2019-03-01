@@ -1,5 +1,14 @@
 # lolo
 
+# MVP
+
+## Functionalities of the MVP
+
+* Login/register (no password needed)
+* Selection of the topics the user wants to learn about (animals, food, clothes, colours)
+* Learning phase: The user learns random words from his preferred topics. The result of the a learning phase is stored in the db (see Docs/dataStructure.md for more info)
+* Test phase: The user is tested on the words from his preferred topics that he has already learned. The result of the a testing phase is stored in the db (see Docs/dataStructure.md for more info) 
+
  ## Folder structure
  ```
 ├── Docs
@@ -12,6 +21,10 @@
 │   ├── ....
 ├── README.md
 ```
+* Docs contains a document explaining the structure of the data stored in the mongo database 
+* Data contains all the vocabulary in csv files (the vocabulary is already inserted in the DB)
+* App contains all the Ionic files
+* API contains all the backend components (the api, and the DBcontroller)
 ## Ionic setup
 To work on ionic please install the following software:
 nodejs
