@@ -46,7 +46,10 @@ export class MainPage implements OnInit {
   Logout(){
     this.router.navigate(['home']);
   }
+<<<<<<< HEAD:app/src/app/main/main.page.ts
 
+=======
+>>>>>>> master:src/app/main/main.page.ts
 
 
 }
