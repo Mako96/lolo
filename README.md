@@ -9,6 +9,11 @@
 * Learning phase: The user learns random words from his preferred topics. The result of the a learning phase is stored in the db (see Docs/dataStructure.md for more info)
 * Test phase: The user is tested on the words from his preferred topics that he has already learned. The result of the a testing phase is stored in the db (see Docs/dataStructure.md for more info) 
 
+## Work done and ideas for future improvement
+
+This file explains who did what and contained some ideas for future improvement:
+https://docs.google.com/document/d/1yOlnkmRApAuh_QsqT5Mi0zi1IAXekeSKP3sz8Myt6Ag/edit?usp=sharing
+
  ## Folder structure
  ```
 ├── Docs
