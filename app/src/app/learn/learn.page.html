@@ -8,26 +8,27 @@
 
   <div>
 
-    <h2>{{data[index].learning[knownLang]}}</h2>
+    <h2>{{data[index].learning[
+    knownLang]}}</h2>
 
     <div class="c0">
         <div >
             <img src={{imageDir+data[index].words[0].url}} (click)="check(data[index].words[0]._id, data[index].learning._id)"/>
-            <p>{{data[index].words[0][learnLang]}}</p>
+            <p>{{data[index].words[0][learningLang]}}</p>
         </div>
         <div >
             <img src={{imageDir+data[index].words[1].url}} (click)="check(data[index].words[1]._id, data[index].learning._id)"/>
-            <p>{{data[index].words[1][learnLang]}}</p>
+            <p>{{data[index].words[1][learningLang]}}</p>
         </div>
     </div>
     <div class="c0">
         <div >
             <img src={{imageDir+data[index].words[2].url}} (click)="check(data[index].words[2]._id, data[index].learning._id)"/>
-            <p>{{data[index].words[2][learnLang]}}</p>
+            <p>{{data[index].words[2][learningLang]}}</p>
         </div>
         <div >
             <img src={{imageDir+data[index].words[3].url}} (click)="check(data[index].words[3]._id, data[index].learning._id)"/>
-            <p>{{data[index].words[3][learnLang]}}</p>
+            <p>{{data[index].words[3][learningLang]}}</p>
         </div>
     </div>
 

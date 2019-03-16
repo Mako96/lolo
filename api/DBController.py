@@ -18,12 +18,13 @@ class DBController:
         self.db = client.loloDB
         self.user_collection = self.db["users"]
         self.voc_collection = self.db["vocabulary"]
+        self.lang_collection = self.db["languages"]
 
-    def insertUser(self, user_email):
+    def insertUser(self, user_email, language_to_learn):
         """ Inserts an email address in the user collection
             Returns the userID if it succeeds else None"""
         if not self.doesUserExist(user_email):
-            query = {"email": user_email, "interests": [], "taughtWords": [], "testedWords": []}
+            query = {"email": user_email, "learning_language": language_to_learn,  "interests": [], "taughtWords": [], "testedWords": []}
             self.user_collection.insert_one(query)
             userID = self.user_collection.find_one({"email": user_email}, {'_id': 1})
             return str(userID["_id"])
@@ -69,6 +70,37 @@ class DBController:
             self.user_collection.update(
                 {"_id": ObjectId(user_ID)},
             {"$set": {"interests": interests}}
+            )
+            return True
+        return False
+
+    def insertLanguages(self, languages):
+        for lang in languages:
+            self.lang_collection.insert_one(lang)
+
+    def getLearningLanguages(self):
+        """Returns all the possible languages to learn"""
+        languages = self.lang_collection.find({},
+                                              {"_id": 0})
+        return list(languages)
+
+    def getUserLearningLanguage(self, user_ID):
+        """Returns a string representing the language that a user is learning"""
+        if not self.doesUserExistByID(user_ID):
+            return None
+        res = self.user_collection.find_one(
+            {"_id": ObjectId(user_ID)},
+            {"learning_language": 1, '_id': 0}
+        )
+        return res["learning_language"]
+
+    def setUserLearningLanguage(self, user_ID, language):
+        """Sets the learning language of a user.
+           Returns True if it succeeds, else false"""
+        if self.doesUserExistByID(user_ID):
+            self.user_collection.update(
+                {"_id": ObjectId(user_ID)},
+            {"$set": {"learning_language": language}}
             )
             return True
         return False
@@ -223,8 +255,9 @@ class DBController:
 
     def getLearnedWords(self, user_ID):
         """Returns the wordIDs of the words that the user has learned"""
+        learning_language = self.getUserLearningLanguage(user_ID)
         learnedWords = self.user_collection.find_one(
-            {"_id": ObjectId(user_ID)},
+            {"_id": ObjectId(user_ID), "taughtWords.lang": learning_language},
             {"taughtWords.wordID": 1, '_id': 0}
         )
         if learnedWords:
@@ -274,7 +307,7 @@ if __name__ == '__main__':
     #print(controller.doesUserExistByID("5c73ed4c2344ef2a3a8e1c2c"))
     #print(controller.setInterests("5c73ed4c2344ef2a3a8e1c2c", ["animals"]))
     #print(controller.getInterests("5c73ed4c2344ef2a3a8e1c2c"))
-    print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 5))
+    #print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 5))
     #print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
     #print(controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2d", "lang": "fr"}]))
     #controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c727e21bf137730b7f488f3", "lang": "fr"}])
@@ -282,3 +315,11 @@ if __name__ == '__main__':
 
 
     #print(controller.getPreviousTestResults("5c73ed4c2344ef2a3a8e1c2c", "fr"))
+
+    languages = [{"lang": "fr", "display_name": "French"},
+                 {"lang": "es", "display_name": "Spanish"},
+                 {"lang": "de", "display_name": "German"}]
+
+    controller.insertLanguages(languages)
+
+    #print(controller.getLearningLanguages())

@@ -12,6 +12,10 @@
 | GET         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/test/words    | Retrieve set of words to test  | application/json | application/json |
 | POST         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/learn/update | Update user learn progress     | application/json | application/json |
 | POST         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/test/update  | Update user test progress      | application/json | application/json |
+| GET         | http://lolo.ai/api/v1.0/languages  | Get all the languages that a user can learn      | application/json | application/json |
+| GET         | http://lolo.ai/api/v1.0/user/{userid}/language_to_learn | Get the language that a user is learning      | application/json | application/json |
+| POST         | http://lolo.ai/api/v1.0/user/{userid}/language_to_learn | Set the language that a user is learning      | application/json | application/json |
+
 
 ### Register
 This services will require a payload with the following structure:
@@ -20,7 +24,8 @@ This services will require a payload with the following structure:
     "data": {
         "user": {
             "name" : "any name",
-            "email" : "any email"
+            "email" : "any email",
+            "language_to_learn": "fr" // or "es" or "de"
         }
     }
 }
@@ -53,14 +58,70 @@ The response will be:
 ```json
 {
     "data":{
-        "message" : "Authentication correct"
+        "message" : "Authentication correct",
         "id": "some user id"
     },
     "error":{
-        "message" : "Authentication failed
+        "message" : "Authentication failed"
     }
 }
 ```
+
+### Get all languages
+
+```json
+{
+    "data":{
+        "languages" : [
+            {
+                "display_name" : "French", 
+                "lang": "fr"
+            },
+            {
+                "display_name" : "Spanish", 
+                "lang": "es"
+            }
+        ]
+    } 
+}
+```
+
+### Get user language to learn
+
+```json
+{
+    "data":{
+        "lang" : "fr"
+    },
+    "error":{
+        "message" : "message"
+    }
+}
+```
+
+### Set user language to learn
+This services will require a payload with the following structure:
+
+```json
+{
+    "data":{
+        "language_to_learn" : "fr"
+    }
+}
+```
+
+The response will be:
+```json
+{
+    "data":{
+        "message" : "language to learn successfully saved",
+    },
+    "error":{
+        "message" : "Something went wrong"
+    }
+}
+```
+
 ### Get all topics
 The first step is to get the available topics from the server to show to the user
 The response will be:

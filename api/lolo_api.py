@@ -17,7 +17,8 @@ def register_user():
     if not request.json:
         abort(400)
     email = request.json["data"]["user"]["email"]
-    userid = dbc.insertUser(email)
+    language_to_learn = request.json["data"]["user"]["language_to_learn"]
+    userid = dbc.insertUser(email, language_to_learn)
     if userid:
         return jsonify(
             {
@@ -60,7 +61,7 @@ def auth_user():
 
 @app.route('/lolo/api/v1.0/topics', methods=['GET'])
 def get_topics():
-    #DUMMY DATA FOR TESTING AS THE TOPIC ARE NOT STORED IN THE BD :
+    #DATA ARE HARCODED FOR NOW AS THE TOPICS ARE NOT STORED IN THE DB :
     categories = {
         "data": {
             "topics": [
@@ -109,7 +110,6 @@ def get_user_preferences(userid):
 @app.route('/lolo/api/v1.0/user/<userid>/preferences', methods=['POST'])
 def set_user_preferences(userid):
     if not request.json or not 'data' in request.json:
-        print("d")
         abort(400)
     interests = request.json["data"]["preferences"]
     success = dbc.setInterests(userid, interests)
@@ -128,6 +128,56 @@ def set_user_preferences(userid):
                 }
             })
 
+
+@app.route('/lolo/api/v1.0/languages', methods=['GET'])
+def get_languages():
+    categories = {
+        "data": {
+            "languages": dbc.getLearningLanguages()
+        }
+    }
+    return jsonify(**categories)
+
+
+@app.route('/lolo/api/v1.0/user/<userid>/language_to_learn', methods=['GET'])
+def get_user_language_to_learn(userid):
+    result = dbc.getUserLearningLanguage(userid)
+    if result is not None:
+        return jsonify(
+            {
+                "data": {
+                    "lang": result,
+                }
+            })
+    else:
+        return jsonify(
+            {
+                "error": {
+                    "code": "failed",
+                    "message": "Something went wrong in get_user_language_to_learn" + str(userid)
+                }
+            })
+
+@app.route('/lolo/api/v1.0/user/<userid>/language_to_learn', methods=['POST'])
+def set_user_language_to_learn(userid):
+    if not request.json or not 'data' in request.json:
+        abort(400)
+    language_to_learn = request.json["data"]["language_to_learn"]
+    success = dbc.setUserLearningLanguage(userid, language_to_learn)
+    if success:
+        return jsonify(
+            {
+                "data": {
+                    "message": "language to learn successfully saved"
+                }
+            })
+    else:
+        return jsonify(
+            {
+                "error": {
+                    "message": "Something went wrong in set_user_language_to_learn()"
+                }
+            })
 
 @app.route('/lolo/api/v1.0/user/<userid>/learn/words/<int:number_of_words>', methods=['GET'])
 def get_words_learn(userid, number_of_words):

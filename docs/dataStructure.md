@@ -10,7 +10,19 @@
 	}
 
 
-*  * * 
+*  * *
+
+## Language collection 
+
+### Format of a document :
+
+	{ 
+        "display_name" : "German", 
+        "lang" : "de" 
+	}
+
+
+*  * *  
 
 ## User collection 
 
@@ -19,6 +31,7 @@
 	{
 		email: ‘example@example.com’ ,
 		interests: [‘colours’, ‘animals’],
+		learning_language: "fr" //or "es" or "de" 
 		taughtWords: [
 			{
 				wordID: 09184650943,
