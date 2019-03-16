@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>test</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="frame0" [hidden]=data[index].isText>
+    <h2>{{data[index].test[knownLang]}}</h2>
+    <div class="c0">
+
+    <div class="c1">
+        <div >
+            <p (click)="checkAnswer(data[index].words[0]._id, data[index].test._id)">{{data[index].words[0][learnLang]}}</p>
+        </div>
+        <div >
+            <p (click)="checkAnswer(data[index].words[1]._id, data[index].test._id)">{{data[index].words[1][learnLang]}}</p>
+        </div>
+    </div>
+    <div class="c1">
+      <div >
+          <p (click)="checkAnswer(data[index].words[2]._id, data[index].test._id)">{{data[index].words[2][learnLang]}}</p>
+      </div>
+      <div >
+          <p (click)="checkAnswer(data[index].words[3]._id, data[index].test._id)">{{data[index].words[3][learnLang]}}</p>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <div class="frame0" [hidden]=data[index].isImage>
+    <img src="{{imageDir+data[index].test.url}}"/>
+    <div class="c0">
+      <div class="c1">
+          <div >
+              <p (click)="checkAnswer(data[index].words[0]._id, data[index].test._id)">{{data[index].words[0][learnLang]}}</p>
+          </div>
+          <div >
+              <p (click)="checkAnswer(data[index].words[1]._id, data[index].test._id)">{{data[index].words[1][learnLang]}}</p>
+          </div>
+      </div>
+      <div class="c1">
+        <div >
+            <p (click)="checkAnswer(data[index].words[2]._id, data[index].test._id)">{{data[index].words[2][learnLang]}}</p>
+        </div>
+        <div >
+            <p (click)="checkAnswer(data[index].words[3]._id, data[index].test._id)">{{data[index].words[3][learnLang]}}</p>
+        </div>
+      </div>
+
+  </div>
+  </div>
+</ion-content>

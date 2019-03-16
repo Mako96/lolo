@@ -1,50 +1,51 @@
-bacon,Bacon
-beef,du boeuf
-chicken,poulet
-ham,jambon
-hamburger,Hamburger
-hot dog,Hot-dog
-lamb chop,côtelette d'agneau
-pork,porc
-sausage,saucisse
-steak,steak
-turkey,dinde
-veal,veau
-apple,Pomme
-apricot,abricot
-banana,banane
-blackberry,la mûre
-blueberry,myrtille
-cherry,Cerise
-currant,groseille
-fig,figue
-grape,grain de raisin
-grapefruit,pamplemousse
-grapes,les raisins
-kiwi,kiwi
-lemon,citron
-lime,citron vert
-melon,melon
-nectarine,nectarine
-orange,Orange
-peach,pêche
-pear,poire
-pineapple,ananas
-plum,prune
-pomegranate,Grenade
-prune,prune
-raspberry,framboise
-strawberry,fraise
-tangerine,mandarine
-watermelon,pastèque
-apple pie,tarte aux pommes
-birthday cake,gâteau d'anniversaire
-cake,gâteau
-candy,bonbons
-donut,Donut
-fruit,fruit
-ice cream,crème glacée
-muffin,muffin
-pie,tarte
-pudding,pudding
-whip cream,Fouetter la crème
+en,fr,topic,url
+bacon,Bacon,food,pictures/food/bacon.jpg
+beef,du boeuf,food,pictures/food/beef.jpg
+chicken,poulet,food,pictures/food/chicken.jpg
+ham,jambon,food,pictures/food/ham.jpg
+hamburger,Hamburger,food,pictures/food/hamburger.jpg
+hot dog,Hot-dog,food,pictures/food/hot_dog.jpg
+lamb chop,côtelette d'agneau,food,pictures/food/lamb_chop.jpg
+pork,porc,food,pictures/food/pork.jpg
+sausage,saucisse,food,pictures/food/sausage.jpg
+steak,steak,food,pictures/food/steak.jpg
+turkey,dinde,food,pictures/food/turkey.jpg
+veal,veau,food,pictures/food/veal.jpg
+apple,Pomme,food,pictures/food/apple.jpg
+apricot,abricot,food,pictures/food/apricot.jpg
+banana,banane,food,pictures/food/banana.jpg
+blackberry,la mûre,food,pictures/food/blackberry.jpg
+blueberry,myrtille,food,pictures/food/blueberry.jpg
+cherry,Cerise,food,pictures/food/cherry.jpg
+currant,groseille,food,pictures/food/currant.jpg
+fig,figue,food,pictures/food/fig.jpg
+grape,grain de raisin,food,pictures/food/grape.jpg
+grapefruit,pamplemousse,food,pictures/food/grapefruit.jpg
+grapes,les raisins,food,pictures/food/grapes.jpg
+kiwi,kiwi,food,pictures/food/kiwi.jpg
+lemon,citron,food,pictures/food/lemon.jpg
+lime,citron vert,food,pictures/food/lime.jpg
+melon,melon,food,pictures/food/melon.jpg
+nectarine,nectarine,food,pictures/food/nectarine.jpg
+orange,Orange,food,pictures/food/orange.jpg
+peach,pêche,food,pictures/food/peach.jpg
+pear,poire,food,pictures/food/pear.jpg
+pineapple,ananas,food,pictures/food/pineapple.jpg
+plum,prune,food,pictures/food/plum.jpg
+pomegranate,Grenade,food,pictures/food/pomegranate.jpg
+prune,prune,food,pictures/food/prune.jpg
+raspberry,framboise,food,pictures/food/raspberry.jpg
+strawberry,fraise,food,pictures/food/strawberry.jpg
+tangerine,mandarine,food,pictures/food/tangerine.jpg
+watermelon,pastèque,food,pictures/food/watermelon.jpg
+apple pie,tarte aux pommes,food,pictures/food/apple_pie.jpg
+birthday cake,gâteau d'anniversaire,food,pictures/food/birthday_cake.jpg
+cake,gâteau,food,pictures/food/cake.jpg
+candy,bonbons,food,pictures/food/candy.jpg
+donut,Donut,food,pictures/food/donut.jpg
+fruit,fruit,food,pictures/food/fruit.jpg
+ice cream,crème glacée,food,pictures/food/ice_cream.jpg
+muffin,muffin,food,pictures/food/muffin.jpg
+pie,tarte,food,pictures/food/pie.jpg
+pudding,pudding,food,pictures/food/pudding.jpg
+whip cream,Fouetter la crème,food,pictures/food/whip_cream.jpg

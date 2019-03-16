@@ -1,0 +1,63 @@
+# Register
+
+{"data":{"user":{"name":"keneth","email":"keubedaa@vub.ac.be"}}}
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"data":{"user":{"name":"keneth","email":"keubedaa@vub.ac.be"}}}' \
+  http://localhost:5000/lolo/api/v1.0/user/register
+
+iduser: 5c73f018948d1f5ea7247a3b
+
+# Auth
+
+{"data": {"user": {"email" : "any email"}}}
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"data": {"user": {"email" : "keubedaa@vub.ac.be"}}}' \
+  http://localhost:5000/lolo/api/v1.0/user/auth
+
+# Get preferences
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:5000/lolo/api/v1.0/preferences
+
+# Get user preferences
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:5000/lolo/api/v1.0/user/5c73f018948d1f5ea7247a3b/preferences
+
+# set user preferences
+
+{"data": {"preferences":[ "animals" ]}}
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"data": {"preferences":[ "animals" ]}}' \
+  http://localhost:5000/lolo/api/v1.0/user/5c73f018948d1f5ea7247a3b/preferences
+
+# Get words to learn
+
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:5000/lolo/api/v1.0/user/5c7580c52344ef3563137808/learn/words/10
+
+# Get words to test
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:5000/lolo/api/v1.0/user/5c768f2e948d1f46e158ce74/test/words/3
+
+# Update learned words
+{"data":{"learned":[{"wordID":"5c713a8802045a96c31771a8","lang":"fr"},{"wordID":"5c713a8802045a96c31771b7","lang":"fr"}]}}
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"data":{"learned":[{"wordID":"5c713a8802045a96c31771a8","lang":"fr"},{"wordID":"5c713a8802045a96c31771b7","lang":"fr"}]}}' \
+  http://localhost:5000/lolo/api/v1.0/user/5c73f018948d1f5ea7247a3b/learn/update
+
+# Update tested words
+{"data":{"tested":[{"wordID":"5c713a8802045a96c31771d8","success":true,"type":"written","lang":"fr"},{"wordID": "5c713a8802045a96c31771e4", "success": false, "type": "written", "lang": "fr"}]}}
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"data":{"tested":[{"wordID":"5c713a8802045a96c31771d8","success":true,"type":"written","lang":"fr"},{"wordID": "5c713a8802045a96c31771e4", "success": false, "type": "written", "lang": "fr"}]}}' \
+  http://localhost:5000/lolo/api/v1.0/user/5c73f018948d1f5ea7247a3b/test/update
