@@ -1,51 +1,50 @@
-en,fr,topic,url
-bacon,Bacon,food,pictures/food/bacon.jpg
-beef,du boeuf,food,pictures/food/beef.jpg
-chicken,poulet,food,pictures/food/chicken.jpg
-ham,jambon,food,pictures/food/ham.jpg
-hamburger,Hamburger,food,pictures/food/hamburger.jpg
-hot dog,Hot-dog,food,pictures/food/hot_dog.jpg
-lamb chop,côtelette d'agneau,food,pictures/food/lamb_chop.jpg
-pork,porc,food,pictures/food/pork.jpg
-sausage,saucisse,food,pictures/food/sausage.jpg
-steak,steak,food,pictures/food/steak.jpg
-turkey,dinde,food,pictures/food/turkey.jpg
-veal,veau,food,pictures/food/veal.jpg
-apple,Pomme,food,pictures/food/apple.jpg
-apricot,abricot,food,pictures/food/apricot.jpg
-banana,banane,food,pictures/food/banana.jpg
-blackberry,la mûre,food,pictures/food/blackberry.jpg
-blueberry,myrtille,food,pictures/food/blueberry.jpg
-cherry,Cerise,food,pictures/food/cherry.jpg
-currant,groseille,food,pictures/food/currant.jpg
-fig,figue,food,pictures/food/fig.jpg
-grape,grain de raisin,food,pictures/food/grape.jpg
-grapefruit,pamplemousse,food,pictures/food/grapefruit.jpg
-grapes,les raisins,food,pictures/food/grapes.jpg
-kiwi,kiwi,food,pictures/food/kiwi.jpg
-lemon,citron,food,pictures/food/lemon.jpg
-lime,citron vert,food,pictures/food/lime.jpg
-melon,melon,food,pictures/food/melon.jpg
-nectarine,nectarine,food,pictures/food/nectarine.jpg
-orange,Orange,food,pictures/food/orange.jpg
-peach,pêche,food,pictures/food/peach.jpg
-pear,poire,food,pictures/food/pear.jpg
-pineapple,ananas,food,pictures/food/pineapple.jpg
-plum,prune,food,pictures/food/plum.jpg
-pomegranate,Grenade,food,pictures/food/pomegranate.jpg
-prune,prune,food,pictures/food/prune.jpg
-raspberry,framboise,food,pictures/food/raspberry.jpg
-strawberry,fraise,food,pictures/food/strawberry.jpg
-tangerine,mandarine,food,pictures/food/tangerine.jpg
-watermelon,pastèque,food,pictures/food/watermelon.jpg
-apple pie,tarte aux pommes,food,pictures/food/apple_pie.jpg
-birthday cake,gâteau d'anniversaire,food,pictures/food/birthday_cake.jpg
-cake,gâteau,food,pictures/food/cake.jpg
-candy,bonbons,food,pictures/food/candy.jpg
-donut,Donut,food,pictures/food/donut.jpg
-fruit,fruit,food,pictures/food/fruit.jpg
-ice cream,crème glacée,food,pictures/food/ice_cream.jpg
-muffin,muffin,food,pictures/food/muffin.jpg
-pie,tarte,food,pictures/food/pie.jpg
-pudding,pudding,food,pictures/food/pudding.jpg
-whip cream,Fouetter la crème,food,pictures/food/whip_cream.jpg
+bacon,Bacon,food,pictures/food/bacon.jpg,Speck,tocino
+beef,du boeuf,food,pictures/food/beef.jpg,Rindfleisch,carne de vaca
+chicken,poulet,food,pictures/food/chicken.jpg,Hähnchen,pollo
+ham,jambon,food,pictures/food/ham.jpg,Schinken,jamón
+hamburger,Hamburger,food,pictures/food/hamburger.jpg,Hamburger,hamburguesa
+hot dog,Hot-dog,food,pictures/food/hot_dog.jpg,Hotdog,Pancho
+lamb chop,côtelette d'agneau,food,pictures/food/lamb_chop.jpg,Lammkotelett,chuleta de cordero
+pork,porc,food,pictures/food/pork.jpg,Schweinefleisch,Cerdo
+sausage,saucisse,food,pictures/food/sausage.jpg,Wurst,chorizo
+steak,steak,food,pictures/food/steak.jpg,Steak,filete
+turkey,dinde,food,pictures/food/turkey.jpg,Truthahn,pavo
+veal,veau,food,pictures/food/veal.jpg,Kalbfleisch,ternera
+apple,Pomme,food,pictures/food/apple.jpg,Apfel,manzana
+apricot,abricot,food,pictures/food/apricot.jpg,Aprikose,albaricoque
+banana,banane,food,pictures/food/banana.jpg,Banane,plátano
+blackberry,la mûre,food,pictures/food/blackberry.jpg,Brombeere,Mora
+blueberry,myrtille,food,pictures/food/blueberry.jpg,Blaubeere,arándano
+cherry,Cerise,food,pictures/food/cherry.jpg,Kirsche,Cereza
+currant,groseille,food,pictures/food/currant.jpg,Johannisbeere,grosella
+fig,figue,food,pictures/food/fig.jpg,Feige,higo
+grape,grain de raisin,food,pictures/food/grape.jpg,Traube,uva
+grapefruit,pamplemousse,food,pictures/food/grapefruit.jpg,Grapefruit,pomelo
+grapes,les raisins,food,pictures/food/grapes.jpg,Trauben,uvas
+kiwi,kiwi,food,pictures/food/kiwi.jpg,Kiwi,kiwi
+lemon,citron,food,pictures/food/lemon.jpg,Zitrone,limón
+lime,citron vert,food,pictures/food/lime.jpg,Limette,Lima
+melon,melon,food,pictures/food/melon.jpg,Melone,melón
+nectarine,nectarine,food,pictures/food/nectarine.jpg,Nektarine,nectarina
+orange,Orange,food,pictures/food/orange.jpg,Orange,naranja
+peach,pêche,food,pictures/food/peach.jpg,Pfirsich,melocotón
+pear,poire,food,pictures/food/pear.jpg,Birne,Pera
+pineapple,ananas,food,pictures/food/pineapple.jpg,Ananas,piña
+plum,prune,food,pictures/food/plum.jpg,Pflaume,ciruela
+pomegranate,Grenade,food,pictures/food/pomegranate.jpg,Granatapfel,granada
+prune,prune,food,pictures/food/prune.jpg,Pflaume,ciruela pasa
+raspberry,framboise,food,pictures/food/raspberry.jpg,Himbeere,frambuesa
+strawberry,fraise,food,pictures/food/strawberry.jpg,Erdbeere,fresa
+tangerine,mandarine,food,pictures/food/tangerine.jpg,Mandarine,Mandarina
+watermelon,pastèque,food,pictures/food/watermelon.jpg,Wassermelone,sandía
+apple pie,tarte aux pommes,food,pictures/food/apple_pie.jpg,Apfelkuchen,pie de manzana
+birthday cake,gâteau d'anniversaire,food,pictures/food/birthday_cake.jpg,Geburtstagskuchen,pastel de cumpleaños
+cake,gâteau,food,pictures/food/cake.jpg,Kuchen,pastel
+candy,bonbons,food,pictures/food/candy.jpg,Süßigkeiten,caramelo
+donut,Donut,food,pictures/food/donut.jpg,Krapfen,rosquilla
+fruit,fruit,food,pictures/food/fruit.jpg,Obst,Fruta
+ice cream,crème glacée,food,pictures/food/ice_cream.jpg,Eis,helado
+muffin,muffin,food,pictures/food/muffin.jpg,Muffin,mollete
+pie,tarte,food,pictures/food/pie.jpg,Kuchen,tarta
+pudding,pudding,food,pictures/food/pudding.jpg,Pudding,pudín
+whip cream,Fouetter la crème,food,pictures/food/whip_cream.jpg,Schlagsahne,crema batida
