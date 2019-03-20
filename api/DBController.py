@@ -1,5 +1,7 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from collections import Counter
+from itertools import chain
 import datetime
 import json
 import random
@@ -92,10 +94,6 @@ class DBController:
                 multi=True
             )
 
-    def updateDifficultyLevel(self, wordID, lang):
-        """Update the level of difficulty of word (identified by wordID) in the given language (lang argument)
-         WordID is a string not an objectID"""
-        pass
 
     def getLearningLanguages(self):
         """Returns all the possible languages to learn"""
@@ -123,45 +121,6 @@ class DBController:
             )
             return True
         return False
-
-    def getTrainingWords(self, user_ID, size):
-        """Returns all the words needed for the training part
-        Format: [{'to learn': word, 'complementary': [list of 3 words]}, {...}]"""
-        if not self.doesUserExistByID(user_ID):
-            return None
-
-        trainingWords = {"words": []}
-        topics = self.getInterests(user_ID)
-
-        # if the user has no preferences, he will get training words from all the possible topics
-        if len(topics) == 0: topics = ["animals", "food", "clothes", "colours"]
-
-        wordsToLearn = self.decideWordsToLearn(ObjectId(user_ID), topics, size)
-        for word in wordsToLearn:
-            complementaryWords = self.getComplementaryWords(word["topic"], word)
-            trainingWords["words"].append({"to_learn": word, "complementary": complementaryWords})
-
-        return json.loads(JSONEncoder().encode(trainingWords))
-
-    def getTestingWords(self, user_ID, size):
-        """For now we do the same thing as for the training and we add a fied "typ" to define
-        which type of test will be used for each word"""
-
-        testingWords = {"words": []}
-        if not self.doesUserExistByID(user_ID):
-            return None
-
-        topics = self.getInterests(user_ID)
-        # if the user has no preferences, he will get training words from all the possible topics
-        if len(topics) == 0: topics = ["animals", "food", "clothes", "colours"]
-
-        wordsToTest = self.decideWordsToTest(user_ID, topics, size)
-
-        for word in wordsToTest:
-            complementaryWords = self.getComplementaryWords(word["topic"], word)
-            testingWords["words"].append(
-                {"to_learn": word, "complementary": complementaryWords, "type": random.choice(["written", "visual"])})
-        return json.loads(JSONEncoder().encode(testingWords))
 
     def updateLearnedWords(self, user_ID, results):
         # [{wordID: ..., lang: ...}]
@@ -250,27 +209,6 @@ class DBController:
                                                                            ]}}})
         return True
 
-    def getPreviousTestResults(self, user_ID, lang):
-        """Returns a list of all the tested words of a user"""
-        testResults = self.user_collection.find_one(
-            {"_id": ObjectId(user_ID), "testedWords.lang": lang},
-            {"testedWords": 1, '_id': 0}
-        )
-        if testResults:
-            return testResults["testedWords"]
-        else:
-            return []
-
-    def decideWordsToLearn(self, user_ID, topics, size):
-        """Returns a list of words to learn """
-        # get all the words that are in the topics list
-        words = self.voc_collection.aggregate([{"$match": {"topic": {'$in': topics}}}])
-
-        res = list(words)
-        res = random.sample(res, size)
-
-        return res
-
     def getLearnedWords(self, user_ID):
         """Returns the wordIDs of the words that the user has learned"""
         learning_language = self.getUserLearningLanguage(user_ID)
@@ -283,37 +221,16 @@ class DBController:
         else:
             return []
 
-    def decideWordsToTest(self, user_ID, topics, size):
-        """Returns a list of words to test """
-
-        # Gets all the words learned by a user
-        learnedWordsIDs = self.getLearnedWords(user_ID)
-        learnedWords = self.voc_collection.aggregate([{"$match": {"_id": {'$in': learnedWordsIDs}}}])
-        learnedWords = list(learnedWords)
-
-        # Gets all the words that match the preferred topics
-        topicsWords = self.voc_collection.aggregate([{"$match": {"topic": {'$in': topics}}}])
-        topicsWords = list(topicsWords)
-        # Intersection between the words that the user has learned and the words in his preferences
-        intersection = [learnedWord for learnedWord in learnedWords for topicsWord in topicsWords if
-                        learnedWord['_id'] == topicsWord['_id']]
-        # if the user has learned less words than the size of the test, we complete with random words
-        to_add = [word for word in topicsWords if word not in intersection]
-        to_add = random.sample(to_add, max(0, size - len(intersection)))
-
-        to_test = intersection + to_add
-
-        return random.sample(to_test, size)
-
-    def getComplementaryWords(self, topic, word_to_learn):
-        """Returns a list of 3 of the same topic of word_to_learn but  different than the word_to_learn"""
-        words = self.voc_collection.aggregate([
-            {"$match": {"topic": topic}},
-            {"$match": {"en": {"$nin": [word_to_learn["en"]]}}}])
-
-        res = list(words)
-        res = random.sample(res, 3)
-        return res
+    def getPreviousTestResults(self, user_ID, lang):
+        """Returns a list of all the tested words of a user"""
+        testResults = self.user_collection.find_one(
+            {"_id": ObjectId(user_ID), "testedWords.lang": lang},
+            {"testedWords": 1, '_id': 0}
+        )
+        if testResults:
+            return testResults["testedWords"]
+        else:
+            return []
 
 
 if __name__ == '__main__':
@@ -335,4 +252,4 @@ if __name__ == '__main__':
     #              {"lang": "es", "display_name": "Spanish"},
     #              {"lang": "de", "display_name": "German"}]
 
-    controller.insertDifficultyLevels()
+    print(controller.getTestingWords("5c8d40802344ef44b1274c0f", 5))
