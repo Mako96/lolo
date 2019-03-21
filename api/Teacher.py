@@ -100,7 +100,7 @@ class Teacher:
 
         user_learning_lang = self.dbController.getUserLearningLanguage(user_ID)
         # First we need to get the distribution of the difficulty levels there are in "words"
-        counter = dict(Counter([word["difficulty_" + user_learning_lang] for word in words]))
+        counter = dict(Counter([word[user_learning_lang]["diffuclty_level"] for word in words]))
         distribution = {k: v / total for total in (sum(counter.values()),) for k, v in counter.items()}
         if not distribution.get(0):
             distribution[0] = 0
@@ -112,11 +112,11 @@ class Teacher:
         number_easy = int(round(distribution[0])) * size
         number_normal = int(round(distribution[1])) * size
         number_hard = size - number_easy - number_normal
-        list_easy = random.sample([elem for elem in words if elem["difficulty_" + user_learning_lang] == 0],
+        list_easy = random.sample([elem for elem in words if elem[user_learning_lang]["diffuclty_level"] == 0],
                                   number_easy)
-        list_normal = random.sample([elem for elem in words if elem["difficulty_" + user_learning_lang] == 1],
+        list_normal = random.sample([elem for elem in words if elem[user_learning_lang]["diffuclty_level"] == 1],
                                     number_normal)
-        list_hard = random.sample([elem for elem in words if elem["difficulty_" + user_learning_lang] == 2],
+        list_hard = random.sample([elem for elem in words if elem[user_learning_lang]["diffuclty_level"] == 2],
                                   number_hard)
 
         return list_easy + list_hard + list_normal
@@ -125,14 +125,14 @@ class Teacher:
         """Returns a list of 3 of the same topic of word_to_learn but  different than the word_to_learn"""
         words = self.dbController.voc_collection.aggregate([
             {"$match": {"topic": topic}},
-            {"$match": {"en": {"$nin": [word_to_learn["en"]]}}}])
+            {"$match": {"id": {"$nin": [word_to_learn["id"]]}}}])
 
         res = list(words)
         res = random.sample(res, 3)
         return res
 
     def updateWordDifficultyLevel(self, wordID, lang):
-        """Update the level of difficulty of word (identified by wordID) in the given language (lang argument)
+        """Update the level of difficulty of a word (identified by wordID) in the given language (lang argument)
          WordID is a string not an objectID"""
         pass
 

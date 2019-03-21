@@ -81,19 +81,6 @@ class DBController:
         """Insert new languages in the language collection"""
         for lang in languages:
             self.lang_collection.insert_one(lang)
-        # TODO it should also add a new field "difficulty_lang" for all the new lang in all the words documents
-
-    def insertDifficultyLevels(self):
-        """Insert 3 new fields in each word document, difficulty_fr, difficulty_en,
-        difficulty_en and set them to 0. This function is used to build the db"""
-        for lang in self.getLearningLanguages():
-            self.voc_collection.update(
-                {},
-                {"$set": {"difficulty_" + lang["lang"]: 0}},
-                upsert=False,
-                multi=True
-            )
-
 
     def getLearningLanguages(self):
         """Returns all the possible languages to learn"""
