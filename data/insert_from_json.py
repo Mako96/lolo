@@ -1,11 +1,6 @@
 import json
-import requests
 from pymongo import MongoClient
-from google.cloud import translate
-import codecs
-from googletrans import Translator
-import time
-import html
+
 
 client = MongoClient(port=27017)
 
