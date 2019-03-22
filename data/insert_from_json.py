@@ -15,15 +15,13 @@ def check_duplicate():
             print(word)
         l.append(word)
 
-# voc_collection.remove({})
-#
-# for file in ["data.json", "data2.json", "data3.json"]:
-#     with open(file) as f:
-#         data = json.load(f)
-#
-#         data = data["data"]
-#         for word in data:
-#             voc_collection.insert(word)
+voc_collection.remove({})
 
+for file in ["data.json", "data2.json", "data3.json"]:
+    with open(file) as f:
+        data = json.load(f)
 
-check_duplicate()
+        data = data["data"]
+        for word in data:
+            voc_collection.insert(word)
+
