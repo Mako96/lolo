@@ -5,25 +5,21 @@ boots,bottes,clothes,pictures/clothes/boots.jpg,Stiefel,botas
 cap,casquette,clothes,pictures/clothes/cap.jpg,Deckel,gorra
 coat,manteau,clothes,pictures/clothes/coat.jpg,Mantel,capa
 dress,robe,clothes,pictures/clothes/dress.jpg,Kleid,vestido
-gloves,gants,clothes,pictures/clothes/gloves.jpg,Handschuhe,guantes
+glove,gant,clothes,pictures/clothes/gloves.jpg,Handschuh,guante
 hat,chapeau,clothes,pictures/clothes/hat.jpg,Hut,sombrero
-jacket,veste,clothes,pictures/clothes/jacket.jpg,Jacke,chaqueta
 jeans,jeans,clothes,pictures/clothes/jeans.jpg,Jeans,pantalones
 overalls,salopette,clothes,pictures/clothes/overalls.jpg,Overall,mono
-pajamas,pyjamas,clothes,pictures/clothes/pajamas.jpg,Pyjama,pijama
+pajama,pyjama,clothes,pictures/clothes/pajamas.jpg,Pyjama,pijama
 pants,un pantalon,clothes,pictures/clothes/pants.jpg,Hose,pantalones
 raincoat,imperméable,clothes,pictures/clothes/raincoat.jpg,Regenmantel,impermeable
 scarf,écharpe,clothes,pictures/clothes/scarf.jpg,Schal,bufanda
 shirt,chemise,clothes,pictures/clothes/shirt.jpg,Hemd,camisa
-shoes,des chaussures,clothes,pictures/clothes/shoes.jpg,Schuhe,Zapatos
+shoe,chaussure,clothes,pictures/clothes/shoes.jpg,Schuh,Zapato
 shorts,short,clothes,pictures/clothes/shorts.jpg,kurze Hose,pantalones cortos
 skirt,jupe,clothes,pictures/clothes/skirt.jpg,Rock,falda
-slippers,chaussons,clothes,pictures/clothes/slippers.jpg,Hausschuhe,zapatillas
-socks,chaussettes,clothes,pictures/clothes/socks.jpg,Socken,calcetines
-stockings,bas,clothes,pictures/clothes/stockings.jpg,Strümpfe,medias
+sock,chaussette,clothes,pictures/clothes/socks.jpg,Sock,calcetine
 suit,costume,clothes,pictures/clothes/suit.jpg,passen,traje
 sweatshirt,sweat-shirt,clothes,pictures/clothes/sweatshirt.jpg,Sweatshirt,camisa de entrenamiento
 t-shirt,T-shirt,clothes,pictures/clothes/t-shirt.jpg,T-Shirt,camiseta
 tie,cravate,clothes,pictures/clothes/tie.jpg,Krawatte,Corbata
 bra,soutien-gorge,clothes,pictures/clothes/bra.jpg,BH,sostén
-slip,caleçon,clothes,pictures/clothes/slip.jpg,Unterhose,resbalón

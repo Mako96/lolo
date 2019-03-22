@@ -7,27 +7,27 @@
 <ion-content padding>
 
     <div class="frame0" [hidden]=data[index].isText>
-        <h2>{{data[index].test[knownLang]}}</h2>
+        <h2>{{data[index].test.id}}</h2>
         <div class="c0">
 
             <div class="c1">
                 <div>
                     <p (click)="checkAnswer(data[index].words[0]._id, data[index].test._id)">
-                        {{data[index].words[0][learningLang]}}</p>
+                        {{data[index].words[0][learningLang].word}}</p>
                 </div>
                 <div>
                     <p (click)="checkAnswer(data[index].words[1]._id, data[index].test._id)">
-                        {{data[index].words[1][learningLang]}}</p>
+                        {{data[index].words[1][learningLang].word}}</p>
                 </div>
             </div>
             <div class="c1">
                 <div>
                     <p (click)="checkAnswer(data[index].words[2]._id, data[index].test._id)">
-                        {{data[index].words[2][learningLang]}}</p>
+                        {{data[index].words[2][learningLang].word}}</p>
                 </div>
                 <div>
                     <p (click)="checkAnswer(data[index].words[3]._id, data[index].test._id)">
-                        {{data[index].words[3][learningLang]}}</p>
+                        {{data[index].words[3][learningLang].word}}</p>
                 </div>
             </div>
 
@@ -40,21 +40,21 @@
             <div class="c1">
                 <div>
                     <p (click)="checkAnswer(data[index].words[0]._id, data[index].test._id)">
-                        {{data[index].words[0][learningLang]}}</p>
+                        {{data[index].words[0][learningLang].word}}</p>
                 </div>
                 <div>
                     <p (click)="checkAnswer(data[index].words[1]._id, data[index].test._id)">
-                        {{data[index].words[1][learningLang]}}</p>
+                        {{data[index].words[1][learningLang].word}}</p>
                 </div>
             </div>
             <div class="c1">
                 <div>
                     <p (click)="checkAnswer(data[index].words[2]._id, data[index].test._id)">
-                        {{data[index].words[2][learningLang]}}</p>
+                        {{data[index].words[2][learningLang].word}}</p>
                 </div>
                 <div>
                     <p (click)="checkAnswer(data[index].words[3]._id, data[index].test._id)">
-                        {{data[index].words[3][learningLang]}}</p>
+                        {{data[index].words[3][learningLang].word}}</p>
                 </div>
             </div>
 

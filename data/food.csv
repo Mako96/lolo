@@ -21,13 +21,11 @@ currant,groseille,food,pictures/food/currant.jpg,Johannisbeere,grosella
 fig,figue,food,pictures/food/fig.jpg,Feige,higo
 grape,grain de raisin,food,pictures/food/grape.jpg,Traube,uva
 grapefruit,pamplemousse,food,pictures/food/grapefruit.jpg,Grapefruit,pomelo
-grapes,les raisins,food,pictures/food/grapes.jpg,Trauben,uvas
 kiwi,kiwi,food,pictures/food/kiwi.jpg,Kiwi,kiwi
 lemon,citron,food,pictures/food/lemon.jpg,Zitrone,limón
 lime,citron vert,food,pictures/food/lime.jpg,Limette,Lima
 melon,melon,food,pictures/food/melon.jpg,Melone,melón
 nectarine,nectarine,food,pictures/food/nectarine.jpg,Nektarine,nectarina
-orange,Orange,food,pictures/food/orange.jpg,Orange,naranja
 peach,pêche,food,pictures/food/peach.jpg,Pfirsich,melocotón
 pear,poire,food,pictures/food/pear.jpg,Birne,Pera
 pineapple,ananas,food,pictures/food/pineapple.jpg,Ananas,piña
@@ -39,13 +37,10 @@ strawberry,fraise,food,pictures/food/strawberry.jpg,Erdbeere,fresa
 tangerine,mandarine,food,pictures/food/tangerine.jpg,Mandarine,Mandarina
 watermelon,pastèque,food,pictures/food/watermelon.jpg,Wassermelone,sandía
 apple pie,tarte aux pommes,food,pictures/food/apple_pie.jpg,Apfelkuchen,pie de manzana
-birthday cake,gâteau d'anniversaire,food,pictures/food/birthday_cake.jpg,Geburtstagskuchen,pastel de cumpleaños
 cake,gâteau,food,pictures/food/cake.jpg,Kuchen,pastel
 candy,bonbons,food,pictures/food/candy.jpg,Süßigkeiten,caramelo
-donut,Donut,food,pictures/food/donut.jpg,Krapfen,rosquilla
 fruit,fruit,food,pictures/food/fruit.jpg,Obst,Fruta
 ice cream,crème glacée,food,pictures/food/ice_cream.jpg,Eis,helado
 muffin,muffin,food,pictures/food/muffin.jpg,Muffin,mollete
 pie,tarte,food,pictures/food/pie.jpg,Kuchen,tarta
 pudding,pudding,food,pictures/food/pudding.jpg,Pudding,pudín
-whip cream,Fouetter la crème,food,pictures/food/whip_cream.jpg,Schlagsahne,crema batida

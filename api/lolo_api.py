@@ -3,11 +3,12 @@ from flask_api import FlaskAPI, status, exceptions
 from flask_cors import CORS
 import json
 
-import mock_messages as mock
 from DBController import *
+from Teacher import *
 
 app = FlaskAPI(__name__)
 dbc = DBController()
+teacher = Teacher(dbc)
 
 CORS(app)
 
@@ -181,8 +182,7 @@ def set_user_language_to_learn(userid):
 
 @app.route('/lolo/api/v1.0/user/<userid>/learn/words/<int:number_of_words>', methods=['GET'])
 def get_words_learn(userid, number_of_words):
-    result = dbc.getTrainingWords(userid, number_of_words)
-    #print(result)
+    result = teacher.getTrainingWords(userid, number_of_words)
     if result:
         return json.dumps({
             "data": result
@@ -199,7 +199,7 @@ def get_words_learn(userid, number_of_words):
 
 @app.route('/lolo/api/v1.0/user/<userid>/test/words/<int:number_of_words>', methods=['GET'])
 def get_words_test(userid, number_of_words):
-    result = dbc.getTestingWords(userid, number_of_words)
+    result = teacher.getTestingWords(userid, number_of_words)
     if result:
         return json.dumps({
                 "data": result
