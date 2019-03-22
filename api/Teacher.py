@@ -112,11 +112,11 @@ class Teacher:
         number_easy = int(round(distribution[0])) * size
         number_normal = int(round(distribution[1])) * size
         number_hard = size - number_easy - number_normal
-        list_easy = random.sample([elem for elem in words if elem[user_learning_lang]["diffuclty_level"] == 0],
+        list_easy = random.sample([elem for elem in words if elem[user_learning_lang]["difficulty_level"] < 4],
                                   number_easy)
-        list_normal = random.sample([elem for elem in words if elem[user_learning_lang]["diffuclty_level"] == 1],
+        list_normal = random.sample([elem for elem in words if 4 <= elem[user_learning_lang]["difficulty_level"] <= 7],
                                     number_normal)
-        list_hard = random.sample([elem for elem in words if elem[user_learning_lang]["diffuclty_level"] == 2],
+        list_hard = random.sample([elem for elem in words if 8 <= elem[user_learning_lang]["difficulty_level"]],
                                   number_hard)
 
         return list_easy + list_hard + list_normal
