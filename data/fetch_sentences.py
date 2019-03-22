@@ -55,10 +55,10 @@ for index, document in words_collection.iterrows():
         skip = False
 
         element = {"id": "", "lexicalCategory": "",
-                   "en": {"word": "", "sentences": [], "diffuclty_level": 0},
-                   "fr": {"word": "", "sentences": [], "diffuclty_level": 0},
-                   'es': {"word": "", "sentences": [], "diffuclty_level": 0},
-                   'de': {"word": "", "sentences": [], "diffuclty_level": 0},
+                   "en": {"word": "", "sentences": [], "difficulty_level": 0},
+                   "fr": {"word": "", "sentences": [], "difficulty_level": 0},
+                   'es': {"word": "", "sentences": [], "difficulty_level": 0},
+                   'de': {"word": "", "sentences": [], "difficulty_level": 0},
                    "url": "", "topic": ""}
 
         word = document["en"]
