@@ -196,17 +196,6 @@ class DBController:
                                                                            ]}}})
         return True
 
-    def getLearnedWords(self, user_ID):
-        """Returns the wordIDs of the words that the user has learned"""
-        learning_language = self.getUserLearningLanguage(user_ID)
-        learnedWords = self.user_collection.find_one(
-            {"_id": ObjectId(user_ID), "taughtWords.lang": learning_language},
-            {"taughtWords.wordID": 1, '_id': 0}
-        )
-        if learnedWords:
-            return [wordID["wordID"] for wordID in learnedWords["taughtWords"]]
-        else:
-            return []
 
     def getPreviousTestResults(self, user_ID, lang):
         """Returns a list of all the tested words of a user"""
