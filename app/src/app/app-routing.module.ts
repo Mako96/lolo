@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'tutorial', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'main', loadChildren: './main/main.module#MainPageModule' },
   { path: 'learn', loadChildren: './learn/learn.module#LearnPageModule' },
   { path: 'test', loadChildren: './test/test.module#TestPageModule' },
+  { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule' },
 ];
 
 @NgModule({
