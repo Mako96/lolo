@@ -32,21 +32,20 @@ wordsSkip = ['bacon', 'beef', 'chicken', 'ham', 'hamburger', 'hot dog', 'pork', 
              'apple', 'apricot', 'banana', 'blackberry', 'blueberry', 'cherry', 'currant', 'fig', 'grape', 'grapefruit',
              'kiwi', 'lemon', 'lime', 'melon', 'nectarine', 'peach', 'pear', 'pineapple', 'plum', 'pomegranate',
              'prune', 'raspberry', 'strawberry', 'tangerine', 'watermelon', 'apple pie', 'cake', 'candy', 'fruit',
-             'ice cream', 'muffin', 'pie', 'pudding', 'alligator', 'ant', 'bear', 'bee', 'bird', 'camel', 'cat',
-             'cheetah', 'chimpanzee', 'cow', 'crocodile', 'deer', 'dog', 'dolphin', 'duck', 'eagle', 'elephant', 'fish',
-             'fly', 'fox', 'frog', 'giraffe', 'goat', 'goldfish', 'hamster', 'hippopotamus', 'horse', 'kangaroo',
-             'kitten', 'leopard', 'lion', 'lizard' 'lobster', 'lizard', 'monkey', 'octopus', 'ostrich', 'otter', 'owl',
-             'oyster', 'panda', 'parrot', 'pelican', 'pig', 'pigeon', 'porcupine', 'puppy', 'rabbit', 'rat', 'reindeer',
-             'rhinoceros', 'rooster', 'scorpion', 'shark', 'sheep', 'shrimp', 'snail', 'snake', 'sparrow', 'spider',
-             'squid', 'squirrel', 'tiger', 'toad', 'tortoise', 'vulture', 'walrus', 'weasel', 'whale', 'wolf', 'zebra',
-             'belt', 'blouse', 'boots', 'cap', 'coat', 'dress', 'glove', 'hat']
+             'ice cream', 'muffin', 'pie', 'pudding', 'alligator', 'ant', 'bee', 'bird', 'camel', 'cat', 'cheetah',
+             'chimpanzee', 'cow', 'crocodile', 'deer', 'dog', 'dolphin', 'duck', 'eagle', 'elephant', 'fish', 'fly',
+             'fox', 'frog', 'giraffe', 'goat', 'goldfish', 'hamster', 'hippopotamus', 'horse', 'kangaroo', 'kitten',
+             'leopard', 'lion', 'lizard', 'monkey', 'octopus', 'ostrich', 'otter', 'owl', 'oyster', 'panda', 'parrot',
+             'pelican', 'pig', 'pigeon', 'porcupine', 'puppy', 'rabbit', 'rat', 'reindeer', 'rhinoceros', 'rooster',
+             'scorpion', 'shark', 'sheep', 'shrimp', 'snail', 'snake', 'sparrow', 'spider', 'squid', 'squirrel',
+             'tiger', 'toad', 'tortoise', 'turtle', 'vulture', 'walrus', 'weasel']
 
 food = pd.read_csv("food.csv", index_col=None, header=0)
 animals = pd.read_csv("animals.csv", index_col=None, header=0)
 colors = pd.read_csv("colors.csv", index_col=None, header=0)
 clothes = pd.read_csv("clothes.csv", index_col=None, header=0)
 
-frames = [food, animals, clothes]
+frames = [food, animals, colors, clothes]
 
 words_collection = pd.concat(frames)
 
@@ -56,10 +55,10 @@ for index, document in words_collection.iterrows():
         skip = False
 
         element = {"id": "", "lexicalCategory": "",
-                   "en": {"word": "", "sentences": [], "diffuclty_level": 0},
-                   "fr": {"word": "", "sentences": [], "diffuclty_level": 0},
-                   'es': {"word": "", "sentences": [], "diffuclty_level": 0},
-                   'de': {"word": "", "sentences": [], "diffuclty_level": 0},
+                   "en": {"word": "", "sentences": [], "difficulty_level": 0},
+                   "fr": {"word": "", "sentences": [], "difficulty_level": 0},
+                   'es': {"word": "", "sentences": [], "difficulty_level": 0},
+                   'de': {"word": "", "sentences": [], "difficulty_level": 0},
                    "url": "", "topic": ""}
 
         word = document["en"]
@@ -128,7 +127,7 @@ for index, document in words_collection.iterrows():
 
             result["data"].append(element)
 
-            with open('data5.json', 'w', encoding='utf8') as fp:
+            with open('data3.json', 'w', encoding='utf8') as fp:
                 json.dump(result, fp, ensure_ascii=False)
 
             fp.close()

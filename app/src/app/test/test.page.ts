@@ -10,8 +10,8 @@ import {LoloUserProviderService} from '../lolo-user-provider.service';
 export class TestPage implements OnInit {
 
     public preferences: any;
-    public level:number;
-    public index:number = 0;
+    public level: number;
+    public index: number = 0;
 
     // these boolean values "image, text" helps to switch to the correct formula for presenting the data e.g. if the if the tested data is
     // image so image is true otherwise it's false
@@ -59,9 +59,19 @@ export class TestPage implements OnInit {
                 var temp = page.complementary;
                 temp.push(page.to_learn);
                 temp.sort(() => Math.random() - 0.5);
-                var isImage = (page.type == 'visual' ? true : false);
-                var isText = !isImage;
-                res.push({isImage: isImage, isText: isText, type: page.type, test: page.to_learn, words: temp});
+                //(page.type == 'visual' ? true : false);
+                var isImage = page.type == 'visual';
+                var isText = page.type == 'written';
+                var isSentence = page.type == 'sentence';
+                res.push({
+                    isImage: isImage,
+                    isText: isText,
+                    isSentence: isSentence,
+                    type: page.type,
+                    test: page.to_learn,
+                    words: temp,
+                    sentencePos: page.sentence_index
+                });
             });
             console.log(res);
             _self.data = res;
@@ -75,7 +85,8 @@ export class TestPage implements OnInit {
             alert("Correct");
             correct = true;
         } else {
-            alert("False, the correct translation of " + this.data[this.index].test.en + " is " + this.data[this.index].test.fr)
+            alert("False, the correct translation of " + this.data[this.index].test.en["word"] +
+                " is " + this.data[this.index].test[this.learningLang]["word"])
         }
 
         if (this.index < this.data.length) {
