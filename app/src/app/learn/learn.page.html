@@ -1,49 +1,37 @@
 <ion-header>
   <ion-toolbar color = "primary">
-    <ion-title>Learn</ion-title>
+    <ion-title><h4>{{data[index].learning.id}}</h4></ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content padding> 
-
-  <div color = "light">
-
-    <h4>{{data[index].learning.id}}</h4>
-
-    <div class="ion-grid">
-      <ion-card (click)="check(data[index].words[0]._id, data[index].learning._id)">
-        <ion-card-header>
+<ion-content>
+<div cards>
+  <div class = "grid-full"> 
+    <ion-row>
+      <ion-col>
+        <ion-card (click)="check(data[index].words[0]._id, data[index].learning._id)">
+          <ion-img src={{imageDir+data[index].words[0].url}}></ion-img>
           <ion-card-title>{{data[index].words[0][learningLang].word}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <ion-img src={{imageDir+data[index].words[0].url}}></ion-img>
-          </ion-card-content>
-      </ion-card>
-      <ion-card (click)="check(data[index].words[1]._id, data[index].learning._id)">
-        <ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card (click)="check(data[index].words[1]._id, data[index].learning._id)">
+          <ion-img width="100" height="100" src={{imageDir+data[index].words[1].url}}></ion-img>
           <ion-card-title>{{data[index].words[1][learningLang].word}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <ion-img width="100" height="100" src={{imageDir+data[index].words[1].url}}></ion-img>
-          </ion-card-content>
-      </ion-card>
+        </ion-card>
+      </ion-col>
+      <ion-col>
         <ion-card (click)="check(data[index].words[2]._id, data[index].learning._id)">
-            <ion-card-header>
-              <ion-card-title>{{data[index].words[2][learningLang].word}}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-img width="100" height="100" src={{imageDir+data[index].words[2].url}}></ion-img>
-              </ion-card-content>
+            <ion-img width="100" height="100" src={{imageDir+data[index].words[2].url}}></ion-img>
+            <ion-card-title>{{data[index].words[2][learningLang].word}}</ion-card-title>
           </ion-card>
+      </ion-col>
+      <ion-col>
           <ion-card (click)="check(data[index].words[3]._id, data[index].learning._id)">
-            <ion-card-header>
+              <ion-img width="100" height="100" src={{imageDir+data[index].words[3].url}}></ion-img>
               <ion-card-title>{{data[index].words[3][learningLang].word}}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-img width="100" height="100" src={{imageDir+data[index].words[3].url}}></ion-img>
-              </ion-card-content>
           </ion-card>
-      </div>
+      </ion-col>
+    </ion-row>
   </div>
-
+</div>
 </ion-content>

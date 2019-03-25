@@ -3,6 +3,18 @@ ion-slide {
     flex-direction: column;
 }
 
+.button_place{
+    position:absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.slider_container {
+    margin: 0;
+    padding:0;
+    position:relative;
+  }
+
 .logo-img {
     display: block;
     margin-left: auto;
