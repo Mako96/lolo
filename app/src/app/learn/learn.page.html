@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color = "primary">
     <ion-title><h4>{{data[index].learning.id}}</h4></ion-title>
+    <ion-button shape="round" color="secondary" (click)="playText(data[index].learning[this.learningLang].word)"  margin-right>Listen</ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content>
