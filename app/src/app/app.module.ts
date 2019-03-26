@@ -14,6 +14,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { LoloApiProviderService } from './lolo-api-provider.service';
 import { LoloUserProviderService } from './lolo-user-provider.service';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { LoloUserProviderService } from './lolo-user-provider.service';
     LoloUserProviderService,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    TextToSpeech
   ],
   bootstrap: [AppComponent]
 })

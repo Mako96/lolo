@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {LoloUserProviderService} from '../lolo-user-provider.service';
+import {TextToSpeech} from '@ionic-native/text-to-speech/ngx';
 
 @Component({
     selector: 'app-learn',
@@ -20,7 +21,7 @@ export class LearnPage implements OnInit {
 
     learnedWords = [];
 
-    constructor(private router: Router, private route: ActivatedRoute, private userProvider: LoloUserProviderService) {
+    constructor(private router: Router, private route: ActivatedRoute, private userProvider: LoloUserProviderService, private tts: TextToSpeech) {
     }
 
     ngOnInit() {
@@ -94,5 +95,19 @@ export class LearnPage implements OnInit {
             alert("Wrong");
         }
     }
-
+    playText(word) {
+        let lang  
+        if(this.learningLang == "fr") 
+          lang = 'fr-FR'
+        else if (this.learningLang == "es")
+            lang ='es-ES'
+        else if (this.learningLang == "de")
+            lang = 'de-DE'   
+        this.tts.speak({
+          text: word,
+          locale: lang
+        })
+          .then(() => console.log('Success'))
+          .catch((reason: any) => console.log(reason));
+      }
 }
