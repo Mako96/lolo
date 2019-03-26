@@ -10,25 +10,25 @@
     <ion-row>
       <ion-col>
         <ion-card (click)="check(data[index].words[0]._id, data[index].learning._id)">
-          <ion-img src={{imageDir+data[index].words[0].url}}></ion-img>
+          <img src={{imageDir+data[index].words[0].url}}/>
           <ion-card-title>{{data[index].words[0][learningLang].word}}</ion-card-title>
         </ion-card>
       </ion-col>
       <ion-col>
         <ion-card (click)="check(data[index].words[1]._id, data[index].learning._id)">
-          <ion-img width="100" height="100" src={{imageDir+data[index].words[1].url}}></ion-img>
+          <img src={{imageDir+data[index].words[1].url}}/>
           <ion-card-title>{{data[index].words[1][learningLang].word}}</ion-card-title>
         </ion-card>
       </ion-col>
       <ion-col>
         <ion-card (click)="check(data[index].words[2]._id, data[index].learning._id)">
-            <ion-img width="100" height="100" src={{imageDir+data[index].words[2].url}}></ion-img>
+            <img src={{imageDir+data[index].words[2].url}}/>
             <ion-card-title>{{data[index].words[2][learningLang].word}}</ion-card-title>
           </ion-card>
       </ion-col>
       <ion-col>
           <ion-card (click)="check(data[index].words[3]._id, data[index].learning._id)">
-              <ion-img width="100" height="100" src={{imageDir+data[index].words[3].url}}></ion-img>
+              <img src={{imageDir+data[index].words[3].url}}/>
               <ion-card-title>{{data[index].words[3][learningLang].word}}</ion-card-title>
           </ion-card>
       </ion-col>
