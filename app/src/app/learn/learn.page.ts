@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {LoloUserProviderService} from '../lolo-user-provider.service';
 import {TextToSpeech} from '@ionic-native/text-to-speech/ngx';
+import { ToastController } from '@ionic/angular';
+import { async } from 'q';
 
 @Component({
     selector: 'app-learn',
@@ -18,10 +20,10 @@ export class LearnPage implements OnInit {
     public learningLang;
     public knownLang = "en";
     public imageDir = "../../assets/images/";
-
+    public toast: any;
     learnedWords = [];
 
-    constructor(private router: Router, private route: ActivatedRoute, private userProvider: LoloUserProviderService, private tts: TextToSpeech) {
+    constructor(private router: Router, private route: ActivatedRoute, private userProvider: LoloUserProviderService, private tts: TextToSpeech, public toastController: ToastController) {
     }
 
     ngOnInit() {
@@ -70,7 +72,7 @@ export class LearnPage implements OnInit {
 
     check(instance, answer) {
         if (instance == answer) {
-            alert("Correct");
+            this.presentToast("Correct")
             console.log(this.data.length)
             if (this.index < this.data.length) {
                 var learned = {"wordID": this.data[this.index].learning._id, "lang": this.learningLang};
@@ -92,9 +94,19 @@ export class LearnPage implements OnInit {
             }
         }
         else {
-            alert("Wrong");
+            // alert("Wrong");
+            this.presentToast("Wrong");
         }
     }
+
+      async presentToast(message) {
+        let toast = await this.toastController.create({
+          message: message,
+          duration: 1000,
+        });
+        toast.present();
+      }
+
     playText(word) {
         let lang  
         if(this.learningLang == "fr") 

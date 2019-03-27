@@ -11,7 +11,7 @@ import { all } from 'q';
 export class MainPage implements OnInit {
  public preferences:any;
  public level:number;
-  constructor(private router: Router, private route: ActivatedRoute, private speechRecognition: SpeechRecognition ) { }
+  constructor(private router: Router, private route: ActivatedRoute, private speechRecognition: SpeechRecognition ) {this.getPermission }
 
   ngOnInit() {
 

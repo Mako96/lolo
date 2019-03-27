@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {NavController} from '@ionic/angular';
+import {NavController, ToastController} from '@ionic/angular';
 
 import {LoloUserProviderService} from '../lolo-user-provider.service';
 
@@ -15,17 +15,25 @@ export class PreferencesPage implements OnInit {
     lastName: string;
     email: string;
 
-    constructor(private userProvider: LoloUserProviderService, private router: Router, private navCtrl: NavController, private route: ActivatedRoute) {
+    constructor(private userProvider: LoloUserProviderService, private router: Router, private navCtrl: NavController, private route: ActivatedRoute, public toastController: ToastController) {
     }
 
     ngOnInit() {
         this.loadTopics();
     }
 
+    async presentToast(message) {
+        let toast = await this.toastController.create({
+          message: message,
+          duration: 1000,
+        });
+        toast.present();
+      }
+
     loadTopics() {
         var _self = this;
-        var cbError = function (error) {
-            alert(error.message);
+        var cbError = (error) => {
+           this.presentToast(error.message)
         };
         var cbSucces = function (data) {
             console.log(data);
@@ -42,8 +50,8 @@ export class PreferencesPage implements OnInit {
 
     loadUserPrefs() {
         var _self = this;
-        var cbError = function (error) {
-            alert(error.message);
+        var cbError = (error) => {
+            this.presentToast(error.message)
         };
         var cbSucces = function (data) {
             console.log(data);
@@ -60,7 +68,7 @@ export class PreferencesPage implements OnInit {
     }
 
     buttonClick(item) {
-        alert(item);
+        this.presentToast(item)
     }
 
     public form = [
@@ -82,11 +90,11 @@ export class PreferencesPage implements OnInit {
         });
         console.log(prefs);
         var _self = this;
-        var cbError = function (error) {
-            alert(error.message);
+        var cbError = (error) => {
+            this.presentToast(error.message)
         };
-        var cbSucces = function (data) {
-            alert(data.message);
+        var cbSucces = (data) => {
+            this.presentToast(data.message)
             _self.router.navigate(["main"]);
         };
 

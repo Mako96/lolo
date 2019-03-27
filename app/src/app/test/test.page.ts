@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {LoloUserProviderService} from '../lolo-user-provider.service';
 import {SpeechRecognition} from "@ionic-native/speech-recognition/ngx";
+import { ToastController } from '@ionic/angular';
 
 @Component({
     selector: 'app-test',
@@ -29,7 +30,7 @@ export class TestPage implements OnInit {
     pronunciationResult;
 
     constructor(private router: Router, private userProvider: LoloUserProviderService,
-                private speechRecognition: SpeechRecognition, private cd: ChangeDetectorRef) {
+                private speechRecognition: SpeechRecognition, private cd: ChangeDetectorRef,private toastController: ToastController) {
     }
 
 
@@ -40,8 +41,8 @@ export class TestPage implements OnInit {
 
     getUserLanguage() {
         var _self = this;
-        var cbError = function (error) {
-            alert(error.message);
+        var cbError = (error) => {
+            this.presentToast(error.message)
             _self.learningLang = "fr" //if it fails the default language is french
         };
         var cbSucces = function (data) {
@@ -53,8 +54,8 @@ export class TestPage implements OnInit {
 
     loadWords() {
         var _self = this;
-        var cbError = function (error) {
-            alert(error.message);
+        var cbError = (error) => {
+            this.presentToast(error.message)
         };
         var cbSucces = function (data) {
             console.log(data);
@@ -83,11 +84,13 @@ export class TestPage implements OnInit {
     checkAnswer(instance, answer) {
         var correct = false;
         if (instance == answer) {
-            alert("Correct");
+            this.presentToast("Correct")
             correct = true;
         } else {
-            alert("False, the correct translation of " + this.data[this.index].test.en["word"] +
-                " is " + this.data[this.index].test[this.learningLang]["word"])
+            this.presentToast("False, the correct translation of " + this.data[this.index].test.en["word"] +
+            " is " + this.data[this.index].test[this.learningLang]["word"])
+            // alert("False, the correct translation of " + this.data[this.index].test.en["word"] +
+            //     " is " + this.data[this.index].test[this.learningLang]["word"])
         }
 
         this.saveAndGoNext(correct)
@@ -106,8 +109,8 @@ export class TestPage implements OnInit {
             if (this.index == this.data.length - 1) {
                 //end of test
                 var _self = this;
-                var cbError = function (error) {
-                    alert(error.message);
+                var cbError = (error) => {
+                    this.presentToast(error.message)
                 };
                 var cbSucces = function (data) {
                     _self.router.navigate(['main']);
@@ -158,13 +161,20 @@ export class TestPage implements OnInit {
 
     confirmPronunciation() {
         if (this.pronunciationResult) {
-            alert("Good job")
+            this.presentToast("Correct")
         } else {
-            alert("Wrong Pronunciation")
+            this.presentToast("Wrong Pronunciation")
         }
         this.saveAndGoNext(this.pronunciationResult)
 
     }
 
+    async presentToast(message) {
+        let toast = await this.toastController.create({
+          message: message,
+          duration: 2500,
+        });
+        toast.present();
+      }
 
 }
