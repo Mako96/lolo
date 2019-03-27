@@ -65,6 +65,10 @@ You need SDK android installed, SDK Java 1.8
 
 You can install android sdk easily by installing android-studio, and update your .bashrc file with :
 
+> export JAVA_HOME=your path to java
+
+> export PATH=$JAVA_HOME/bin:$PATH
+
 > export ANDROID_SDK_ROOT= your path to the sdk
 
 > export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
