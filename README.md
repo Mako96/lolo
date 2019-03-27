@@ -59,17 +59,27 @@ main.page.html <-- for the structure
 main.page.ts <-- for fuctionality
 main.page.scss <-- to deal with the style "css"
 
-## Build android app
+## Run the app on your mobile phone
 
-SDK android installed, SDK Java 1.8 and correct paths as follows:
+You need SDK android installed, SDK Java 1.8
 
-> export JAVA_HOME=/opt/jdk1.8.0_201  
-> export PATH=$JAVA_HOME/bin:$PATH
+You can install android sdk easily by installing android-studio, and update your .bashrc file with :
 
-> export ANDROID_HOME=$HOME/Android/Sdk  
-> export PATH=$PATH:$ANDROID_HOME/tools
+> export ANDROID_SDK_ROOT= your path to the sdk
 
-> ionic cordova build android
+> export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+
+> export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
+> export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+
+connect your android phone to your computer
+
+> ionic cordova run android -l --device
+
+if you dont have an android phone, download an emulator using android studio then
+
+> ionic cordova emulate android -l
 
 ## Generate splash and icons
 To automatically generate the icons and splash screens run:
