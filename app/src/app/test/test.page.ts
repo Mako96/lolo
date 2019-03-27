@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {LoloUserProviderService} from '../lolo-user-provider.service';
+import {SpeechRecognition} from "@ionic-native/speech-recognition/ngx";
 
 @Component({
     selector: 'app-test',
@@ -25,7 +26,10 @@ export class TestPage implements OnInit {
 
     testedWords = [];
 
-    constructor(private router: Router, private userProvider: LoloUserProviderService) {
+    pronunciationResult;
+
+    constructor(private router: Router, private userProvider: LoloUserProviderService,
+                private speechRecognition: SpeechRecognition, private cd: ChangeDetectorRef) {
     }
 
 
@@ -64,9 +68,6 @@ export class TestPage implements OnInit {
                 var isText = page.type == 'written';
                 var isSentence = page.type == 'sentence';
                 res.push({
-                    isImage: isImage,
-                    isText: isText,
-                    isSentence: isSentence,
                     type: page.type,
                     test: page.to_learn,
                     words: temp,
@@ -89,6 +90,11 @@ export class TestPage implements OnInit {
                 " is " + this.data[this.index].test[this.learningLang]["word"])
         }
 
+        this.saveAndGoNext(correct)
+
+    }
+
+    saveAndGoNext(correct) {
         if (this.index < this.data.length) {
             var tested = {
                 "wordID": this.data[this.index].test._id,
@@ -109,8 +115,56 @@ export class TestPage implements OnInit {
                 this.userProvider.updateTestedWords(this.testedWords, cbSucces, cbError);
             }
 
+            console.log(this.index);
             this.index++;
+            console.log(this.index)
+
         }
     }
+
+    // FOR PRONUNCIATION TEST
+    getPermission() {
+        this.speechRecognition.hasPermission()
+            .then((hasPermission) => {
+                if (!hasPermission) {
+                    this.speechRecognition.requestPermission();
+                }
+            });
+    }
+
+    startRecording(word) {
+
+        console.log("starting")
+
+        let lang
+        if (this.learningLang == "fr")
+            lang = 'fr-FR'
+        else if (this.learningLang == "es")
+            lang = 'es-ES'
+        else if (this.learningLang == "de")
+            lang = 'de-DE'
+
+        let options = {
+            language: lang
+        }
+        var _self = this;
+        this.speechRecognition.startListening(options).subscribe(matches => {
+            this.pronunciationResult = false;
+            if (matches.includes(word)) {
+                this.pronunciationResult = true;
+            }
+        });
+    }
+
+    confirmPronunciation() {
+        if (this.pronunciationResult) {
+            alert("Good job")
+        } else {
+            alert("Wrong Pronunciation")
+        }
+        this.saveAndGoNext(this.pronunciationResult)
+
+    }
+
 
 }

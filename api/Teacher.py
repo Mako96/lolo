@@ -13,7 +13,7 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
-TYPES_OF_TEST = ["visual", "written", "sentence"]
+TYPES_OF_TEST = ["visual", "written", "sentence", "pronunciation"]
 
 
 class Teacher:

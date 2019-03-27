@@ -6,10 +6,9 @@
 
 <ion-content padding>
 
-    <div class="frame0" [hidden]=!(data[index].isText)>
+    <div class="frame0" [hidden]="!(data[index].type === 'written')">
         <h2>{{data[index].test.id}}</h2>
         <div class="c0">
-
             <div class="c1">
                 <div>
                     <p (click)="checkAnswer(data[index].words[0]._id, data[index].test._id)">
@@ -30,11 +29,11 @@
                         {{data[index].words[3][learningLang].word}}</p>
                 </div>
             </div>
-
         </div>
+
     </div>
 
-    <div class="frame0" [hidden]=!(data[index].isImage)>
+    <div class="frame0" [hidden]="!(data[index].type === 'visual')">
         <img src="{{imageDir+data[index].test.url}}"/>
         <div class="c0">
             <div class="c1">
@@ -57,11 +56,10 @@
                         {{data[index].words[3][learningLang].word}}</p>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <div class="frame0" [hidden]=!(data[index].isSentence)>
+    <div class="frame0" [hidden]="!(data[index].type === 'sentence')">
         <h1> {{data[index].test["en"]["sentences"][data[index].sentencePos]}}</h1>
         <h2> {{data[index].test[learningLang]["sentences"][data[index].sentencePos]}}</h2>
         <div class="c0">
@@ -86,7 +84,36 @@
                         {{data[index].words[3][learningLang].word}}</p>
                 </div>
             </div>
-
         </div>
+    </div>
+
+    <div class="frame0" [hidden]="!(data[index].type === 'pronunciation')">
+        <h2>{{data[index].test.id}}</h2>
+        <div class="c0">
+
+            <div class="c1">
+                <div>
+                    <p>
+                        {{data[index].words[0][learningLang].word}}</p>
+                </div>
+                <div>
+                    <p>
+                        {{data[index].words[1][learningLang].word}}</p>
+                </div>
+            </div>
+            <div class="c1">
+                <div>
+                    <p>
+                        {{data[index].words[2][learningLang].word}}</p>
+                </div>
+                <div>
+                    <p>
+                        {{data[index].words[3][learningLang].word}}</p>
+                </div>
+            </div>
+        </div>
+
+        <ion-button (click)="startRecording(data[index].test[learningLang].word)">Click to speak</ion-button>
+        <ion-button (click)="confirmPronunciation()">Confirm and go next</ion-button>
     </div>
 </ion-content>
