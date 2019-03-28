@@ -204,4 +204,9 @@ export class LoloUserProviderService {
         });
     }
 
+    getCompletedWords() {
+        return ["word_id1","word_id2","word_id3"]
+    }
+
+
 }

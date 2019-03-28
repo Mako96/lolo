@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>statistics</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <p> Progress page</p>
+
+  <div class="progress-wrapper">
+      <div>
+          <round-progress
+                  [current]="70"
+                  [max]="100"
+                  [color]="'#45ccce'"
+                  [background]="'#eaeaea'"
+                  [radius]="125"
+                  [stroke]="20"
+                  [semicircle]="false"
+                  [rounded]="true"
+                  [clockwise]="true"
+                  [responsive]="true"
+                  [duration]="800"
+                  [animation]="'easeInOutQuart'"
+                  [animationDelay]="0">
+          </round-progress>
+      </div>
+      <div class="text">Your text goes here</div>
+
+  </div>
+
+
+</ion-content>

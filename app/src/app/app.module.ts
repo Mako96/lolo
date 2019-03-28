@@ -14,8 +14,12 @@ import {IonicStorageModule} from '@ionic/storage';
 
 import {LoloApiProviderService} from './lolo-api-provider.service';
 import {LoloUserProviderService} from './lolo-user-provider.service';
+
 import {TextToSpeech} from '@ionic-native/text-to-speech/ngx';
+
 import {SpeechRecognition} from '@ionic-native/speech-recognition/ngx';
+
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
 
 @NgModule({
     declarations: [AppComponent],

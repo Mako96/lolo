@@ -50,6 +50,12 @@ export class MainPage implements OnInit {
 
   }
 
+  ShowStatistics()
+  {
+
+    this.router.navigate(['statistics']);
+  }
+
   ChangePreference()
   {
 
