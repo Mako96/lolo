@@ -9,8 +9,8 @@ export class LoloApiProviderService {
     constructor(public http: HttpClient) {
     }
 
-    //apiUrl = "http://127.0.0.1:5000/lolo/api/v1.0/";
-    apiUrl = 'https://chatbook.xyz/lolo/lolo/api/v1.0/';
+    apiUrl = "http://127.0.0.1:5000/lolo/api/v1.0/";
+    //apiUrl = 'https://chatbook.xyz/lolo/lolo/api/v1.0/';
 
     doRegister(name, email, language_to_learn) {
         return this.http.post(this.apiUrl + 'user/register', {

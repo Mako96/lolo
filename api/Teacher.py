@@ -74,7 +74,7 @@ class Teacher:
         for word in wordsToTest:
             # decide which test can be done for the word
             possible_tests = copy.deepcopy(TYPES_OF_TEST)
-            if len(word["en"]["sentences"]) == 0: # if no sentences for this word
+            if len(word["en"]["sentences"]) == 0:  # if no sentences for this word
                 possible_tests.remove("sentence")
             else:
                 possible_tests.remove("written")
@@ -99,8 +99,6 @@ class Teacher:
         data["to_learn"][user_learning_lang]["sentences"][int(data["sentence_index"])] = sentence
 
         return data
-
-
 
     def decideWordsToTest(self, user_ID, topics, size, user_learning_lang):
         """Returns a list of words to test """
@@ -133,7 +131,7 @@ class Teacher:
     def generate_words_set(self, size, words, user_learning_lang):
         """Generate words set based on the difficulty level of the words"""
         # First we need to get the distribution of the difficulty levels there are in "words"
-        counter = dict(Counter([int(word[user_learning_lang]["difficulty_level"]) for word in words]))
+        counter = dict(Counter([int(round(word[user_learning_lang]["difficulty_level"])) for word in words]))
         distribution = {k: v / total for total in (sum(counter.values()),) for k, v in counter.items()}
         for i in range(1, 11):  # 1 to 10
             if not distribution.get(i):
@@ -142,21 +140,21 @@ class Teacher:
         number_easy = 0
         for i in range(1, 4):
             number_easy += distribution[i]
-        number_normal = 0
+        number_intermediate = 0
         for i in range(4, 8):
-            number_normal += distribution[i]
+            number_intermediate += distribution[i]
         number_hard = 0
         for i in range(8, 11):
             number_hard += distribution[i]
 
         number_easy = int(round(number_easy * size))
-        number_normal = int(round(number_normal * size))
-        number_hard = size - number_easy - number_normal
+        number_intermediate = int(round(number_intermediate * size))
+        number_hard = size - number_easy - number_intermediate
 
         list_easy = random.sample([elem for elem in words if elem[user_learning_lang]["difficulty_level"] < 4],
                                   number_easy)
         list_normal = random.sample([elem for elem in words if 4 <= elem[user_learning_lang]["difficulty_level"] <= 7],
-                                    number_normal)
+                                    number_intermediate)
         list_hard = random.sample([elem for elem in words if 8 <= elem[user_learning_lang]["difficulty_level"]],
                                   number_hard)
 
@@ -183,12 +181,3 @@ class Teacher:
             return [wordID["wordID"] for wordID in learnedWords["taughtWords"]]
         else:
             return []
-
-    def updateWordDifficultyLevel(self, wordID, lang):
-        """Update the level of difficulty of a word (identified by wordID) in the given language (lang argument)
-         WordID is a string not an objectID"""
-        pass
-
-    def updateWordsDifficultyDistribution(self):
-        """Based on the recent user result, we can update the difficulties of the test/learning sessions """
-        pass
