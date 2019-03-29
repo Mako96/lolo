@@ -2,7 +2,6 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 from collections import Counter
 from itertools import chain
-import datetime
 import json
 import random
 
@@ -109,123 +108,23 @@ class DBController:
             return True
         return False
 
-    def updateLearnedWords(self, user_ID, results):
-        # [{wordID: ..., lang: ...}]
-        if not self.doesUserExistByID(user_ID):
-            return False
-
-        date = datetime.datetime.utcnow()
-
-        taughtWords = self.user_collection.find_one(
-            {"_id": ObjectId(user_ID)},
-            {"taughtWords": 1, '_id': 0}
-        )
-
-        taughtWords = taughtWords["taughtWords"]
-
-        found = False
-        for result in results:
-            if taughtWords:
-                for elem in taughtWords:
-                    if elem["wordID"] == ObjectId(result["wordID"]) and elem["lang"] == result["lang"]:
-                        self.user_collection.update(
-                            {"_id": ObjectId(user_ID), "taughtWords.wordID": ObjectId(result["wordID"]),
-                             "taughtWords.lang": result["lang"]},
-                            {"$inc": {"taughtWords.$.numberOfTimesSeen": 1},
-                             "$set": {"taughtWords.$.dateLastSeen": date}},
-                            False,
-                            True)
-                        found = True
-                        break
-
-            # if the list of taughtWords is empty or the word is not learned yet
-            if not taughtWords or not found:
-                self.user_collection.update({"_id": ObjectId(user_ID)},
-                                            {"$addToSet": {"taughtWords": {'wordID': ObjectId(result["wordID"]),
-                                                                           'lang': result["lang"],
-                                                                           'numberOfTimesSeen': 1,
-                                                                           'dateLastSeen': date}}},
-                                            False,
-                                            True)
-        return True
-
-    def updateTestedWords(self, user_ID, results):
-        # [{wordID: ..., success: True, type: "written", lang: "fr"}]
-        if not self.doesUserExistByID(user_ID):
-            return False
-
-        date = datetime.datetime.utcnow()
-
-        testedWords = self.user_collection.find_one(
-            {"_id": ObjectId(user_ID)},
-            {"testedWords": 1, '_id': 0}
-        )
-
-        testedWords = testedWords["testedWords"]
-
-        found = False
-        for result in results:
-            if testedWords:
-                for elem in testedWords:
-                    if elem["wordID"] == ObjectId(result["wordID"]) and elem["lang"] == result["lang"]:
-                        self.user_collection.update(
-                            {"_id": ObjectId(user_ID), "testedWords.wordID": ObjectId(result["wordID"]),
-                             "testedWords.lang": result["lang"]},
-                            {"$push": {
-                                "testedWords.$.result":
-                                    {
-                                        'date': date,
-                                        'success': result["success"],
-                                        'type': result["type"]
-                                    }
-                            }})
-                        found = True
-                        break
-
-            # if the list of testedWords is empty or the word is not tested yet
-            if not testedWords or not found:
-                self.user_collection.update({"_id": ObjectId(user_ID)},
-                                            {"$addToSet": {"testedWords": {'wordID': ObjectId(result["wordID"]),
-                                                                           'lang': result["lang"],
-                                                                           'result': [
-                                                                               {
-                                                                                   'date': date,
-                                                                                   'success': result["success"],
-                                                                                   'type': result["type"]
-                                                                               }
-                                                                           ]}}})
-        return True
-
-
-    def getPreviousTestResults(self, user_ID, lang):
-        """Returns a list of all the tested words of a user"""
-        testResults = self.user_collection.find_one(
-            {"_id": ObjectId(user_ID), "testedWords.lang": lang},
-            {"testedWords": 1, '_id': 0}
-        )
-        if testResults:
-            return testResults["testedWords"]
-        else:
-            return []
-
 
 if __name__ == '__main__':
-    controller = DBController()
-    # print(controller.insertUser("a"))
-    # print(controller.doesUserExist("a"))
-    # print(controller.doesUserExistByID("5c73ed4c2344ef2a3a8e1c2c"))
-    # print(controller.setInterests("5c73ed4c2344ef2a3a8e1c2c", ["animals"]))
-    # print(controller.getInterests("5c73ed4c2344ef2a3a8e1c2c"))
-    # print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 5))
-    # print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
-    # print(controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2d", "lang": "fr"}]))
-    # controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c727e21bf137730b7f488f3", "lang": "fr"}])
-    # controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c727e21bf137730b7f488f4","lang": "fr"}])
+    pass
+    with open('../data/data_ok.json', 'r') as f:
+        data = json.load(f)
 
-    # print(controller.getPreviousTestResults("5c73ed4c2344ef2a3a8e1c2c", "fr"))
+    for record in data:
+        record["fr"]["nbSuccess"] = 0
+        record["en"]["nbSuccess"] = 0
+        record["de"]["nbSuccess"] = 0
+        record["es"]["nbSuccess"] = 0
+        record["fr"]["nbFailures"] = 0
+        record["en"]["nbFailures"] = 0
+        record["de"]["nbFailures"] = 0
+        record["es"]["nbFailures"] = 0
 
-    # languages = [{"lang": "fr", "display_name": "French"},
-    #              {"lang": "es", "display_name": "Spanish"},
-    #              {"lang": "de", "display_name": "German"}]
+    with open('data_ok.json', 'w', encoding='utf8') as fp:
+        json.dump(data, fp, ensure_ascii=False)
 
-    print(controller.getTestingWords("5c8d40802344ef44b1274c0f", 5))
+    fp.close()

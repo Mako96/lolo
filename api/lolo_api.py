@@ -5,10 +5,13 @@ import json
 
 from DBController import *
 from Teacher import *
+from Student import *
 
 app = FlaskAPI(__name__)
 dbc = DBController()
-teacher = Teacher(dbc)
+student = Student(dbc)
+teacher = Teacher(dbc, student)
+
 
 CORS(app)
 
@@ -219,7 +222,7 @@ def get_words_test(userid, number_of_words):
 def update_learning_data(userid):
     if not request.json:
         abort(400)
-    success = dbc.updateLearnedWords(userid, request.json["data"]["learned"])
+    success = student.updateLearnedWords(userid, request.json["data"]["learned"])
     if success:
         return jsonify(
             {
@@ -240,7 +243,7 @@ def update_learning_data(userid):
 def update_testing_data(userid):
     if not request.json:
         abort(400)
-    success = dbc.updateTestedWords(userid, request.json["data"]["tested"])
+    success = student.updateTestWords(userid, request.json["data"]["tested"])
     if success:
         return jsonify(
             {

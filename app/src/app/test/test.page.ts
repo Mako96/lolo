@@ -27,7 +27,7 @@ export class TestPage implements OnInit {
 
     testedWords = [];
 
-    pronunciationResult;
+    pronunciationResult = false;
 
     constructor(private router: Router, private userProvider: LoloUserProviderService,
                 private speechRecognition: SpeechRecognition, private cd: ChangeDetectorRef,private toastController: ToastController) {
@@ -99,6 +99,7 @@ export class TestPage implements OnInit {
 
     saveAndGoNext(correct) {
         if (this.index < this.data.length) {
+            console.log(correct)
             var tested = {
                 "wordID": this.data[this.index].test._id,
                 "success": correct,
@@ -150,7 +151,6 @@ export class TestPage implements OnInit {
         let options = {
             language: lang
         }
-        var _self = this;
         this.speechRecognition.startListening(options).subscribe(matches => {
             this.pronunciationResult = false;
             if (matches.includes(word)) {
