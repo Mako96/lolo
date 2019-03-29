@@ -109,24 +109,22 @@ class DBController:
         return False
 
 
-
 if __name__ == '__main__':
-    controller = DBController()
-    # print(controller.insertUser("a"))
-    # print(controller.doesUserExist("a"))
-    # print(controller.doesUserExistByID("5c73ed4c2344ef2a3a8e1c2c"))
-    # print(controller.setInterests("5c73ed4c2344ef2a3a8e1c2c", ["animals"]))
-    # print(controller.getInterests("5c73ed4c2344ef2a3a8e1c2c"))
-    # print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 5))
-    # print(controller.getTestingWords("5c73ed4c2344ef2a3a8e1c2c", 3))
-    # print(controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c73ed4c2344ef2a3a8e1c2d", "lang": "fr"}]))
-    # controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c727e21bf137730b7f488f3", "lang": "fr"}])
-    # controller.updateLearnedWords("5c73ed4c2344ef2a3a8e1c2c", [{"wordID": "5c727e21bf137730b7f488f4","lang": "fr"}])
+    pass
+    with open('../data/data_ok.json', 'r') as f:
+        data = json.load(f)
 
-    # print(controller.getPreviousTestResults("5c73ed4c2344ef2a3a8e1c2c", "fr"))
+    for record in data:
+        record["fr"]["nbSuccess"] = 0
+        record["en"]["nbSuccess"] = 0
+        record["de"]["nbSuccess"] = 0
+        record["es"]["nbSuccess"] = 0
+        record["fr"]["nbFailures"] = 0
+        record["en"]["nbFailures"] = 0
+        record["de"]["nbFailures"] = 0
+        record["es"]["nbFailures"] = 0
 
-    # languages = [{"lang": "fr", "display_name": "French"},
-    #              {"lang": "es", "display_name": "Spanish"},
-    #              {"lang": "de", "display_name": "German"}]
+    with open('data_ok.json', 'w', encoding='utf8') as fp:
+        json.dump(data, fp, ensure_ascii=False)
 
-    print(controller.getTestingWords("5c8d40802344ef44b1274c0f", 5))
+    fp.close()
