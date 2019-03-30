@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'main', loadChildren: './main/main.module#MainPageModule' },
   { path: 'learn', loadChildren: './learn/learn.module#LearnPageModule' },
   { path: 'test', loadChildren: './test/test.module#TestPageModule' },
-  { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule' },
+  { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule' },  { path: 'learn-end', loadChildren: './learn-end/learn-end.module#LearnEndPageModule' },
+
 ];
 
 @NgModule({

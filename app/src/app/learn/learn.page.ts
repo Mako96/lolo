@@ -85,7 +85,7 @@ export class LearnPage implements OnInit {
                         alert(error.message);
                     };
                     var cbSucces = function (data) {
-                        _self.router.navigate(['main']);
+                        _self.router.navigate(['learn-end']);
                     };
                     this.userProvider.updateLearnedWords(this.learnedWords, cbSucces, cbError);
                 }
