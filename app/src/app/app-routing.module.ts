@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'learn', loadChildren: './learn/learn.module#LearnPageModule' },
   { path: 'test', loadChildren: './test/test.module#TestPageModule' },
   { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule' },
+  { path: 'learn-end', loadChildren: './learn-end/learn-end.module#LearnEndPageModule' },
   { path: 'statistics', loadChildren: './statistics/statistics.module#StatisticsPageModule' }
 ];
 
