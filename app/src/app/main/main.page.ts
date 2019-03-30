@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,NavigationExtras, ActivatedRoute } from '@angular/router';
 import {SpeechRecognition} from "@ionic-native/speech-recognition/ngx";
+import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { all } from 'q';
 
 @Component({
@@ -11,7 +13,7 @@ import { all } from 'q';
 export class MainPage implements OnInit {
  public preferences:any;
  public level:number;
-  constructor(private router: Router, private route: ActivatedRoute, private speechRecognition: SpeechRecognition ) {this.getPermission }
+  constructor(public navCtrl: NavController, public storage: Storage,private router: Router, private route: ActivatedRoute, private speechRecognition: SpeechRecognition ) {this.getPermission }
 
   ngOnInit() {
 

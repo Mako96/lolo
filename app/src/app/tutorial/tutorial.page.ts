@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-tutorial',
   templateUrl: './tutorial.page.html',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class TutorialPage {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private storage: Storage) { }
 
   goHome(){
     this.router.navigate(['home']);

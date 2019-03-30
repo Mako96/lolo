@@ -5,26 +5,46 @@
 </ion-header> -->
 
 <ion-content background-color = "light-shade" padding>
-  <ion-slides pager="true">
+  <ion-slides pager="true" parallax="true">
 
     <ion-slide color = "light-shade" >
+            <ion-img class="logo-img" src="../../assets/images/logo_copy.png" style="width:100%;height:80%;margin:0;display:block" ></ion-img>
+         
       <div class= "slider_container">
-        <ion-img class="logo-img" src="../../assets/images/logo.png" style="width:100%;height:auto;margin:0;display:block" ></ion-img>
+        <ion-img class="logo-img" src="../../assets/images/tutorial_images/tutorial01.svg" style="width:100%;height:70%;margin:0" ></ion-img>
+        <br/>
+        <h4>Learn What Matters!</h4>
       </div>
-      <h4>Learn What Matters!</h4>
-      <h4>Swipe right -> </h4>
+      
     </ion-slide>
     <div class = "button_place">
         <ion-button shape="round"  (click)="goHome()" expand="full" color = "light">Skip</ion-button>
     </div>
     
     <ion-slide>
-      <h1>When you register, select a language that you want to learn. After registering you will be able to select specific topics in your 'Set Preferences' tab.</h1>
+      <div>
+        <ion-img class="logo-img" src="../../assets/images/tutorial_images/tutorial02.svg" style="width:100%;height:auto;margin:0;display:block" ></ion-img>
+      </div>
+      <br/><br/><br/>
+      <h4>Select a language that you want to learn. Choose between a variety of topics later!</h4>
     </ion-slide>
 
     <ion-slide>
-      <h1>Learn from the different ways that lolo provides you to learn (visual, textual, audio)</h1>
-      <ion-button shape="round" fill="solid" (click)="goHome()"   expand="full" margin-bottom>Let's Go</ion-button>
+        <div>
+            <ion-img class="logo-img" src="../../assets/images/tutorial_images/tutorial03.svg" style="width:100%;height:auto;margin:0;display:block" ></ion-img>
+          </div>
+          <br/><br/>
+          <div><h4>Lolo teaches you intelligently based on your abilities!</h4></div>
+      
+    </ion-slide>
+
+    <ion-slide>
+        <div>
+            <ion-img class="logo-img" src="../../assets/images/tutorial_images/tutorial04.svg" style="width:100%;height:auto;margin:0;display:block" ></ion-img>
+          </div>
+          <br/>
+      <h4>Learn through different ways! The more you play the better your experience!</h4>
+      <ion-button shape="round" fill="solid" (click)="goHome()"   expand="full" margin-bottom>Let's Go!</ion-button>
     </ion-slide>
   </ion-slides>
 </ion-content>

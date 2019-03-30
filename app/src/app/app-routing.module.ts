@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'learn', loadChildren: './learn/learn.module#LearnPageModule' },
   { path: 'test', loadChildren: './test/test.module#TestPageModule' },
   { path: 'tutorial', loadChildren: './tutorial/tutorial.module#TutorialPageModule' },
-  { path: 'statistics', loadChildren: './statistics/statistics.module#StatisticsPageModule' },
+  { path: 'statistics', loadChildren: './statistics/statistics.module#StatisticsPageModule' }
 ];
 
 @NgModule({
