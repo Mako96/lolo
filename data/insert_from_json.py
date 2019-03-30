@@ -16,11 +16,10 @@ def check_duplicate():
 
 voc_collection.remove({})
 
-for file in ["data.json", "data2.json", "data3.json"]:
+for file in ["data_ok.json"]:
     with open(file) as f:
         data = json.load(f)
 
-        data = data["data"]
         for word in data:
             voc_collection.insert(word)
 

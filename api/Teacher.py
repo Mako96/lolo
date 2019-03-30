@@ -1,5 +1,7 @@
 from bson.objectid import ObjectId
 from collections import Counter
+from DBController import *
+from Student import *
 import json
 import random
 import re
@@ -16,10 +18,21 @@ class JSONEncoder(json.JSONEncoder):
 TYPES_OF_TEST = ["visual", "written", "sentence", "pronunciation"]
 
 
+def chooseRandomWithoutDuplicate(list, size):
+    res = []
+    for i in range(size):
+        rand = random.randint(0, len(list) - 1)
+        while list[rand] in res:
+            rand = random.randint(0, len(list) - 1)
+        res.append(list[rand])
+    return res
+
+
 class Teacher:
 
-    def __init__(self, dbController):
+    def __init__(self, dbController, student):
         self.dbController = dbController
+        self.student = student
 
     # -------------------------------------TEACHING ---------------------------------------------------------------
     def getTrainingWords(self, user_ID, size):
@@ -43,16 +56,32 @@ class Teacher:
         return json.loads(JSONEncoder().encode(trainingWords))
 
     def decideWordsToLearn(self, user_ID, topics, size, user_learning_lang):
-        """Returns a list of words to learn """
-        # get all the words that are in the topics list
+        """
+        Returns a list of words to learn
+        The words will be chosen using the fitness of the topics and the  of the words
+        the highest is the fitness the higher is the probability of having difficult words
+        """
+
+        # get all the words that are in the topics of the user
         words = self.dbController.voc_collection.aggregate([{"$match": {"topic": {'$in': topics}}}])
         words = list(words)
+        # get the fitness (pro or intermediate or bad) of the user
+        fitness = self.student.getUserFitness(user_ID, user_learning_lang)
+        list_to_choose_from = []
 
-        print("hereTOLe")
+        # cat1 = word_difficulty < 4 | cat2 = 4 <= word_difficulty < 8 | cat3 >= 8
+        weights = {"pro": {"cat1": 1, "cat2": 2, "cat3": 3}, "intermediate": {"cat1": 1, "cat2": 2, "cat3": 1},
+                   "bad": {"cat1": 3, "cat2": 1, "cat3": 1}}
 
-        learning_words = self.generate_words_set(size, words, user_learning_lang)
+        for word in words:
+            if word[user_learning_lang]["score"] >= 8:
+                list_to_choose_from.extend([word] * weights[fitness]["cat3"])
+            elif 4 <= word[user_learning_lang]["score"] < 8:
+                list_to_choose_from.extend([word] * weights[fitness]["cat2"])
+            elif word[user_learning_lang]["score"] < 4:
+                list_to_choose_from.extend([word] * weights[fitness]["cat1"])
 
-        return learning_words
+        return chooseRandomWithoutDuplicate(list_to_choose_from, size)
 
     # -------------------------------------TESTING ---------------------------------------------------------------
 
@@ -62,6 +91,7 @@ class Teacher:
 
         user_learning_lang = self.dbController.getUserLearningLanguage(user_ID)
         testingWords = {"words": []}
+
         if not self.dbController.doesUserExistByID(user_ID):
             return None
 
@@ -69,7 +99,7 @@ class Teacher:
         # if the user has no preferences, he will get training words from all the possible topics
         if len(topics) == 0: topics = ["animals", "food", "clothes", "colours"]
 
-        wordsToTest = self.decideWordsToTest(user_ID, topics, size, user_learning_lang)
+        wordsToTest = self.decideWordsToTest(user_ID, topics, size)
 
         for word in wordsToTest:
             # decide which test can be done for the word
@@ -100,17 +130,14 @@ class Teacher:
 
         return data
 
-    def decideWordsToTest(self, user_ID, topics, size, user_learning_lang):
+    def decideWordsToTest(self, user_ID, topics, size):
         """Returns a list of words to test """
         # Gets all the words learned by a user
-        learnedWordsIDs = self.getLearnedWords(user_ID)
-
-        learnedWords = self.dbController.voc_collection.aggregate([{"$match": {"_id": {'$in': learnedWordsIDs}}}])
-        learnedWords = list(learnedWords)
-
+        learnedWords = self.student.getListOfMostRecentLearnedWords(user_ID)
         # Gets all the words that match the preferred topics
         topicsWords = self.dbController.voc_collection.aggregate([{"$match": {"topic": {'$in': topics}}}])
         topicsWords = list(topicsWords)
+
         # Intersection between the words that the user has learned and the words in his preferences
         intersection = [learnedWord for learnedWord in learnedWords for topicsWord in topicsWords if
                         learnedWord['_id'] == topicsWord['_id']]
@@ -122,62 +149,20 @@ class Teacher:
         # to_test contains all the words that the user have learned in a certain topic
         to_test = intersection + to_add
 
-        testings_words = self.generate_words_set(size, to_test, user_learning_lang)
-
-        return testings_words
+        return chooseRandomWithoutDuplicate(to_test, size)
 
     # ------------------------------------------------------------------------------------------------------
-
-    def generate_words_set(self, size, words, user_learning_lang):
-        """Generate words set based on the difficulty level of the words"""
-        # First we need to get the distribution of the difficulty levels there are in "words"
-        counter = dict(Counter([int(round(word[user_learning_lang]["difficulty_level"])) for word in words]))
-        distribution = {k: v / total for total in (sum(counter.values()),) for k, v in counter.items()}
-        for i in range(1, 11):  # 1 to 10
-            if not distribution.get(i):
-                distribution[i] = 0
-        # choose the number of easy, normal and hard words
-        number_easy = 0
-        for i in range(1, 4):
-            number_easy += distribution[i]
-        number_intermediate = 0
-        for i in range(4, 8):
-            number_intermediate += distribution[i]
-        number_hard = 0
-        for i in range(8, 11):
-            number_hard += distribution[i]
-
-        number_easy = int(round(number_easy * size))
-        number_intermediate = int(round(number_intermediate * size))
-        number_hard = size - number_easy - number_intermediate
-
-        list_easy = random.sample([elem for elem in words if elem[user_learning_lang]["difficulty_level"] < 4],
-                                  number_easy)
-        list_normal = random.sample([elem for elem in words if 4 <= elem[user_learning_lang]["difficulty_level"] <= 7],
-                                    number_intermediate)
-        list_hard = random.sample([elem for elem in words if 8 <= elem[user_learning_lang]["difficulty_level"]],
-                                  number_hard)
-
-        return list_easy + list_hard + list_normal
 
     def getComplementaryWords(self, topic, word_to_learn):
         """Returns a list of 3 of the same topic of word_to_learn but  different than the word_to_learn"""
         words = self.dbController.voc_collection.aggregate([
             {"$match": {"topic": topic}},
-            {"$match": {"id": {"$nin": [word_to_learn["id"]]}}}])
+            {"$match": {"id": {"$nin": [word_to_learn["id"]]}}}
+        ])
 
         res = list(words)
         res = random.sample(res, 3)
         return res
 
-    def getLearnedWords(self, user_ID):
-        """Returns the wordIDs of the words that the user has learned"""
-        learning_language = self.dbController.getUserLearningLanguage(user_ID)
-        learnedWords = self.dbController.user_collection.find_one(
-            {"_id": ObjectId(user_ID), "taughtWords.lang": learning_language},
-            {"taughtWords.wordID": 1, '_id': 0}
-        )
-        if learnedWords:
-            return [wordID["wordID"] for wordID in learnedWords["taughtWords"]]
-        else:
-            return []
+
+
