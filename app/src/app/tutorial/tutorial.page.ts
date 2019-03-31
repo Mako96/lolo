@@ -11,7 +11,7 @@ export class TutorialPage {
   constructor(private router: Router,private storage: Storage) { }
 
   goHome(){
-    this.router.navigate(['home']);
+    this.router.navigate(['login']);
   }
 
 }

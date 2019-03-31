@@ -1,10 +1,10 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>login</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content padding>
+<ion-content padding style="text-align: -webkit-center;">
 
     <ion-img class="logo-img" src="../../assets/images/logo.png" center ></ion-img>
 
@@ -12,14 +12,9 @@
         <ion-label position="stacked">Email:</ion-label>
         <ion-input type="email" required email [(ngModel)]="email_V"></ion-input>
       </ion-item>
-      <ion-button shape="round" fill="solid" margin-top (click)="start()" > START </ion-button>
-      <ion-button shape="round" fill="solid" (click)="goBack()" margin-top  margin-start> Go Back </ion-button>
-    
-    <ion-item>
-      <ion-label>
-        Learn What Matters... 
-      </ion-label>
-    </ion-item>
-    
-  
+      <ion-button shape="round" expand="full" color="primary" margin-top (click)="start()" > Login </ion-button>
+      <div class="below-buttons">
+        <ion-button shape="round" color="secondary" (click)="goRegister()" >Register</ion-button>
+        <ion-button shape="round" color="secondary" (click)="goBack()"> Tutorial </ion-button>
+      </div>  
 </ion-content>
