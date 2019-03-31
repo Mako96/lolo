@@ -65,6 +65,6 @@ export class MainPage implements OnInit {
   }
 
   Logout(){
-    this.router.navigate(['home']);
+    this.router.navigate(['login']);
   }
 }

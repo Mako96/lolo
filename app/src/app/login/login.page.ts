@@ -34,7 +34,12 @@ export class LoginPage implements OnInit {
   }
 
   goBack(){
-    this.router.navigate(['home']);
+    this.router.navigate(['tutorial']);
+  }
+
+  goRegister(){
+    this.router.navigate(['register']);
+    
   }
 
   async presentToast(message) {
