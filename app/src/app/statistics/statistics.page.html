@@ -1,33 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>statistics</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>statistics</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <p> Progress page</p>
+    <p></p>
 
-  <div class="progress-wrapper">
-      <div>
-          <round-progress
-                  [current]="70"
-                  [max]="100"
-                  [color]="'#45ccce'"
-                  [background]="'#eaeaea'"
-                  [radius]="125"
-                  [stroke]="20"
-                  [semicircle]="false"
-                  [rounded]="true"
-                  [clockwise]="true"
-                  [responsive]="true"
-                  [duration]="800"
-                  [animation]="'easeInOutQuart'"
-                  [animationDelay]="0">
-          </round-progress>
-      </div>
-      <div class="text">Your text goes here</div>
+    <div class="progress-wrapper">
+        <div *ngFor="let item of completedWords | keyvalue">
+            <ion-card>
+                <ion-card-title>{{item.key}}</ion-card-title>
+                <div>
+                    <p class="progress-val">{{item.value}}%</p>
+                    <p class="text">of known words</p>
 
-  </div>
+                </div>
+                <round-progress
+                        [current]="item.value"
+                        [max]="100"
+                        [color]="'#45ccce'"
+                        [background]="'#eaeaea'"
+                        [radius]="10"
+                        [stroke]="3"
+                        [semicircle]="false"
+                        [rounded]="true"
+                        [clockwise]="true"
+                        [responsive]="true"
+                        [duration]="800"
+                        [animation]="'easeInOutQuart'"
+                        [animationDelay]="0">
+                </round-progress>
+            </ion-card>
+        </div>
+    </div>
 
 
 </ion-content>

@@ -18,13 +18,32 @@ class Student:
     def getStatistics(self, userID):
         pass
 
-    def getPercentageOfWordsSeen(self, userID, topic):
-        pass
+    def getPercentageOfWordsPassed(self, userID):
+        topics = ["animals", "food", "clothes", "colours"]
+        words = self.getPassedTestWords(userID)
+        print(len(words))
+        nbOfWordsPerTopics = self.domain.getNbOfWordsPerTopics()
+        percentages = {topic: 0 for topic in topics}
+        for word in words:
+            for topic in ["animals", "food", "clothes", "colours"]:
+                if word["topic"] == topic:
+                    percentages[topic] += 1
+
+        for key in percentages:
+            percentages[key] = round((percentages[key] / nbOfWordsPerTopics[key]) * 100)
+
+        return percentages
 
     def getListOfAllLearnedWords(self, userID):
-        user_learning_lang = self.dbController.getLearningLanguages(userID)
+        user_learning_lang = self.dbController.getUserLearningLanguage(userID)
         res = self.getAllLearnedWordsIDs(userID, user_learning_lang)
         res = [result["taughtWords"]["wordID"] for result in res]
+        return self.getWordsFromIDs(res)
+
+    def getPassedTestWords(self, userID):
+        user_learning_lang = self.dbController.getUserLearningLanguage(userID)
+        res = self.getAllPassedWordsIDs(userID, user_learning_lang)
+        res = [result["testedWords"]["wordID"] for result in res]
         return self.getWordsFromIDs(res)
 
     def getWordsFromIDs(self, learnedWordsIDs):
@@ -193,6 +212,9 @@ class Student:
         res = self.dbController.user_collection.aggregate([
             {"$match": {"_id": ObjectId(user_ID), 'testedWords.lang': lang}},
             {"$unwind": "$testedWords"},
+            {"$match": {
+                "testedWords.lang": lang,
+            }},
             {"$sort": {
                 "testedWords.dateLastSeen": -1
             }},
@@ -203,12 +225,15 @@ class Student:
         return list(res)
 
     def getLast15LearnedWordsIDs(self, user_ID, lang):
-        """Returns the wordIDs of the words that the user has learned"""
+        """Returns the last 15 word's IDs that the user has learned"""
         res = self.dbController.user_collection.aggregate([
             {"$match": {"_id": ObjectId(user_ID), 'taughtWords.lang': lang}},
             {"$unwind": "$taughtWords"},
+            {"$match": {
+                "taughtWords.lang": lang,
+            }},
             {"$sort": {
-                "taughtWords.dateLastSeen": -1
+                "taughtWords.dateLastSeen": -1,
             }},
             {"$limit": 15}
 
@@ -219,7 +244,35 @@ class Student:
     def getAllLearnedWordsIDs(self, user_ID, lang):
         """Returns the wordIDs of the words that the user has learned"""
         res = self.dbController.user_collection.aggregate([
-            {"$match": {"_id": ObjectId(user_ID), 'testedWords.lang': lang}},
+            {"$match": {"_id": ObjectId(user_ID), 'taughtWords.lang': lang}},
+            {"$unwind": "$taughtWords"},
+            {"$match": {
+                "taughtWords.lang": lang,
+            }},
         ])
 
         return list(res)
+
+    def getAllPassedWordsIDs(self, user_ID, lang):
+        """Returns the wordIDs of the words for which the user has passed at least one test"""
+        res = self.dbController.user_collection.aggregate([
+            {"$match": {"_id": ObjectId(user_ID)}},
+            {"$unwind": "$testedWords"},
+            {"$match": {
+                "testedWords.lang": lang,
+                'testedWords.nbOfSuccess': {'$ne': 0}
+            }},
+            {"$project": {"testedWords.wordID": 1, "_id": 0}}
+        ])
+        #to only have distinct wordIds in res
+        res = list(res)
+        seen = set()
+        res_ok = [elem for elem in res if
+                  [(elem["testedWords"]["wordID"]) not in seen, seen.add(elem["testedWords"]["wordID"])][0]]
+        return list(res_ok)
+
+
+if __name__ == '__main__':
+    db = DBController()
+    sd = Student(db)
+    print(sd.getPercentageOfWordsPassed("5c9d3e6b2344ef4d810419e9"))

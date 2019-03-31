@@ -11,18 +11,24 @@ import { ToastController } from '@ionic/angular';
 export class StatisticsPage implements OnInit {
 
 
-  public completedWords = [];
+  public completedWords = {};
   constructor(private userProvider: LoloUserProviderService) { }
 
-  getCompletedWords() {
-    var _self = this;
-    //TODO complete this function and userprovider getCompletedWords function too
-    _self.completedWords = this.userProvider.getCompletedWords();
-    //TODO: for each topic: we make a circle with number of words completed in tests
-
-  }
+  getUserStatistics() {
+        var _self = this;
+        var cbError = function (error) {
+            alert(error.message);
+            _self.completedWords = []
+        };
+        var cbSucces = function (data) {
+            console.log(data);
+            _self.completedWords = data.stat
+        };
+        this.userProvider.getUserStatistics(cbSucces, cbError);
+    }
 
   ngOnInit() {
+    this.getUserStatistics()
   }
 
 
