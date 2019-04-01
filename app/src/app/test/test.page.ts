@@ -29,12 +29,20 @@ export class TestPage implements OnInit {
 
     pronunciationResult = false;
 
+    public resultPageDisplay = false;
+
+    public correctWords = 0;
+    public totalWords = 0;
+
     constructor(private router: Router, private userProvider: LoloUserProviderService,
                 private speechRecognition: SpeechRecognition, private cd: ChangeDetectorRef,private toastController: ToastController) {
     }
 
 
     ngOnInit() {
+      this.resultPageDisplay = false;
+      this.correctWords = 0;
+      this.totalWords = 0;
         this.getUserLanguage();
         this.loadWords();
     }
@@ -99,7 +107,6 @@ export class TestPage implements OnInit {
 
     saveAndGoNext(correct) {
         if (this.index < this.data.length) {
-            console.log(correct)
             var tested = {
                 "wordID": this.data[this.index].test._id,
                 "success": correct,
@@ -111,19 +118,33 @@ export class TestPage implements OnInit {
                 //end of test
                 var _self = this;
                 var cbError = (error) => {
-                    this.presentToast(error.message)
+                    _self.presentToast(error.message)
                 };
                 var cbSucces = function (data) {
-                    _self.router.navigate(['main']);
+                  console.log(data);
+                    _self.showResultPage(_self);
                 };
                 this.userProvider.updateTestedWords(this.testedWords, cbSucces, cbError);
+            } else {
+              this.index++;
             }
 
-            console.log(this.index);
-            this.index++;
-            console.log(this.index)
-
         }
+    }
+
+    showResultPage(_self) {
+        _self.correctWords = 0;
+        _self.totalWords = _self.testedWords.length;
+        _self.testedWords.forEach( function(word){
+          if(word.success){
+            _self.correctWords++;
+          }
+        });
+        _self.resultPageDisplay = true;
+    }
+
+    goMain() {
+      this.router.navigate(['main'])
     }
 
     // FOR PRONUNCIATION TEST
