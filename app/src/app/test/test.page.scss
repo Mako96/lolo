@@ -1,11 +1,31 @@
 img {
-    width: 80hv;
-    height: 80hv; 
-	margin:50hv;
-	border: 3px solid;
-    border-radius: 21px;
+    display: block;
+    // width: 70vw;
+    height: 83vw;
+    object-fit: cover;
+	// border: 3px solid;
+    // border-radius: 21px;
 }
 
+h1 {
+    text-align: center;
+    font-size: 2em;
+    color: black;
+}
+
+h4{
+    text-align: center;
+    font-size: 30px
+}
+
+.card-image{
+    margin: 0 5px;
+    width: 70%;
+    height:calc(50% - 10px);
+    padding: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 40px;
+}
 
 .c0{
     display: inline-flex;
@@ -20,5 +40,42 @@ p{
     margin-bottom: 80px;
 }
 
+[cards] {
+    .grid-full ion-row {
+        align-content: center;
+        flex: 0 0 50%;
+        max-width: 60%;
+        max-height:calc(50% - 30px);
+        padding: 5px 0;
+    }
+    .row {
+        padding: 0 3px;
+    }
+    .col {
+        padding: 5px 0;
+    }
+    .card {
+        margin: 0 5px;
+        width: calc(100% - 10px);
+        height:calc(100% - 10px);
+        padding: 2px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+        border-radius: 4px;
+        h1 {
+            text-align: center;
+            font-weight: 400;
+            font-size: 12px;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: black;
+        }
+    }
+}
 
-
+.vertical-align-content > 
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+     max-height:calc(100% - 30px);
+}

@@ -74,6 +74,10 @@ export class LoloApiProviderService {
         });
     }
 
+    getStatistics(userid) {
+        return this.http.get(this.apiUrl + 'user/' + userid + '/stat');
+    }
+
 
     updateLearnedWords(words, userid) {
         return this.http.post(this.apiUrl + 'user/' + userid + '/learn/update', {

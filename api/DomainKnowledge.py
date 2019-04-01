@@ -6,6 +6,17 @@ class DomainKnowledge:
     def __init__(self, dbController):
         self.dbController = dbController
 
+    def getNbOfWordsPerTopics(self):
+        res = self.dbController.voc_collection.aggregate([
+            {"$group": {"_id": '$topic', "count": {"$sum": 1}}}
+        ])
+        res = list(res)
+        res_ok = {}
+        for elem in res:
+            res_ok[elem["_id"]] = elem["count"]
+
+        return res_ok
+
     def updateScores(self, testResults):
         """Update words difficulties based on users's results"""
         user_learning_lang = testResults[0]["lang"]  # the language the user is currently learning

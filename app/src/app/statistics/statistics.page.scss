@@ -2,7 +2,7 @@
     position: relative;
 }
 
-.progress-wrapper .text{
+.progress-wrapper .progress-val{
     
     position: absolute;
     top: 50%;
@@ -10,6 +10,34 @@
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     text-align: center;
+    font-weight: bold;
+    font-size: large;
     width: 100%;
     z-index: 1;
+    white-space: pre-line;
+}
+
+.progress-wrapper .text{
+
+    position: absolute;
+    top: 55%;
+    left: 0;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    white-space: pre-line;
+}
+
+ion-card-title{
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+ion-card{
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
 }
