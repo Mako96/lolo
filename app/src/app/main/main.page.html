@@ -6,15 +6,16 @@
 
 <ion-content padding style="text-align: -webkit-center;">
 <div class="mode">
-    <img src='../../assets/images/learn.jpg'  (click)="learnPage()">
-
+  <img src='../../assets/images/learn.jpg'  (click)="learnPage()">
   <p>Learning Phase</p>
     <img src='../../assets/images/test.jpg'   (click)="testPage()" >
   <p>Testing Phase</p>
+  <img src='../../assets/images/stats.jpg'  (click)="ShowStatistics()">
+  <p>Show Statistics</p>
+    <img src='../../assets/images/settings.jpg'   (click)="ChangePreference()" >
+  <p>Settings</p>
 
 </div>
-<ion-button shape="round" (click)="ShowStatistics()" >Show Statistics</ion-button>
-<ion-button shape="round" (click)="ChangePreference()" >Change preferences</ion-button>
 <ion-button shape="round" (click)="Tutorial()" >Tutorial</ion-button>
 <ion-button shape="round" (click)="Logout()" >Logout</ion-button>
 </ion-content>
