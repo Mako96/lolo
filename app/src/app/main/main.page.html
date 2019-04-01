@@ -5,17 +5,38 @@
 </ion-header>
 
 <ion-content padding style="text-align: -webkit-center;">
-<div class="mode">
-  <img src='../../assets/images/learn.jpg'  (click)="learnPage()">
-  <p>Learning Phase</p>
-    <img src='../../assets/images/test.jpg'   (click)="testPage()" >
-  <p>Testing Phase</p>
-  <img src='../../assets/images/stats.jpg'  (click)="ShowStatistics()">
-  <p>Show Statistics</p>
-    <img src='../../assets/images/settings.jpg'   (click)="ChangePreference()" >
-  <p>Settings</p>
-
-</div>
+  <div cards>
+    <div class = "grid-full"> 
+      <ion-row>
+        <ion-col>
+          <ion-card (click)="learnPage()">
+            <img src='../../assets/images/learn.jpg'/>
+            <ion-card-title>Learning Phase</ion-card-title>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card (click)="testPage()">
+            <img src='../../assets/images/test.jpg'/>
+            <ion-card-title>Testing Phase</ion-card-title>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>        
+        <ion-col>
+          <ion-card (click)="ShowStatistics()">
+              <img src='../../assets/images/stats.jpg'/>
+              <ion-card-title>Show Statistics</ion-card-title>
+            </ion-card>
+        </ion-col>
+        <ion-col>
+            <ion-card (click)="ChangePreference()">
+                <img src='../../assets/images/settings.jpg'/>
+                <ion-card-title>Settings</ion-card-title>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
 <ion-button shape="round" (click)="Tutorial()" >Tutorial</ion-button>
 <ion-button shape="round" (click)="Logout()" >Logout</ion-button>
 </ion-content>
