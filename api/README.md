@@ -4,17 +4,18 @@
 
 | HTTP Method | URI                                             | Action                         | Content type     | Response         |
 |-------------|-------------------------------------------------|--------------------------------|------------------|------------------|
-| POST        | http://lolo.ai/lolo/api/v1.0/user/register      | Register a new user to the DB  | application/json | application/json |
-| POST        | http://lolo.ai/lolo/api/v1.0/user/auth          | Authenticate a user            | application/json | application/json |
-| GET         | http://lolo.ai/lolo/api/v1.0/{iduser}/preferences        | Retrieve lolo categories for user       | application/json | application/json |
-| POST        | http://lolo.ai/lolo/api/v1.0/user/{iduser}/preferences   | Save user selected preferences | application/json | application/json |
-| GET         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/learn/words   | Retrieve set of words to learn | application/json | application/json |
-| GET         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/test/words    | Retrieve set of words to test  | application/json | application/json |
-| POST         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/learn/update | Update user learn progress     | application/json | application/json |
-| POST         | http://lolo.ai/lolo/api/v1.0/user/{iduser}/test/update  | Update user test progress      | application/json | application/json |
-| GET         | http://lolo.ai/api/v1.0/languages  | Get all the languages that a user can learn      | application/json | application/json |
-| GET         | http://lolo.ai/api/v1.0/user/{userid}/language_to_learn | Get the language that a user is learning      | application/json | application/json |
-| POST         | http://lolo.ai/api/v1.0/user/{userid}/language_to_learn | Set the language that a user is learning      | application/json | application/json |
+| POST        | https://chatbook.xyz/lolo/lolo/api/v1.0/user/register      | Register a new user to the DB  | application/json | application/json |
+| POST        | https://chatbook.xyz/lolo/lolo/api/v1.0/user/auth          | Authenticate a user            | application/json | application/json |
+| GET         | https://chatbook.xyz/lolo/lolo/api/v1.0/{iduser}/preferences        | Retrieve lolo categories for user       | application/json | application/json |
+| POST        | https://chatbook.xyz/lolo/lolo/api/v1.0/user/{iduser}/preferences   | Save user selected preferences | application/json | application/json |
+| GET         | https://chatbook.xyz/lolo/lolo/api/v1.0/user/{iduser}/learn/words   | Retrieve set of words to learn | application/json | application/json |
+| GET         | https://chatbook.xyz/lolo/lolo/api/v1.0/user/{iduser}/test/words    | Retrieve set of words to test  | application/json | application/json |
+| POST         | https://chatbook.xyz/lolo/lolo/api/v1.0/user/{iduser}/learn/update | Update user learn progress     | application/json | application/json |
+| POST         | https://chatbook.xyz/lolo/lolo/api/v1.0/user/{iduser}/test/update  | Update user test progress      | application/json | application/json |
+| GET         | https://chatbook.xyz/lolo/lolo/api/v1.0/languages  | Get all the languages that a user can learn      | application/json | application/json |
+| GET         | https://chatbook.xyz/lolo/lolo/api/v1.0/user/{userid}/language_to_learn | Get the language that a user is learning      | application/json | application/json |
+| POST         | https://chatbook.xyz/lolo/lolo/api/v1.0/user/{userid}/language_to_learn | Set the language that a user is learning      | application/json | application/json |
+| GET         | https://chatbook.xyz/lolo/lolo/api/v1.0/user/{userid}/stat | Get the stat of a user      | application/json | application/json |
 
 
 ### Register
