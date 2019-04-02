@@ -72,7 +72,7 @@ export class LearnPage implements OnInit {
 
     check(instance, answer) {
         if (instance == answer) {
-            this.presentToast("Correct")
+            this.presentCorrectToast("Correct")
             console.log(this.data.length)
             if (this.index < this.data.length) {
                 var learned = {"wordID": this.data[this.index].learning._id, "lang": this.learningLang};
@@ -95,7 +95,7 @@ export class LearnPage implements OnInit {
         }
         else {
             // alert("Wrong");
-            this.presentToast("Wrong");
+            this.presentIncorrectToast("Wrong, Try Again!");
         }
     }
 
@@ -106,6 +106,29 @@ export class LearnPage implements OnInit {
         });
         toast.present();
       }
+
+      async presentCorrectToast(message) {
+        let toast = await this.toastController.create({
+          message: message,
+          duration: 1000,
+          position: 'bottom',
+          animated:true,
+          cssClass:"correct-toast",
+        });
+        toast.present();
+      }
+
+      async presentIncorrectToast(message) {
+        let toast = await this.toastController.create({
+          message: message,
+          duration: 1500,
+          showCloseButton: true,
+          position: 'bottom',
+          closeButtonText: 'OK',
+          animated:true,
+          cssClass:"incorrect-toast",
+        }).then((toast) => {toast.present();});
+    }
 
     playText(word) {
         let lang  

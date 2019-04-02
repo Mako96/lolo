@@ -3,7 +3,7 @@
     <ion-title><h4>{{data[index].learning.id}}</h4></ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content text-center class="vertical-align-content" padding-bottom="50px">
 <div cards>
   <div class = "grid-full"> 
     <ion-row>
@@ -34,5 +34,5 @@
     </ion-row>
   </div>
 </div>
-<ion-button shape="round" fill="solid" color="secondary" (click)="playText(data[index].learning[this.learningLang].word)" expand="full"  margin-bottom >Listen</ion-button>
+<ion-button style="text-align: -webkit-center;" shape="round" fill="solid" color="secondary" (click)="playText(data[index].learning[this.learningLang].word)" margin-bottom >Listen</ion-button>
 </ion-content>
