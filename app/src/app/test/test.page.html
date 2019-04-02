@@ -40,10 +40,10 @@
                 <h1 text-color=#000>Pronounciation test!<br/> Identify the correct translation and tap the speak button to test your pronounciation. Once ready tap confirm.</h1>
         </ion-card>
         <br/><br/>
-        <ion-button shape="round" color="medium" fill="solid" disable=true margin-bottom>{{data[index].words[0][learningLang].word}}</ion-button>&ensp;
-        <ion-button shape="round" color="medium" fill="solid" disable=true margin-bottom>{{data[index].words[1][learningLang].word}}</ion-button><br/>
-        <ion-button shape="round" color="medium" fill="solid" disable=true margin-bottom>{{data[index].words[2][learningLang].word}}</ion-button>&ensp;
-        <ion-button shape="round" color="medium" fill="solid" disable=true margin-bottom>{{data[index].words[3][learningLang].word}}</ion-button><br/><br/><br/><br/>
+        <ion-button shape="round" color="medium" fill="solid" disabled=true margin-bottom>{{data[index].words[0][learningLang].word}}</ion-button>&ensp;
+        <ion-button shape="round" color="medium" fill="solid" disabled=true margin-bottom>{{data[index].words[1][learningLang].word}}</ion-button><br/>
+        <ion-button shape="round" color="medium" fill="solid" disabled=true margin-bottom>{{data[index].words[2][learningLang].word}}</ion-button>&ensp;
+        <ion-button shape="round" color="medium" fill="solid" disabled=true margin-bottom>{{data[index].words[3][learningLang].word}}</ion-button><br/><br/><br/><br/>
    
         <ion-button shape="round" (click)="startRecording(data[index].test[learningLang].word)">Speak</ion-button>
         <ion-button shape="round" (click)="confirmPronunciation()">Confirm</ion-button>
