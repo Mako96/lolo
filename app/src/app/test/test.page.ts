@@ -92,10 +92,10 @@ export class TestPage implements OnInit {
     checkAnswer(instance, answer) {
         var correct = false;
         if (instance == answer) {
-            this.presentToast("Correct")
+            this.presentCorrectToast("Correct")
             correct = true;
         } else {
-            this.presentToast("False, the correct translation of " + this.data[this.index].test.en["word"] +
+            this.presentIncorrectToast("False, the correct translation of " + this.data[this.index].test.en["word"] +
             " is " + this.data[this.index].test[this.learningLang]["word"])
             // alert("False, the correct translation of " + this.data[this.index].test.en["word"] +
             //     " is " + this.data[this.index].test[this.learningLang]["word"])
@@ -182,9 +182,9 @@ export class TestPage implements OnInit {
 
     confirmPronunciation() {
         if (this.pronunciationResult) {
-            this.presentToast("Correct")
+            this.presentCorrectToast("Correct")
         } else {
-            this.presentToast("Wrong Pronunciation")
+            this.presentIncorrectToast("Wrong Pronunciation")
         }
         this.saveAndGoNext(this.pronunciationResult)
 
@@ -196,6 +196,30 @@ export class TestPage implements OnInit {
           duration: 2500,
         });
         toast.present();
+      }
+
+      async presentCorrectToast(message) {
+        let toast = await this.toastController.create({
+          message: message,
+          duration: 1500,
+          position: 'bottom',
+          animated:true,
+          cssClass:"correct-toast",
+        });
+        toast.present();
+      }
+
+      async presentIncorrectToast(message) {
+        let toast = await this.toastController.create({
+          message: message,
+        //   duration: 2500,
+          showCloseButton: true,
+          position: 'bottom',
+          closeButtonText: 'OK',
+          animated:true,
+          cssClass:"incorrect-toast",
+        }).then((toast) => {toast.present();});
+        
       }
 
 }
