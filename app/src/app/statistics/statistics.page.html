@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>statistics</ion-title>
+        <ion-title>Progress for {{langs[learningLang]}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -10,8 +10,9 @@
     <div class="progress-wrapper">
         <div *ngFor="let item of completedWords | keyvalue">
             <ion-card>
-                <ion-card-title>{{item.key}}</ion-card-title>
+                <ion-card-title>Topic {{item.key}}</ion-card-title>
                 <div>
+                    <p class="texttop">You master</p>
                     <p class="progress-val">{{item.value}}%</p>
                     <p class="text">of known words</p>
 
@@ -34,6 +35,8 @@
             </ion-card>
         </div>
     </div>
+
+    <ion-button shape="round" (click)="goBack()" >Back</ion-button>
 
 
 </ion-content>
