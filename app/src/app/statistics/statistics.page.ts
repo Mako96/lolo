@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
 export class StatisticsPage implements OnInit {
 
   public learningLang;
-  public langs = {"fr":"French", "de":"German","swe":"Swedish"}
+  public langs = {"fr":"French", "de":"German","swe":"Swedish","es":"Spanish","nl":"Dutch"}
   public completedWords = {};
   constructor(private userProvider: LoloUserProviderService,private router: Router) { }
 
