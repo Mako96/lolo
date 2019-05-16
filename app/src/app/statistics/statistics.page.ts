@@ -54,6 +54,11 @@ export class StatisticsPage implements OnInit {
     this.router.navigate(['main']);
   }
 
+  showDetails()
+  {
+    this.router.navigate(['testedwords'])
+  }
+
 
 
 }

@@ -9,7 +9,7 @@
 
     <div class="progress-wrapper">
         <div *ngFor="let item of completedWords | keyvalue">
-            <ion-card>
+            <ion-card (click)="showDetails()" tappable>
                 <ion-card-title>Topic {{item.key}}</ion-card-title>
                 <div>
                     <p class="texttop">You completed</p>
