@@ -278,5 +278,24 @@ def get_user_stats(userid):
                 }
             })
 
+@app.route('/lolo/api/v1.0/user/<userid>/stat/words', methods=['GET'])
+def get_user_stats(userid):
+    result = student.getCorrectIncorrectWords(userid)
+    if result is not None:
+        return jsonify(
+            {
+                "data": {
+                    "stat": result,
+                }
+            })
+    else:
+        return jsonify(
+            {
+                "error": {
+                    "code": "failed",
+                    "message": "Something went wrong in get_user_stats " + str(userid)
+                }
+            })
+
 if __name__ == "__main__":
     app.run(debug=True)
