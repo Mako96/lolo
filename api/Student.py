@@ -271,6 +271,24 @@ class Student:
                   [(elem["testedWords"]["wordID"]) not in seen, seen.add(elem["testedWords"]["wordID"])][0]]
         return list(res_ok)
 
+    def getAllFailedWordsIDs(self, user_ID, lang):
+        """Returns the wordIDs of the words for which the user FAILED on tests"""
+        res = self.dbController.user_collection.aggregate([
+            {"$match": {"_id": ObjectId(user_ID)}},
+            {"$unwind": "$testedWords"},
+            {"$match": {
+                "testedWords.lang": lang,
+                'testedWords.nbOfSuccess': {'$eq': 0}
+            }},
+            {"$project": {"testedWords.wordID": 1, "_id": 0}}
+        ])
+        #to only have distinct wordIds in res
+        res = list(res)
+        seen = set()
+        res_ok = [elem for elem in res if
+                  [(elem["testedWords"]["wordID"]) not in seen, seen.add(elem["testedWords"]["wordID"])][0]]
+        return list(res_ok)
+
 
 if __name__ == '__main__':
     db = DBController()
