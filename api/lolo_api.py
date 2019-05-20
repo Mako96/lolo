@@ -280,7 +280,9 @@ def get_user_stats(userid):
 
 @app.route('/lolo/api/v1.0/user/<userid>/stat/words', methods=['GET'])
 def get_user_stats_words(userid):
-    result = student.getPassedTestWords(userid)
+    passed = student.getPassedTestWords(userid)
+    failed = student.getFailedTestWords(userid)
+    result = {"passed":passed, "failed":failed}
     if result is not None:
         return jsonify(
             {
