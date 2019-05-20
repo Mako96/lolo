@@ -45,6 +45,12 @@ class Student:
         res = self.getAllPassedWordsIDs(userID, user_learning_lang)
         res = [result["testedWords"]["wordID"] for result in res]
         return self.getWordsFromIDs(res)
+        
+    def getFailedTestWords(self, userID):
+        user_learning_lang = self.dbController.getUserLearningLanguage(userID)
+        res = self.getAllFailedWordsIDs(userID, user_learning_lang)
+        res = [result["testedWords"]["wordID"] for result in res]
+        return self.getWordsFromIDs(res)
 
     def getWordsFromIDs(self, learnedWordsIDs):
         learnedWords = self.dbController.voc_collection.aggregate([{"$match": {"_id": {'$in': learnedWordsIDs}}}])
