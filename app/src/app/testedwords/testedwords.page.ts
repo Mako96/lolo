@@ -12,14 +12,34 @@ import { ToastController } from '@ionic/angular';
 export class TestedwordsPage implements OnInit {
 
   constructor(private userProvider: LoloUserProviderService,private router: Router) { }
-
+  public completedWords = {};
   ngOnInit() {
+    this.getUserTestedWords();
   }
+
+  getUserTestedWords(){
+    /*TODO*/
+    var _self = this;
+    var cbError = function (error) {
+        alert(error.message);
+        _self.completedWords = []
+    };
+    var cbSucces = function (data) {
+        console.log(data);
+        _self.completedWords = data.stat
+    };
+    this.userProvider.getUserTestedWords(cbSucces, cbError);
+  }
+
+
+
+
+
+
 
 
   goBack()
   {
-
     this.router.navigate(['main']);
   }
   goStatistics()

@@ -159,6 +159,22 @@ export class LoloUserProviderService {
         });
     }
 
+    getUserTestedWords(cbSucces, cbError){
+    /*TODO*/
+        var _self = this;
+        this.getUserID(function (userid) {
+            _self.apiProvider.getUserTestedWords(userid).subscribe((data: any) => {
+                if (data.error !== undefined) {
+                    cbError(data.error);
+                } else if (data.data !== undefined) {
+                    cbSucces(data.data);
+                } else {
+                    cbError({'message': _self.genericApiErrorMsg});
+                }
+            });
+        });
+    }
+
     getLearningWords(cbSucces, cbError) {
         var _self = this;
         this.getUserID(function (userid) {

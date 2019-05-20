@@ -78,6 +78,11 @@ export class LoloApiProviderService {
         return this.http.get(this.apiUrl + 'user/' + userid + '/stat');
     }
 
+    getUserTestedWords(userid) {
+      /*TODO*/
+        return this.http.get(this.apiUrl + 'user/' + userid + '/stat/words');
+    }
+
 
     updateLearnedWords(words, userid) {
         return this.http.post(this.apiUrl + 'user/' + userid + '/learn/update', {
