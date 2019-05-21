@@ -29,6 +29,12 @@ class DomainKnowledge:
         nbOfSuccess = self.getNbOfSuccess(wordID, str(user_learning_lang))
         nbOfFailures = self.getNbOfFailures(wordID, str(user_learning_lang))
 
+        # L : TODO: get the actual word length from testResults
+        L = 7
+
+        # P = proportion off failures and successes
+        P = nbOfSuccess/nbOfFailures
+
         # if the user passed the test
 
         score = difficulty + 0.2 * (nbOfSuccess - nbOfFailures)
