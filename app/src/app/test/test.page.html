@@ -1,11 +1,22 @@
-<ion-header>
-    <ion-toolbar color="primary">
-        <ion-title><h4>{{data[index].test.id}}</h4></ion-title>
-    </ion-toolbar>
-</ion-header>
 
-<ion-content text-center class="vertical-align-content" margin-bottom="50px">
-
+<ion-content text-center class="vertical-align-content" margin-bottom="50px" [hidden]="!(resultPageDisplay)">
+  <div class="frame0" style="text-align: -webkit-center;" >
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title><h4>Test Result</h4></ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <h1>Score</h1>
+    <h2>{{correctWords}} / {{totalWords}}</h2>
+    <ion-button class='' (click)="goMain()">Back</ion-button>
+  </div>
+</ion-content>
+<ion-content text-center class="vertical-align-content" margin-bottom="50px" [hidden]="resultPageDisplay">
+  <ion-header>
+      <ion-toolbar color="primary">
+          <ion-title><h4>{{data[index].test.id}}</h4></ion-title>
+      </ion-toolbar>
+  </ion-header>
     <div class="frame0" [hidden]="!(data[index].type === 'written')">
         <br/><br/>
         <ion-button shape="round" color="secondary" fill="solid" margin-bottom (click)="checkAnswer(data[index].words[0]._id, data[index].test._id)" >{{data[index].words[0][learningLang].word}}</ion-button><br/>
@@ -48,4 +59,5 @@
         <ion-button shape="round" (click)="startRecording(data[index].test[learningLang].word)">Speak</ion-button>
         <ion-button shape="round" (click)="confirmPronunciation()">Confirm</ion-button>
     </div>
+
 </ion-content>

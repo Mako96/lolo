@@ -40,7 +40,7 @@ export class MainPage implements OnInit {
   learnPage(){
 
 
-  this.router.navigate(['mode']);
+  this.router.navigate(['learn']);
 
   }
 
