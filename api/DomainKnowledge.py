@@ -1,10 +1,21 @@
 from bson.objectid import ObjectId
+from keras.models import model_from_yaml
+from numpy import array
+from math import floor 
 
 
 class DomainKnowledge:
 
     def __init__(self, dbController):
         self.dbController = dbController
+
+        # load YAML and create model
+        yaml_file = open('model.yaml', 'r')
+        loaded_model_yaml = yaml_file.read()
+        yaml_file.close()
+        self.loaded_model = model_from_yaml(loaded_model_yaml)
+        # load weights into new model
+        self.loaded_model.load_weights("model.h5")
 
     def getNbOfWordsPerTopics(self):
         res = self.dbController.voc_collection.aggregate([
@@ -37,7 +48,10 @@ class DomainKnowledge:
 
         # if the user passed the test
 
-        score = difficulty + 0.2 * (nbOfSuccess - nbOfFailures)
+        Xnew = array([[L,P]])
+        # make a prediction
+        ynew = self.loaded_model.predict(Xnew)
+        score = floor(ynew[0][0])
 
         # max difficulty is 10, min is 1
         if score > 10:
