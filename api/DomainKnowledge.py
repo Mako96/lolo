@@ -41,6 +41,7 @@ class DomainKnowledge:
         nbOfFailures = self.getNbOfFailures(wordID, str(user_learning_lang))
 
         # L : TODO: get the actual word length from testResults
+        word_list = self.dbController.voc_collection.aggregate([{"$match": {"_id": {'$in': learnedWordsIDs}}}])
         L = 7
 
         # P = proportion off failures and successes
