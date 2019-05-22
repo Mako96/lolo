@@ -42,6 +42,7 @@ class DomainKnowledge:
 
         # L : TODO: get the actual word length from testResults
         word_list = self.dbController.voc_collection.aggregate([{"$match": {"_id": {'$in': learnedWordsIDs}}}])
+        print("word_list: " + str(word_list))
         word = "bla"
         L = len(word)
 
